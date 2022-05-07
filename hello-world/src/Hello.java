@@ -1,9 +1,14 @@
 public class Hello {
     public static void main(String[] args) {
-        System.out.println("Hello Devin");
+        System.out.println("Hello, Devin");
 
         int myFirstNumber = (10 + 5) + (2 * 10);
+        int mySecondNumber = 12;
+        int myThirdNumber = myFirstNumber * 2;
+        int myTotal = myFirstNumber + mySecondNumber + myThirdNumber;
 //        sout shortcut
-        System.out.println(myFirstNumber);
+        System.out.println(myTotal);
+        int myLastOne = 1000 - myTotal;
+        System.out.println(myLastOne);
     }
 }
