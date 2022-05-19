@@ -2,11 +2,27 @@ package com.example;
 
 public class Main {
     public static void main(String[] args) {
-        BankAccount bobsAccount = new BankAccount();
-                //("12345", 0.00, "Bob Brown", "myemail@bob.com", "(087) 123-4567");
 
-        System.out.println(bobsAccount.getAccountNumber());
-        System.out.println(bobsAccount.getBalance());
+        VipCustomer person1 = new VipCustomer();
+        System.out.println(person1.getName());
+
+        VipCustomer person2 = new VipCustomer("Devin", "devin@email.com");
+        System.out.println(person2.getName());
+
+        VipCustomer person3 = new VipCustomer("Bob", 100.00, "bob@email.com");
+        System.out.println(person3.getName());
+
+
+
+//        BankAccount bobsAccount = new BankAccount();
+//                //("12345", 0.00, "Bob Brown", "myemail@bob.com", "(087) 123-4567");
+//
+//        System.out.println(bobsAccount.getAccountNumber());
+//        System.out.println(bobsAccount.getBalance());
+//
+//        BankAccount devinsAccount = new BankAccount("Devin", "devin@devin.com", "12345");
+//        System.out.println(devinsAccount.getAccountNumber() + " name " + devinsAccount.getCustomerName());
+
 
 //        BankAccount bankAccount = new BankAccount();
 //        bankAccount.setAccountNumber("1234567890");
