@@ -31,9 +31,15 @@ public class Main {
     public static int[] sortIntegers(int[] array){
         int[] sortedValues = array.clone();
         Arrays.sort(sortedValues);
-        //reverse array here -- last step
-        printArray(sortedValues);
-        return sortedValues;
+        int[] descendingArray = new int[sortedValues.length];
+        //REVERSE ARRAY HERE -- THIS IS THE LAST STEP*********************
+        int count = 0;
+        for(int i = (sortedValues.length - 1); i >= 0; i--) {
+            descendingArray[count] = sortedValues[i];
+            count++;
+        }
+        printArray(descendingArray);
+        return descendingArray;
     }
 
 }
