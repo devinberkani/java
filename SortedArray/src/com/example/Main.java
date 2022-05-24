@@ -18,6 +18,7 @@ public class Main {
         for(int i = 0; i < number; i++) {
             enteredValues[i] = scanner.nextInt();
         }
+        scanner.close();
         return enteredValues;
     }
 
