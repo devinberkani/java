@@ -2,21 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a3b6110f-2b55-4f9e-a4b3-8bf33e0cb85a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../InnerClasses/src/com/example/Gearbox.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Interface/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Interface/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Interface/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Interface/Interface.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Interface/src/com/example/ISaveable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Interface/src/com/example/Monster.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Interface/src/com/example/Player.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../InterfaceChallenge/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../InterfaceChallenge/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../InterfaceChallenge/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../InterfaceChallenge/InterfaceChallenge.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../InterfaceChallenge/src/com/example/ISaveable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../InterfaceChallenge/src/com/example/Monster.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../InterfaceChallenge/src/com/example/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../InnerClassChallenge/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../InnerClassChallenge/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../InnerClassChallenge/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../InnerClassChallenge/InnerClassChallenge.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../InnerClassChallenge/src/com/example/Album.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../InnerClassChallenge/src/com/example/Song.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../InnerClasses/src/com/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../InnerClasses/src/com/example/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
