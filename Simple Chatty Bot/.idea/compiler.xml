@@ -9,6 +9,11 @@
       <module name="Simple_Chatty_Bot.Simple_Chatty_Bot-task-build-test-results.main" target="11" />
       <module name="Simple_Chatty_Bot.Simple_Chatty_Bot-task-build-tmp.main" target="11" />
       <module name="Simple_Chatty_Bot.Simple_Chatty_Bot-task.main" target="11" />
+      <module name="Simple_Chatty_Bot.Topics-Integer_types_and_operations-Difference_of_times.main" target="11" />
+      <module name="Simple_Chatty_Bot.Topics-Integer_types_and_operations-Next_even_number.main" target="11" />
+      <module name="Simple_Chatty_Bot.Topics-Integer_types_and_operations-Reading_integer_numbers.main" target="11" />
+      <module name="Simple_Chatty_Bot.Topics-Integer_types_and_operations-Reversing.main" target="11" />
+      <module name="Simple_Chatty_Bot.Topics-Integer_types_and_operations-Theory.main" target="11" />
       <module name="Simple_Chatty_Bot.Topics-Overview_of_the_basic_program-Cats_are_robots.main" target="11" />
       <module name="Simple_Chatty_Bot.Topics-Overview_of_the_basic_program-Find_a_word_that_is_not_a_keyword.main" target="11" />
       <module name="Simple_Chatty_Bot.Topics-Overview_of_the_basic_program-Hello,_Java.main" target="11" />
@@ -16,6 +21,7 @@
       <module name="Simple_Chatty_Bot.Topics-Overview_of_the_basic_program-The_Hello_World_program.main" target="11" />
       <module name="Simple_Chatty_Bot.Topics-Overview_of_the_basic_program-Theory.main" target="11" />
       <module name="Simple_Chatty_Bot.Topics-Printing_data-Digits_from_0_to_9_backwards.main" target="11" />
+      <module name="Simple_Chatty_Bot.Topics-Printing_data-First,_second,_third.main" target="11" />
       <module name="Simple_Chatty_Bot.Topics-Printing_data-The_result_of_a_Tic-Tac-Toe_game.main" target="11" />
       <module name="Simple_Chatty_Bot.Topics-Printing_data-Theory.main" target="11" />
       <module name="Simple_Chatty_Bot.Topics-Printing_data-We_need_to_learn_Java.main" target="11" />
