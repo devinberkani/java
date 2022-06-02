@@ -38,6 +38,9 @@
             <option value="$PROJECT_DIR$/Topics/Scanning the input/Hiring a chef" />
             <option value="$PROJECT_DIR$/Topics/Scanning the input/Print strings in the reverse order" />
             <option value="$PROJECT_DIR$/Topics/Scanning the input/Theory" />
+            <option value="$PROJECT_DIR$/Topics/String/Check prefix ignoring the case" />
+            <option value="$PROJECT_DIR$/Topics/String/Find true expressions" />
+            <option value="$PROJECT_DIR$/Topics/String/Theory" />
             <option value="$PROJECT_DIR$/util" />
           </set>
         </option>

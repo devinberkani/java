@@ -106,5 +106,8 @@ files:
     }
   learner_created: false
 feedback_link: https://hyperskill.org/learn/step/9927#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Thu, 02 Jun 2022 12:30:05 UTC
 record: -1

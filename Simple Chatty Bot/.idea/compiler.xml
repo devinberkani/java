@@ -29,6 +29,9 @@
       <module name="Simple_Chatty_Bot.Topics-Scanning_the_input-Hiring_a_chef.main" target="11" />
       <module name="Simple_Chatty_Bot.Topics-Scanning_the_input-Print_strings_in_the_reverse_order.main" target="11" />
       <module name="Simple_Chatty_Bot.Topics-Scanning_the_input-Theory.main" target="11" />
+      <module name="Simple_Chatty_Bot.Topics-String-Check_prefix_ignoring_the_case.main" target="11" />
+      <module name="Simple_Chatty_Bot.Topics-String-Find_true_expressions.main" target="11" />
+      <module name="Simple_Chatty_Bot.Topics-String-Theory.main" target="11" />
       <module name="Simple_Chatty_Bot.util.main" target="11" />
     </bytecodeTargetLevel>
   </component>
