@@ -15,9 +15,6 @@ public class Main {
 
         char[] array2 = new char[1];
 
-        System.out.println(array2);
-
-
 //        char[] array3 = new char[-1];
 
 //        char[] array4 = new char[10000000000000];
