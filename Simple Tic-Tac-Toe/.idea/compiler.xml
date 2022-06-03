@@ -2,7 +2,17 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="17">
+      <module name="Simple_Tic-Tac-Toe.Simple_Tic-Tac-Toe-task-build-classes-java.main" target="11" />
+      <module name="Simple_Tic-Tac-Toe.Simple_Tic-Tac-Toe-task-build-generated-sources-annotationProcessor-java.main" target="11" />
+      <module name="Simple_Tic-Tac-Toe.Simple_Tic-Tac-Toe-task-build-generated-sources-headers-java.main" target="11" />
+      <module name="Simple_Tic-Tac-Toe.Simple_Tic-Tac-Toe-task-build-reports-tests.main" target="11" />
+      <module name="Simple_Tic-Tac-Toe.Simple_Tic-Tac-Toe-task-build-test-results.main" target="11" />
+      <module name="Simple_Tic-Tac-Toe.Simple_Tic-Tac-Toe-task-build-tmp.main" target="11" />
       <module name="Simple_Tic-Tac-Toe.Simple_Tic-Tac-Toe-task.main" target="11" />
+      <module name="Simple_Tic-Tac-Toe.Topics-Primitive_and_reference_types-Code_with_nulls.main" target="11" />
+      <module name="Simple_Tic-Tac-Toe.Topics-Primitive_and_reference_types-Creating_a_primitive.main" target="11" />
+      <module name="Simple_Tic-Tac-Toe.Topics-Primitive_and_reference_types-The_assignment.main" target="11" />
+      <module name="Simple_Tic-Tac-Toe.Topics-Primitive_and_reference_types-Theory.main" target="11" />
       <module name="Simple_Tic-Tac-Toe.util.main" target="11" />
     </bytecodeTargetLevel>
   </component>
