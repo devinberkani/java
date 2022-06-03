@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d9de5312-358a-4777-b685-fae8071bd7f7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/course-info.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Simple Tic-Tac-Toe/Simple Tic-Tac-Toe/Fight/task-remote-info.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Simple Tic-Tac-Toe/Simple Tic-Tac-Toe/First move/task-remote-info.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Simple Tic-Tac-Toe/Simple Tic-Tac-Toe/What's up on the field/task-remote-info.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/course-info.yaml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +44,7 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.sourceCode.Java",
+    "settings.editor.selected.configurable": "preferences.pathVariables",
     "show.inlinked.gradle.project.popup": "false"
   }
 }]]></component>
