@@ -9,6 +9,14 @@
       <module name="Simple_Chatty_Bot.Simple_Chatty_Bot-task-build-test-results.main" target="11" />
       <module name="Simple_Chatty_Bot.Simple_Chatty_Bot-task-build-tmp.main" target="11" />
       <module name="Simple_Chatty_Bot.Simple_Chatty_Bot-task.main" target="11" />
+      <module name="Simple_Chatty_Bot.Topics-Conditional_statement-Chocolate.main" target="11" />
+      <module name="Simple_Chatty_Bot.Topics-Conditional_statement-Healthy_sleep.main" target="11" />
+      <module name="Simple_Chatty_Bot.Topics-Conditional_statement-Theory.main" target="11" />
+      <module name="Simple_Chatty_Bot.Topics-Conditional_statement-Triangle.main" target="11" />
+      <module name="Simple_Chatty_Bot.Topics-Increment_and_decrement-Decrement_all.main" target="11" />
+      <module name="Simple_Chatty_Bot.Topics-Increment_and_decrement-Increasing_a_variable_by_one.main" target="11" />
+      <module name="Simple_Chatty_Bot.Topics-Increment_and_decrement-Theory.main" target="11" />
+      <module name="Simple_Chatty_Bot.Topics-Increment_and_decrement-What_is_the_result.main" target="11" />
       <module name="Simple_Chatty_Bot.Topics-Integer_types_and_operations-Difference_of_times.main" target="11" />
       <module name="Simple_Chatty_Bot.Topics-Integer_types_and_operations-Next_even_number.main" target="11" />
       <module name="Simple_Chatty_Bot.Topics-Integer_types_and_operations-Reading_integer_numbers.main" target="11" />
@@ -25,6 +33,10 @@
       <module name="Simple_Chatty_Bot.Topics-Printing_data-The_result_of_a_Tic-Tac-Toe_game.main" target="11" />
       <module name="Simple_Chatty_Bot.Topics-Printing_data-Theory.main" target="11" />
       <module name="Simple_Chatty_Bot.Topics-Printing_data-We_need_to_learn_Java.main" target="11" />
+      <module name="Simple_Chatty_Bot.Topics-Relational_operators-Exactly_one_parameter_is_positive.main" target="11" />
+      <module name="Simple_Chatty_Bot.Topics-Relational_operators-Groundhogs_at_a_party.main" target="11" />
+      <module name="Simple_Chatty_Bot.Topics-Relational_operators-Possible_values_of_a_variable.main" target="11" />
+      <module name="Simple_Chatty_Bot.Topics-Relational_operators-Theory.main" target="11" />
       <module name="Simple_Chatty_Bot.Topics-Scanning_the_input-Guest_list_of_a_hotel.main" target="11" />
       <module name="Simple_Chatty_Bot.Topics-Scanning_the_input-Hiring_a_chef.main" target="11" />
       <module name="Simple_Chatty_Bot.Topics-Scanning_the_input-Print_strings_in_the_reverse_order.main" target="11" />
@@ -32,6 +44,9 @@
       <module name="Simple_Chatty_Bot.Topics-String-Check_prefix_ignoring_the_case.main" target="11" />
       <module name="Simple_Chatty_Bot.Topics-String-Find_true_expressions.main" target="11" />
       <module name="Simple_Chatty_Bot.Topics-String-Theory.main" target="11" />
+      <module name="Simple_Chatty_Bot.Topics-The_for-loop-Grades.main" target="11" />
+      <module name="Simple_Chatty_Bot.Topics-The_for-loop-The_sum_of_integers_from_a_to_b.main" target="11" />
+      <module name="Simple_Chatty_Bot.Topics-The_for-loop-Theory.main" target="11" />
       <module name="Simple_Chatty_Bot.util.main" target="11" />
     </bytecodeTargetLevel>
   </component>
