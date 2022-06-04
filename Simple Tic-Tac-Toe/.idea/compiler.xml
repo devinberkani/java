@@ -13,6 +13,10 @@
       <module name="Simple_Tic-Tac-Toe.Topics-Primitive_and_reference_types-Creating_a_primitive.main" target="11" />
       <module name="Simple_Tic-Tac-Toe.Topics-Primitive_and_reference_types-The_assignment.main" target="11" />
       <module name="Simple_Tic-Tac-Toe.Topics-Primitive_and_reference_types-Theory.main" target="11" />
+      <module name="Simple_Tic-Tac-Toe.Topics-The_while_and_do-while_loops-Magic_code.main" target="11" />
+      <module name="Simple_Tic-Tac-Toe.Topics-The_while_and_do-while_loops-The_largest_element_of_a_sequence.main" target="11" />
+      <module name="Simple_Tic-Tac-Toe.Topics-The_while_and_do-while_loops-The_smallest_value.main" target="11" />
+      <module name="Simple_Tic-Tac-Toe.Topics-The_while_and_do-while_loops-Theory.main" target="11" />
       <module name="Simple_Tic-Tac-Toe.util.main" target="11" />
     </bytecodeTargetLevel>
   </component>

@@ -14,31 +14,35 @@ public class Main {
         int numOfColumns = 3;
 
         //initialize game pieces array
-        String[] gamePiecesArray = new String[9];
+        char[] gamePiecesArray = new char[9];
+
+        //prompt user for input
+        System.out.print("Enter cells: ");
+
+        //save user input as String
+        String userInput = scanner.next();
 
         //initialize user input array
-        String[] userInputArray = new String[gamePiecesArray.length];
-
-        //fill user input array
-        for (int i = 0; i < gamePiecesArray.length; i++) {
-            userInputArray[i] = scanner.next();
+        char[] userInputArray = new char[9];
+        for (int i = 0; i < userInput.length(); i++) {
+            userInputArray[i] = userInput.charAt(i);
         }
 
         //***print game board***
 
         //print top border
-        System.out.println("-----------");
+        System.out.println("---------");
 
         //variable for counting gameBoard array index
-        int gameBoardIndex = 0;
+        int arrayIndex = 0;
         for (int r = 0; r < numOfRows; r++) {
             //print left sidebar
             String sidebarCharacter = "|";
-            System.out.print(sidebarCharacter);
+            System.out.print(sidebarCharacter + " ");
             for (int c = 0; c < numOfColumns; c++) {
-                gamePiecesArray[gameBoardIndex] = userInputArray[gameBoardIndex]; // *****this needs to be changed to be user input
-                System.out.print(" " + gamePiecesArray[gameBoardIndex] + " ");
-                gameBoardIndex++;
+                gamePiecesArray[arrayIndex] = userInputArray[arrayIndex];
+                System.out.print(gamePiecesArray[arrayIndex] + " ");
+                arrayIndex++;
             }
             //print right sidebar
             System.out.print(sidebarCharacter);
@@ -46,7 +50,7 @@ public class Main {
             System.out.println();
         }
         //print bottom border
-        System.out.println("-----------");
+        System.out.println("---------");
     }
 
 }
