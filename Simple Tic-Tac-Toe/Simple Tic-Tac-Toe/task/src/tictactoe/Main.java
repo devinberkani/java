@@ -27,13 +27,37 @@ public class Main {
 
     public static void analyzeGameState(char[] array, int numOfRows, int numOfColumns) {
 
-        // initialize game state array for all game states to be tracked and compared simultaneously
-        int[] gameStateArray = new int[8];
+        //***** track counts for the game *****
+
+        // track pieces laid -- if index of array == X or O should count up by 1
+        // if numOfPiecesLaid < 8, program should print "game not finished"
+        // when this number == 8, gameIsOver should == true
+
+        int xPiecesLaid = 0;
+        int oPiecesLaid = 0;
+        int numPiecesLaid = 0;
+        boolean gameIsOver = false;
+
+        // DETERMINE counts -- assess each game state scenario to add up counts for numPiecesLaid and each above win state scenario
+        //variable for counting gameBoard array index
+        int arrayIndex = 0;
+        for (int r = 0; r < numOfRows; r++) {
+            for (int c = 0; c < numOfColumns; c++) {
+                if (array[arrayIndex] == 'X') {
+                    xPiecesLaid++;
+                    numPiecesLaid++;
+                }
+                if (array[arrayIndex] == 'O') {
+                    oPiecesLaid++;
+                    numPiecesLaid++;
+                }
+                arrayIndex++;
+            }
+        }
 
         //***** all 16 win state combinations *****
 
-        // horizontal win states -- double these to be able to track x and o win counts
-
+        // horizontal win states
         int topHorizontalWinCountX = 0;
         int midHorizontalWinCountX = 0;
         int bottomHorizontalWinCountX = 0;
@@ -58,50 +82,142 @@ public class Main {
         int leftToRightDiagonalWinCountO = 0;
         int rightToLeftDiagonalWinCountO = 0;
 
-        //horizontal x
+        // x win count
+        int xWinCount = 0;
 
-        // this part will have to be within a loop that adds up the counts for use below
+        // y win count
+        int oWinCount = 0;
 
-        // if (array[0] == x && array[1] == x && array[2] == x)
-        // if (array[3] == x && array[4] == x && array[5] == x)
-        // if (array[6] == x && array[7] == x && array[8] == x)
+        // total win count
+        int totalWinCount = 0;
 
-        //horizontal o
+        //horizontal x win logic
 
-        // if (array[0] == o && array[1] == o && array[2] == o)
-        // if (array[3] == o && array[4] == o && array[5] == o)
-        // if (array[6] == o && array[7] == o && array[8] == o)
+         if (array[0] == 'X' && array[1] == 'X' && array[2] == 'X')  {
+             topHorizontalWinCountX++;
+             xWinCount++;
+         }
 
+         if (array[3] == 'X' && array[4] == 'X' && array[5] == 'X') {
+             midHorizontalWinCountX++;
+             xWinCount++;
+         }
 
-        //***** track counts for the game *****
+         if (array[6] == 'X' && array[7] == 'X' && array[8] == 'X') {
+             bottomHorizontalWinCountX++;
+             xWinCount++;
+         }
 
-        // track pieces laid -- if index of array == X or O should count up by 1
-        // if numOfPiecesLaid < 8, program should print "game not finished"
-        // when this number == 8, gameIsOver should == true
-        int numPiecesLaid = 0;
-        boolean gameIsOver = false;
+        // vertical x win logic
 
-        //variable for counting gameBoard array index
-        int arrayIndex = 0;
-
-        // DETERMINE counts-- assess each game state scenario to add up counts for each above win state scenario
-        for (int r = 0; r < numOfRows; r++) {
-            for (int c = 0; c < numOfColumns; c++) {
-                System.out.println(array[arrayIndex]);
-                arrayIndex++;
-            }
+        if (array[0] == 'X' && array[3] == 'X' && array[6] == 'X')  {
+            leftVerticalWinCountX++;
+            xWinCount++;
         }
 
-        // ADD count totals to game state array - this is a separate loop
+        if (array[1] == 'X' && array[4] == 'X' && array[7] == 'X') {
+            midVerticalWinCountX++;
+            xWinCount++;
+        }
 
-        //***** determine winner for the game -- do this in separate method? *****
+        if (array[2] == 'X' && array[5] == 'X' && array[8] == 'X') {
+            rightVerticalWinCountX++;
+            xWinCount++;
+        }
+
+        // diagonal x win logic
+
+        if (array[0] == 'X' && array[4] == 'X' && array[8] == 'X')  {
+            leftToRightDiagonalWinCountX++;
+            xWinCount++;
+        }
+
+        if (array[2] == 'X' && array[4] == 'X' && array[6] == 'X') {
+            rightToLeftDiagonalWinCountX++;
+            xWinCount++;
+        }
+
+        //horizontal o win logic
+
+        if (array[0] == 'O' && array[1] == 'O' && array[2] == 'O')  {
+            topHorizontalWinCountO++;
+            oWinCount++;
+        }
+
+        if (array[3] == 'O' && array[4] == 'O' && array[5] == 'O') {
+            midHorizontalWinCountO++;
+            oWinCount++;
+        }
+
+        if (array[6] == 'O' && array[7] == 'O' && array[8] == 'O') {
+            bottomHorizontalWinCountO++;
+            oWinCount++;
+        }
+
+        // vertical o win logic
+
+        if (array[0] == 'O' && array[3] == 'O' && array[6] == 'O')  {
+            leftVerticalWinCountO++;
+            oWinCount++;
+        }
+
+        if (array[1] == 'O' && array[4] == 'O' && array[7] == 'O') {
+            midVerticalWinCountO++;
+            oWinCount++;
+        }
+
+        if (array[2] == 'O' && array[5] == 'O' && array[8] == 'O') {
+            rightVerticalWinCountO++;
+            oWinCount++;
+        }
+
+        // diagonal o win logic
+
+        if (array[0] == 'O' && array[4] == 'O' && array[8] == 'O')  {
+            leftToRightDiagonalWinCountO++;
+            oWinCount++;
+        }
+
+        if (array[2] == 'O' && array[4] == 'O' && array[6] == 'O') {
+            rightToLeftDiagonalWinCountO++;
+            oWinCount++;
+        }
+
+        // game over logic
+        if (numPiecesLaid == 9 || Math.abs(xPiecesLaid - oPiecesLaid) > 1 || Math.abs(xPiecesLaid - oPiecesLaid) < 0 || xWinCount > 0 || oWinCount > 0) {
+            gameIsOver = true;
+        } else {
+            System.out.println("Game not finished");
+        }
+
+        // initialize game state arrays for all game states to be tracked and compared simultaneously
+        int[] gameStateArrayX = {topHorizontalWinCountX, midHorizontalWinCountX, bottomHorizontalWinCountX, leftVerticalWinCountX, midVerticalWinCountX, rightVerticalWinCountX, leftToRightDiagonalWinCountX, rightToLeftDiagonalWinCountX};
+
+        int[] gameStateArrayO = {topHorizontalWinCountO, midHorizontalWinCountO, bottomHorizontalWinCountO, leftVerticalWinCountO, midVerticalWinCountO, rightVerticalWinCountO, leftToRightDiagonalWinCountO, rightToLeftDiagonalWinCountO};
+
+        //***** ADD count totals to game state arrays - determine winner for the game -- *****
+
+        if (gameIsOver) {
+            for (int i = 0; i < gameStateArrayX.length; i++) {
+                totalWinCount += gameStateArrayX[i];
+                totalWinCount += gameStateArrayO[i];
+            }
+            if (totalWinCount > 1 || Math.abs(xPiecesLaid - oPiecesLaid) > 1 || Math.abs(xPiecesLaid - oPiecesLaid) < 0) {
+                System.out.println("Impossible");
+            } else if (xWinCount == 1) {
+                System.out.println("X wins");
+            } else if (oWinCount == 1) {
+                System.out.println("O wins");
+            } else {
+                System.out.println("Draw");
+            }
+        }
 
         // ONLY IF gameIsOver == true (won't print "game not finished" anymore)
         // make sure there is only one winner by tracking number of wins (below winCount variable),
         // if there is only one, print the winner,
         // if there is more than one, print impossible,
         // if there is zero, print draw
-        int winCount = 0;
     }
 
     public static void printGameBoard(char[] array) {
