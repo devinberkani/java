@@ -3,6 +3,7 @@ import java.util.Scanner;
 class Main {
     public static void main(String[] args) {
         // put your code here
+
         Scanner scanner = new Scanner(System.in);
 
         int n = scanner.nextInt();
@@ -17,12 +18,6 @@ class Main {
         }
 
         int k = scanner.nextInt();
-
-//        for (int i = 0; i < cinemaSeats.length; i++) {
-//            for (int j = 0; j < cinemaSeats[i].length; j++) {
-//                System.out.println(cinemaSeats[i][j]);
-//            }
-//        }
 
 
         int emptySeatCount = 0;
@@ -41,7 +36,6 @@ class Main {
                     }
                 } else {
                     emptySeatCount = 0;
-                    continue; //*****this is where you left off to get the last one
                 }
             }
         }
