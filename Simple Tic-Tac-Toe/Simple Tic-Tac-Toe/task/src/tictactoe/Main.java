@@ -3,29 +3,81 @@ package tictactoe;
 import java.util.Scanner;
 
 public class Main {
+
+    // initialize scanner
+    static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
         // write your code here
 
-        // initialize scanner
-        Scanner scanner = new Scanner(System.in);
+        // define number of rows and columns for game
+        int numOfRows = 3;
+        int numOfColumns = 3;
 
-        //prompt user for input
+        // prompt user for input
         System.out.print("Enter cells: ");
 
-        //save user input as String
+        // save user input as String
         String userInput = scanner.next();
 
-        //initialize user input array
-        char[] userInputArray = new char[9];
-        for (int i = 0; i < userInput.length(); i++) {
-            userInputArray[i] = userInput.charAt(i);
+        // initialize user input array
+        int stringIndex = 0;
+        char[][] userInputArray = new char[numOfRows][numOfColumns];
+        for (int r = 0; r < userInputArray.length; r++) {
+            for (int c = 0; c < userInputArray[r].length; c++) {
+                userInputArray[r][c] = userInput.charAt(stringIndex);
+                stringIndex++;
+            }
         }
 
         //***print game board***
-        printGameBoard(userInputArray);
+        printGameBoard(userInputArray, numOfRows, numOfColumns);
+
+        //modify game pieces array based on user coordinate input
+        enterCoordinates(userInputArray, numOfRows, numOfColumns);
+
     }
 
-    public static void analyzeGameState(char[] array, int numOfRows, int numOfColumns) {
+    public static void enterCoordinates(char[][] array, int numOfRows, int numOfColumns) {
+        // define user's piece
+        char playerPiece = 'X';
+
+        // get coordinates from user
+        int rowPlacement = 0;
+        int columnPlacement = 0;
+        boolean isValid = false;
+
+        //error logic
+
+        do {
+            System.out.print("Enter the coordinates: ");
+            scanner.nextLine();
+            if (!scanner.hasNextInt()) {
+                System.out.println("You should enter numbers!");
+            }
+            else {
+                rowPlacement = scanner.nextInt();
+                columnPlacement = scanner.nextInt();
+                if (rowPlacement < 1 || rowPlacement > 3 || columnPlacement < 1 || columnPlacement > 3) {
+                    System.out.println("Coordinates should be from 1 to 3!");
+                } else {
+                    int xCoordinate = rowPlacement - 1;
+                    int yCoordinate = columnPlacement - 1;
+                    char attemptedPlacement = array[xCoordinate][yCoordinate];
+                    if (attemptedPlacement == 'X' || attemptedPlacement == 'O') {
+                        System.out.println("This cell is occupied! Choose another one!");
+                    } else {
+                        array[xCoordinate][yCoordinate] = playerPiece;
+                        isValid = true;
+                    }
+                }
+            }
+        } while (!isValid);
+
+        printGameBoard(array, numOfRows, numOfColumns);
+
+    }
+    public static void analyzeGameState(char[][] array, int numOfRows, int numOfColumns) {
 
         //***** track counts for the game *****
 
@@ -43,15 +95,15 @@ public class Main {
         int arrayIndex = 0;
         for (int r = 0; r < numOfRows; r++) {
             for (int c = 0; c < numOfColumns; c++) {
-                if (array[arrayIndex] == 'X') {
+                if (array[r][c] == 'X') {
                     xPiecesLaid++;
                     numPiecesLaid++;
                 }
-                if (array[arrayIndex] == 'O') {
+                if (array[r][c] == 'O') {
                     oPiecesLaid++;
                     numPiecesLaid++;
                 }
-                arrayIndex++;
+//                arrayIndex++;
             }
         }
 
@@ -93,92 +145,92 @@ public class Main {
 
         //horizontal x win logic
 
-         if (array[0] == 'X' && array[1] == 'X' && array[2] == 'X')  {
+         if (array[0][0] == 'X' && array[0][1] == 'X' && array[0][2] == 'X')  {
              topHorizontalWinCountX++;
              xWinCount++;
          }
 
-         if (array[3] == 'X' && array[4] == 'X' && array[5] == 'X') {
+         if (array[1][0] == 'X' && array[1][1] == 'X' && array[1][2] == 'X') {
              midHorizontalWinCountX++;
              xWinCount++;
          }
 
-         if (array[6] == 'X' && array[7] == 'X' && array[8] == 'X') {
+         if (array[2][0] == 'X' && array[2][1] == 'X' && array[2][2] == 'X') {
              bottomHorizontalWinCountX++;
              xWinCount++;
          }
 
         // vertical x win logic
 
-        if (array[0] == 'X' && array[3] == 'X' && array[6] == 'X')  {
+        if (array[0][0] == 'X' && array[1][0] == 'X' && array[2][0] == 'X')  {
             leftVerticalWinCountX++;
             xWinCount++;
         }
 
-        if (array[1] == 'X' && array[4] == 'X' && array[7] == 'X') {
+        if (array[0][1] == 'X' && array[1][1] == 'X' && array[2][1] == 'X') {
             midVerticalWinCountX++;
             xWinCount++;
         }
 
-        if (array[2] == 'X' && array[5] == 'X' && array[8] == 'X') {
+        if (array[0][2] == 'X' && array[1][2] == 'X' && array[2][2] == 'X') {
             rightVerticalWinCountX++;
             xWinCount++;
         }
 
         // diagonal x win logic
 
-        if (array[0] == 'X' && array[4] == 'X' && array[8] == 'X')  {
+        if (array[0][0] == 'X' && array[1][1] == 'X' && array[2][2] == 'X')  {
             leftToRightDiagonalWinCountX++;
             xWinCount++;
         }
 
-        if (array[2] == 'X' && array[4] == 'X' && array[6] == 'X') {
+        if (array[0][2] == 'X' && array[1][1] == 'X' && array[2][0] == 'X') {
             rightToLeftDiagonalWinCountX++;
             xWinCount++;
         }
 
         //horizontal o win logic
 
-        if (array[0] == 'O' && array[1] == 'O' && array[2] == 'O')  {
+        if (array[0][0] == 'O' && array[0][1] == 'O' && array[0][2] == 'O')  {
             topHorizontalWinCountO++;
             oWinCount++;
         }
 
-        if (array[3] == 'O' && array[4] == 'O' && array[5] == 'O') {
+        if (array[1][0] == 'O' && array[1][1] == 'O' && array[1][2] == 'O') {
             midHorizontalWinCountO++;
             oWinCount++;
         }
 
-        if (array[6] == 'O' && array[7] == 'O' && array[8] == 'O') {
+        if (array[2][0] == 'O' && array[2][1] == 'O' && array[2][2] == 'O') {
             bottomHorizontalWinCountO++;
             oWinCount++;
         }
 
         // vertical o win logic
 
-        if (array[0] == 'O' && array[3] == 'O' && array[6] == 'O')  {
+        if (array[0][0] == 'O' && array[1][0] == 'O' && array[2][0] == 'O')  {
             leftVerticalWinCountO++;
             oWinCount++;
         }
 
-        if (array[1] == 'O' && array[4] == 'O' && array[7] == 'O') {
+        if (array[0][1] == 'O' && array[1][1] == 'O' && array[2][1] == 'O') {
             midVerticalWinCountO++;
             oWinCount++;
         }
 
-        if (array[2] == 'O' && array[5] == 'O' && array[8] == 'O') {
+        if (array[0][2] == 'O' && array[1][2] == 'O' && array[2][2] == 'O') {
             rightVerticalWinCountO++;
             oWinCount++;
         }
 
         // diagonal o win logic
 
-        if (array[0] == 'O' && array[4] == 'O' && array[8] == 'O')  {
+        if (array[0][0] == 'O' && array[1][1] == 'O' && array[2][2] == 'O')  {
             leftToRightDiagonalWinCountO++;
             oWinCount++;
         }
 
-        if (array[2] == 'O' && array[4] == 'O' && array[6] == 'O') {
+        if (array[0][2] == 'O' && array[1][1] == 'O' && array[2][0] == 'O') {
             rightToLeftDiagonalWinCountO++;
             oWinCount++;
         }
@@ -220,27 +272,22 @@ public class Main {
         // if there is zero, print draw
     }
 
-    public static void printGameBoard(char[] array) {
-        // define number of rows and columns for game
-        int numOfRows = 3;
-        int numOfColumns = 3;
+    public static void printGameBoard(char[][] array, int numOfRows, int numOfColumns) {
 
         //initialize game pieces array
-        char[] gamePiecesArray = new char[9];
+        char[][] gamePiecesArray = new char[numOfRows][numOfColumns];
 
         //print top border
         System.out.println("---------");
 
         //variable for counting gameBoard array index
-        int arrayIndex = 0;
         for (int r = 0; r < numOfRows; r++) {
             //print left sidebar
             String sidebarCharacter = "|";
             System.out.print(sidebarCharacter + " ");
             for (int c = 0; c < numOfColumns; c++) {
-                gamePiecesArray[arrayIndex] = array[arrayIndex];
-                System.out.print(gamePiecesArray[arrayIndex] + " ");
-                arrayIndex++;
+                gamePiecesArray[r][c] = array[r][c];
+                System.out.print(gamePiecesArray[r][c] + " ");
             }
             //print right sidebar
             System.out.print(sidebarCharacter);
