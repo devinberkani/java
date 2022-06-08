@@ -14,33 +14,44 @@ public class Main {
         int numOfRows = 3;
         int numOfColumns = 3;
 
-        // prompt user for input
-        System.out.print("Enter cells: ");
-
-        // save user input as String
-        String userInput = scanner.next();
-
         // initialize user input array
-        int stringIndex = 0;
         char[][] userInputArray = new char[numOfRows][numOfColumns];
         for (int r = 0; r < userInputArray.length; r++) {
             for (int c = 0; c < userInputArray[r].length; c++) {
-                userInputArray[r][c] = userInput.charAt(stringIndex);
-                stringIndex++;
+                userInputArray[r][c] = ' ';
             }
         }
 
-        //***print game board***
-        printGameBoard(userInputArray, numOfRows, numOfColumns);
+        boolean endOfGame = false;
+        boolean isPlayerX = true;
 
-        //modify game pieces array based on user coordinate input
-        enterCoordinates(userInputArray, numOfRows, numOfColumns);
+
+        while(!endOfGame) {
+
+            //***print game board***
+            endOfGame = printGameBoard(userInputArray, numOfRows, numOfColumns);
+
+            if(endOfGame) {
+                break;
+            }
+
+            //modify game pieces array based on user coordinate input
+            enterCoordinates(userInputArray, numOfRows, numOfColumns, isPlayerX);
+
+            // switches between X and O every time method is called
+            isPlayerX = !isPlayerX;
+        }
 
     }
 
-    public static void enterCoordinates(char[][] array, int numOfRows, int numOfColumns) {
+    public static void enterCoordinates(char[][] array, int numOfRows, int numOfColumns, boolean isPlayerX) {
         // define user's piece
+
         char playerPiece = 'X';
+
+        if(!isPlayerX) {
+            playerPiece = 'O';
+        }
 
         // get coordinates from user
         int rowPlacement = 0;
@@ -51,21 +62,22 @@ public class Main {
 
         do {
             System.out.print("Enter the coordinates: ");
-            scanner.nextLine();
             if (!scanner.hasNextInt()) {
+                scanner.nextLine();
                 System.out.println("You should enter numbers!");
-            }
-            else {
+            } else {
                 rowPlacement = scanner.nextInt();
                 columnPlacement = scanner.nextInt();
                 if (rowPlacement < 1 || rowPlacement > 3 || columnPlacement < 1 || columnPlacement > 3) {
                     System.out.println("Coordinates should be from 1 to 3!");
+                    scanner.nextLine();
                 } else {
                     int xCoordinate = rowPlacement - 1;
                     int yCoordinate = columnPlacement - 1;
                     char attemptedPlacement = array[xCoordinate][yCoordinate];
                     if (attemptedPlacement == 'X' || attemptedPlacement == 'O') {
                         System.out.println("This cell is occupied! Choose another one!");
+                        scanner.nextLine();
                     } else {
                         array[xCoordinate][yCoordinate] = playerPiece;
                         isValid = true;
@@ -74,10 +86,10 @@ public class Main {
             }
         } while (!isValid);
 
-        printGameBoard(array, numOfRows, numOfColumns);
+//        printGameBoard(array, numOfRows, numOfColumns);
 
     }
-    public static void analyzeGameState(char[][] array, int numOfRows, int numOfColumns) {
+    public static boolean analyzeGameState(char[][] array, int numOfRows, int numOfColumns) {
 
         //***** track counts for the game *****
 
@@ -265,6 +277,7 @@ public class Main {
             }
         }
 
+        return gameIsOver;
         // ONLY IF gameIsOver == true (won't print "game not finished" anymore)
         // make sure there is only one winner by tracking number of wins (below winCount variable),
         // if there is only one, print the winner,
@@ -272,7 +285,7 @@ public class Main {
         // if there is zero, print draw
     }
 
-    public static void printGameBoard(char[][] array, int numOfRows, int numOfColumns) {
+    public static boolean printGameBoard(char[][] array, int numOfRows, int numOfColumns) {
 
         //initialize game pieces array
         char[][] gamePiecesArray = new char[numOfRows][numOfColumns];
@@ -299,7 +312,7 @@ public class Main {
         System.out.println("---------");
 
         //analyze game state
-        analyzeGameState(gamePiecesArray, numOfRows, numOfColumns);
+        return analyzeGameState(gamePiecesArray, numOfRows, numOfColumns);
     }
 
 }
