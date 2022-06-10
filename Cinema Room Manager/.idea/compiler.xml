@@ -14,12 +14,20 @@
       <module name="Cinema_Room_Manager.Topics-Conditional_statement-The_army_of_units.main" target="11" />
       <module name="Cinema_Room_Manager.Topics-Conditional_statement-Theory.main" target="11" />
       <module name="Cinema_Room_Manager.Topics-Conditional_statement-Triangle.main" target="11" />
+      <module name="Cinema_Room_Manager.Topics-Declaring_a_method-Calculating_factorials.main" target="11" />
+      <module name="Cinema_Room_Manager.Topics-Declaring_a_method-Greatest_common_divisor.main" target="11" />
+      <module name="Cinema_Room_Manager.Topics-Declaring_a_method-Theory.main" target="11" />
       <module name="Cinema_Room_Manager.Topics-Multidimensional_array-Cinema.main" target="11" />
       <module name="Cinema_Room_Manager.Topics-Multidimensional_array-Create_cube.main" target="11" />
       <module name="Cinema_Room_Manager.Topics-Multidimensional_array-Indexing_rules.main" target="11" />
       <module name="Cinema_Room_Manager.Topics-Multidimensional_array-Practical_applications.main" target="11" />
       <module name="Cinema_Room_Manager.Topics-Multidimensional_array-Printing_lengths_of_nested_arrays.main" target="11" />
       <module name="Cinema_Room_Manager.Topics-Multidimensional_array-Theory.main" target="11" />
+      <module name="Cinema_Room_Manager.Topics-The_main_method-Fixing_errors_in_main.main" target="11" />
+      <module name="Cinema_Room_Manager.Topics-The_main_method-Fixing_the_main_method.main" target="11" />
+      <module name="Cinema_Room_Manager.Topics-The_main_method-No_main_args.main" target="11" />
+      <module name="Cinema_Room_Manager.Topics-The_main_method-Print__Hello,_Java.main" target="11" />
+      <module name="Cinema_Room_Manager.Topics-The_main_method-Theory.main" target="11" />
       <module name="Cinema_Room_Manager.util.main" target="11" />
     </bytecodeTargetLevel>
   </component>

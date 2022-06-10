@@ -18,5 +18,7 @@ class Main {
         } else {
             System.out.println("legion");
         }
+
     }
+
 }
