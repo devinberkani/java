@@ -17,6 +17,10 @@
       <module name="Cinema_Room_Manager.Topics-Declaring_a_method-Calculating_factorials.main" target="11" />
       <module name="Cinema_Room_Manager.Topics-Declaring_a_method-Greatest_common_divisor.main" target="11" />
       <module name="Cinema_Room_Manager.Topics-Declaring_a_method-Theory.main" target="11" />
+      <module name="Cinema_Room_Manager.Topics-Functional_decomposition-Calculator_with_four_methods.main" target="11" />
+      <module name="Cinema_Room_Manager.Topics-Functional_decomposition-Create_a_full_name.main" target="11" />
+      <module name="Cinema_Room_Manager.Topics-Functional_decomposition-Decompose_a_math_function.main" target="11" />
+      <module name="Cinema_Room_Manager.Topics-Functional_decomposition-Theory.main" target="11" />
       <module name="Cinema_Room_Manager.Topics-Multidimensional_array-Cinema.main" target="11" />
       <module name="Cinema_Room_Manager.Topics-Multidimensional_array-Create_cube.main" target="11" />
       <module name="Cinema_Room_Manager.Topics-Multidimensional_array-Indexing_rules.main" target="11" />
