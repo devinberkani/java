@@ -36,6 +36,8 @@
       <module name="Cinema_Room_Manager.Topics-The_main_method-No_main_args.main" target="11" />
       <module name="Cinema_Room_Manager.Topics-The_main_method-Print__Hello,_Java.main" target="11" />
       <module name="Cinema_Room_Manager.Topics-The_main_method-Theory.main" target="11" />
+      <module name="Cinema_Room_Manager.Topics-What_is_an_exception-Avoid_division_by_zero.main" target="11" />
+      <module name="Cinema_Room_Manager.Topics-What_is_an_exception-Theory.main" target="11" />
       <module name="Cinema_Room_Manager.util.main" target="11" />
     </bytecodeTargetLevel>
   </component>

@@ -44,6 +44,8 @@
             <option value="$PROJECT_DIR$/Topics/The main method/No main args" />
             <option value="$PROJECT_DIR$/Topics/The main method/Print  Hello, Java" />
             <option value="$PROJECT_DIR$/Topics/The main method/Theory" />
+            <option value="$PROJECT_DIR$/Topics/What is an exception/Avoid division by zero" />
+            <option value="$PROJECT_DIR$/Topics/What is an exception/Theory" />
             <option value="$PROJECT_DIR$/util" />
           </set>
         </option>
