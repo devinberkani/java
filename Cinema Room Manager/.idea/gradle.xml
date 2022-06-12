@@ -17,6 +17,10 @@
             <option value="$PROJECT_DIR$/Cinema Room Manager/task/build/reports/tests" />
             <option value="$PROJECT_DIR$/Cinema Room Manager/task/build/test-results" />
             <option value="$PROJECT_DIR$/Cinema Room Manager/task/build/tmp" />
+            <option value="$PROJECT_DIR$/Topics/Array exceptions/A line that throws an exception" />
+            <option value="$PROJECT_DIR$/Topics/Array exceptions/Calculate Square" />
+            <option value="$PROJECT_DIR$/Topics/Array exceptions/Out of bounds" />
+            <option value="$PROJECT_DIR$/Topics/Array exceptions/Theory" />
             <option value="$PROJECT_DIR$/Topics/Arrays as parameters/Get first and last elements" />
             <option value="$PROJECT_DIR$/Topics/Arrays as parameters/Theory" />
             <option value="$PROJECT_DIR$/Topics/Arrays as parameters/Varargs" />
@@ -39,6 +43,9 @@
             <option value="$PROJECT_DIR$/Topics/Multidimensional array/Practical applications" />
             <option value="$PROJECT_DIR$/Topics/Multidimensional array/Printing lengths of nested arrays" />
             <option value="$PROJECT_DIR$/Topics/Multidimensional array/Theory" />
+            <option value="$PROJECT_DIR$/Topics/NPE/Avoid NPE" />
+            <option value="$PROJECT_DIR$/Topics/NPE/Theory" />
+            <option value="$PROJECT_DIR$/Topics/NPE/When NPE cannot occur" />
             <option value="$PROJECT_DIR$/Topics/The main method/Fixing errors in main" />
             <option value="$PROJECT_DIR$/Topics/The main method/Fixing the main method" />
             <option value="$PROJECT_DIR$/Topics/The main method/No main args" />
