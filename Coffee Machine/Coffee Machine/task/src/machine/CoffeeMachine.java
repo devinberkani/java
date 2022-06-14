@@ -4,6 +4,85 @@ import java.util.Scanner;
 
 public class CoffeeMachine {
 
+    //***YOU ARE STILL ON STAGE 4/6, JUST FINISHED TESTING BUYING ESPRESSO, STILL EARLY IN STAGE
+
+    public static int[] buyCoffee(int coffeeSelection, int[] coffeeMachineArray) {
+        int waterUsed = 0;
+        int milkUsed = 0;
+        int coffeeBeansUsed = 0;
+        int disposableCupsUsed = 1;
+        int moneyCollected = 0;
+
+        if (coffeeSelection == 1) { // espresso
+            waterUsed = 250;
+            coffeeBeansUsed = 16;
+            moneyCollected = 4;
+        } else if (coffeeSelection == 2) { //latte
+            waterUsed = 350;
+            milkUsed = 75;
+            coffeeBeansUsed = 20;
+            moneyCollected = 7;
+        } else if (coffeeSelection == 3) { //cappuccino
+            waterUsed = 200;
+            milkUsed = 100;
+            coffeeBeansUsed = 12;
+            moneyCollected = 6;
+        }
+
+        coffeeMachineArray[0] -= waterUsed;
+        coffeeMachineArray[1] -= milkUsed;
+        coffeeMachineArray[2] -= coffeeBeansUsed;
+        coffeeMachineArray[3] -= disposableCupsUsed;
+        coffeeMachineArray[4] += moneyCollected;
+
+        return coffeeMachineArray;
+    }
+
+    public static void printMenu() {
+        Scanner scanner = new Scanner(System.in);
+
+        int waterHad = 400; // ml
+        int milkHad = 540; // ml
+        int coffeeBeansHad = 120; // g
+        int disposableCupsHad = 9; // cups
+        int moneyHad = 550; // $
+
+        // array of all items to be given to and returned by methods
+
+        int[] coffeeMachineArray = {waterHad, milkHad, coffeeBeansHad, disposableCupsHad, moneyHad};
+
+        System.out.println("The coffee machine has:\n" +
+                        coffeeMachineArray[0] + " ml of water\n" +
+                        coffeeMachineArray[1] + " ml of milk\n" +
+                        coffeeMachineArray[2] + " g of coffee beans\n" +
+                        coffeeMachineArray[3] + " disposable cups\n" +
+                        "$" + coffeeMachineArray[4] + " of money");
+
+        System.out.println("Write action (buy, fill, take)");
+
+        String action = scanner.nextLine();
+
+        if (action.equalsIgnoreCase("buy")) {
+            System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:");
+            int coffeeSelection = scanner.nextInt();
+            coffeeMachineArray = buyCoffee(coffeeSelection, coffeeMachineArray);
+        } else if (action.equalsIgnoreCase("fill")) {
+
+        } else if (action.equalsIgnoreCase("take")) {
+
+        } else {
+            //put error here
+        }
+
+        System.out.println("The coffee machine has:\n" +
+                coffeeMachineArray[0] + " ml of water\n" +
+                coffeeMachineArray[1] + " ml of milk\n" +
+                coffeeMachineArray[2] + " g of coffee beans\n" +
+                coffeeMachineArray[3] + " disposable cups\n" +
+                "$" + coffeeMachineArray[4] + " of money");
+
+    }
+
     public static int numOfCups(int water, int milk, int coffeeBeans, int waterHad, int milkHad, int coffeeBeansHad) {
         int numOfCups = 0;
         while (waterHad >= water && milkHad >= milk && coffeeBeansHad >= coffeeBeans) {
@@ -45,33 +124,6 @@ public class CoffeeMachine {
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-//        System.out.println("Starting to make a coffee");
-//        System.out.println("Grinding coffee beans");
-//        System.out.println("Boiling water");
-//        System.out.println("Mixing boiled water with crushed coffee beans");
-//        System.out.println("Pouring coffee into the cup");
-//        System.out.println("Pouring some milk into the cup");
-//        System.out.println("Coffee is ready!");
-
-        System.out.println("Write how many ml of water the coffee machine has: ");
-
-        int waterHad = scanner.nextInt();
-
-        System.out.println("Write how many ml of milk the coffee machine has: ");
-
-        int milkHad = scanner.nextInt();
-
-        System.out.println("Write how many grams of coffee beans the coffee machine has: ");
-
-        int coffeeBeansHad = scanner.nextInt();
-
-        System.out.println("Write how many cups of coffee you will need: ");
-
-        int cupsOfCoffee = scanner.nextInt();
-
-        calculateIngredients(cupsOfCoffee, waterHad, milkHad, coffeeBeansHad);
-
+        printMenu();
     }
 }
