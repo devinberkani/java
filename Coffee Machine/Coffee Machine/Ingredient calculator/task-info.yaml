@@ -116,8 +116,15 @@ files:
     }
   learner_created: false
 feedback_link: https://hyperskill.org/learn/step/5330#comment
-status: Solved
+status: Failed
 feedback:
-  message: Congratulations!
-  time: Mon, 13 Jun 2022 15:09:52 UTC
-record: -1
+  message: "Error in test #1\n\nProgram ran out of input. You tried to read more than\
+    \ expected.\n\nPlease find below the output of your program during this failed\
+    \ test.\nNote that the &#39;&gt;&#39; character indicates the beginning of the\
+    \ input line.\n\n---\n\nStarting to make a coffee\nGrinding coffee beans\nBoiling\
+    \ water\nMixing boiled water with crushed coffee beans\nPouring coffee into the\
+    \ cup\nPouring some milk into the cup\nCoffee is ready!\nWrite how many ml of\
+    \ water the coffee machine has: \n&gt; 25\nWrite how many ml of milk the coffee\
+    \ machine has:"
+  time: Tue, 14 Jun 2022 11:01:42 UTC
+record: 2
