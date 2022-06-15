@@ -4,38 +4,104 @@ import java.util.Scanner;
 
 public class CoffeeMachine {
 
-    //***YOU ARE STILL ON STAGE 4/6, JUST FINISHED TESTING BUYING ESPRESSO, STILL EARLY IN STAGE
-
-    public static int[] buyCoffee(int coffeeSelection, int[] coffeeMachineArray) {
+    public static void buyCoffee(String coffeeSelection, int[] coffeeMachineArray) {
         int waterUsed = 0;
         int milkUsed = 0;
         int coffeeBeansUsed = 0;
         int disposableCupsUsed = 1;
         int moneyCollected = 0;
 
-        if (coffeeSelection == 1) { // espresso
+        if (coffeeSelection.equals("1")) { // espresso
             waterUsed = 250;
             coffeeBeansUsed = 16;
             moneyCollected = 4;
-        } else if (coffeeSelection == 2) { //latte
+        } else if (coffeeSelection.equals("2")) { //latte
             waterUsed = 350;
             milkUsed = 75;
             coffeeBeansUsed = 20;
             moneyCollected = 7;
-        } else if (coffeeSelection == 3) { //cappuccino
+        } else if (coffeeSelection.equals("3")) { //cappuccino
             waterUsed = 200;
             milkUsed = 100;
             coffeeBeansUsed = 12;
             moneyCollected = 6;
         }
 
-        coffeeMachineArray[0] -= waterUsed;
-        coffeeMachineArray[1] -= milkUsed;
-        coffeeMachineArray[2] -= coffeeBeansUsed;
-        coffeeMachineArray[3] -= disposableCupsUsed;
-        coffeeMachineArray[4] += moneyCollected;
+        String inventoryCheck = isEnoughIngredients(coffeeMachineArray, waterUsed, milkUsed, coffeeBeansUsed, disposableCupsUsed);
 
-        return coffeeMachineArray;
+        if (inventoryCheck == null) {
+            System.out.println("I have enough resources, making you a coffee!");
+            coffeeMachineArray[0] -= waterUsed;
+            coffeeMachineArray[1] -= milkUsed;
+            coffeeMachineArray[2] -= coffeeBeansUsed;
+            coffeeMachineArray[3] -= disposableCupsUsed;
+            coffeeMachineArray[4] += moneyCollected;
+        } else {
+            System.out.println(inventoryCheck);
+        }
+    }
+
+    public static String isEnoughIngredients(int[] coffeeMachineArray, int waterUsed, int milkUsed, int coffeeBeansUsed, int disposableCupsUsed) {
+        int waterHad = coffeeMachineArray[0];
+        int milkHad = coffeeMachineArray[1];
+        int coffeeBeansHad = coffeeMachineArray[2];
+        int disposableCupsHad = coffeeMachineArray[3];
+
+        waterHad -= waterUsed;
+        milkHad -= milkUsed;
+        coffeeBeansHad -= coffeeBeansUsed;
+        disposableCupsHad -= disposableCupsUsed;
+
+        if (waterHad < 0) {
+            return "Sorry, not enough water!";
+        } else if (milkHad < 0) {
+            return "Sorry, not enough milk!";
+        } else if (coffeeBeansHad < 0) {
+            return "Sorry, not enough coffee beans!";
+        } else if (disposableCupsHad < 0) {
+            return "Sorry, not enough disposable cups!";
+        }
+        return null;
+    }
+
+    public static void fillCoffeeMachine(int[] coffeeMachineArray) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Write how many ml of water you want to add:");
+
+        int waterAdded = scanner.nextInt();
+
+        System.out.println("Write how many ml of milk you want to add:");
+
+        int milkAdded = scanner.nextInt();
+
+        System.out.println("Write how many grams of coffee beans you want to add:");
+
+        int coffeeBeansAdded = scanner.nextInt();
+
+        System.out.println("Write how many disposable cups of coffee you want to add:");
+
+        int disposableCupsAdded = scanner.nextInt();
+
+        coffeeMachineArray[0] += waterAdded;
+        coffeeMachineArray[1] += milkAdded;
+        coffeeMachineArray[2] += coffeeBeansAdded;
+        coffeeMachineArray[3] += disposableCupsAdded;
+    }
+
+    public static void take(int[] coffeeMachineArray) {
+        System.out.println("I gave you $" + coffeeMachineArray[4]);
+
+        coffeeMachineArray[4] = 0;
+    }
+
+    public static void printRemaining(int[] coffeeMachineArray) {
+        System.out.println("The coffee machine has:\n" +
+                coffeeMachineArray[0] + " ml of water\n" +
+                coffeeMachineArray[1] + " ml of milk\n" +
+                coffeeMachineArray[2] + " g of coffee beans\n" +
+                coffeeMachineArray[3] + " disposable cups\n" +
+                "$" + coffeeMachineArray[4] + " of money");
     }
 
     public static void printMenu() {
@@ -51,76 +117,30 @@ public class CoffeeMachine {
 
         int[] coffeeMachineArray = {waterHad, milkHad, coffeeBeansHad, disposableCupsHad, moneyHad};
 
-        System.out.println("The coffee machine has:\n" +
-                        coffeeMachineArray[0] + " ml of water\n" +
-                        coffeeMachineArray[1] + " ml of milk\n" +
-                        coffeeMachineArray[2] + " g of coffee beans\n" +
-                        coffeeMachineArray[3] + " disposable cups\n" +
-                        "$" + coffeeMachineArray[4] + " of money");
+        boolean isComplete = false;
 
-        System.out.println("Write action (buy, fill, take)");
+        while (!isComplete) {
+            System.out.println("Write action (buy, fill, take, remaining, exit)");
 
-        String action = scanner.nextLine();
+            String action = scanner.nextLine();
 
-        if (action.equalsIgnoreCase("buy")) {
-            System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:");
-            int coffeeSelection = scanner.nextInt();
-            coffeeMachineArray = buyCoffee(coffeeSelection, coffeeMachineArray);
-        } else if (action.equalsIgnoreCase("fill")) {
-
-        } else if (action.equalsIgnoreCase("take")) {
-
-        } else {
-            //put error here
+            if (action.equalsIgnoreCase("buy")) {
+                System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu:");
+                String coffeeSelection = scanner.nextLine();
+                buyCoffee(coffeeSelection, coffeeMachineArray);
+            } else if (action.equalsIgnoreCase("fill")) {
+                fillCoffeeMachine(coffeeMachineArray);
+            } else if (action.equalsIgnoreCase("take")) {
+                take(coffeeMachineArray);
+            } else if (action.equalsIgnoreCase("remaining")) {
+                printRemaining(coffeeMachineArray);
+            } else if (action.equalsIgnoreCase("exit")) {
+                isComplete = true;
+            } else {
+                // put error here
+            }
         }
 
-        System.out.println("The coffee machine has:\n" +
-                coffeeMachineArray[0] + " ml of water\n" +
-                coffeeMachineArray[1] + " ml of milk\n" +
-                coffeeMachineArray[2] + " g of coffee beans\n" +
-                coffeeMachineArray[3] + " disposable cups\n" +
-                "$" + coffeeMachineArray[4] + " of money");
-
-    }
-
-    public static int numOfCups(int water, int milk, int coffeeBeans, int waterHad, int milkHad, int coffeeBeansHad) {
-        int numOfCups = 0;
-        while (waterHad >= water && milkHad >= milk && coffeeBeansHad >= coffeeBeans) {
-            waterHad -= water;
-            milkHad -= milk;
-            coffeeBeansHad -= coffeeBeans;
-            numOfCups++;
-        }
-        return numOfCups;
-    }
-
-    public static void calculateIngredients(int cupsOfCoffee, int waterHad, int milkHad, int coffeeBeansHad) {
-        // ingredients for one cup
-
-        int water = 200; //ml
-        int milk = 50; //ml
-        int coffeeBeans = 15; //g
-
-//        int waterNeeded = water * cupsOfCoffee;
-//        int milkNeeded = milk * cupsOfCoffee;
-//        int coffeeBeansNeeded = coffeeBeans * cupsOfCoffee;
-
-        int numOfCups = numOfCups(water, milk, coffeeBeans, waterHad, milkHad, coffeeBeansHad);
-
-        int extraCups = numOfCups - cupsOfCoffee;
-
-        if (numOfCups < cupsOfCoffee) {
-            System.out.println("No, I can only make " + numOfCups + " cups(s) of coffee");
-        } else if (numOfCups == cupsOfCoffee) {
-            System.out.println("Yes, I can make that amount of coffee");
-        } else {
-            System.out.println("Yes, I can make that amount of coffee (and even " + extraCups + " more than that)");
-        }
-
-//        System.out.println("For " + cupsOfCoffee + " cups of coffee you will need:");
-//        System.out.println(waterNeeded + " ml of water");
-//        System.out.println(milkNeeded + " ml of milk");
-//        System.out.println(coffeeBeansNeeded + " g of coffee beans");
     }
 
     public static void main(String[] args) {

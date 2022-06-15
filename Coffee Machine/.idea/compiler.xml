@@ -9,6 +9,11 @@
       <module name="Coffee_Machine.Coffee_Machine-task-build-test-results.main" target="11" />
       <module name="Coffee_Machine.Coffee_Machine-task-build-tmp.main" target="11" />
       <module name="Coffee_Machine.Coffee_Machine-task.main" target="11" />
+      <module name="Coffee_Machine.Topics-The_while_and_do-while_loops-Magic_code.main" target="11" />
+      <module name="Coffee_Machine.Topics-The_while_and_do-while_loops-The_largest_element_of_a_sequence.main" target="11" />
+      <module name="Coffee_Machine.Topics-The_while_and_do-while_loops-The_sequence.main" target="11" />
+      <module name="Coffee_Machine.Topics-The_while_and_do-while_loops-The_smallest_value.main" target="11" />
+      <module name="Coffee_Machine.Topics-The_while_and_do-while_loops-Theory.main" target="11" />
       <module name="Coffee_Machine.util.main" target="11" />
     </bytecodeTargetLevel>
   </component>
