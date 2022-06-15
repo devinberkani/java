@@ -5,39 +5,41 @@ import java.util.Scanner;
 public class CoffeeMachine {
 
     public static void buyCoffee(String coffeeSelection, int[] coffeeMachineArray) {
-        int waterUsed = 0;
-        int milkUsed = 0;
-        int coffeeBeansUsed = 0;
-        int disposableCupsUsed = 1;
-        int moneyCollected = 0;
+        if(!coffeeSelection.equals("back")) { // as long as selection does not equal back, continue
+            int waterUsed = 0;
+            int milkUsed = 0;
+            int coffeeBeansUsed = 0;
+            int disposableCupsUsed = 1;
+            int moneyCollected = 0;
 
-        if (coffeeSelection.equals("1")) { // espresso
-            waterUsed = 250;
-            coffeeBeansUsed = 16;
-            moneyCollected = 4;
-        } else if (coffeeSelection.equals("2")) { //latte
-            waterUsed = 350;
-            milkUsed = 75;
-            coffeeBeansUsed = 20;
-            moneyCollected = 7;
-        } else if (coffeeSelection.equals("3")) { //cappuccino
-            waterUsed = 200;
-            milkUsed = 100;
-            coffeeBeansUsed = 12;
-            moneyCollected = 6;
-        }
+            if (coffeeSelection.equals("1")) { // espresso
+                waterUsed = 250;
+                coffeeBeansUsed = 16;
+                moneyCollected = 4;
+            } else if (coffeeSelection.equals("2")) { // latte
+                waterUsed = 350;
+                milkUsed = 75;
+                coffeeBeansUsed = 20;
+                moneyCollected = 7;
+            } else if (coffeeSelection.equals("3")) { // cappuccino
+                waterUsed = 200;
+                milkUsed = 100;
+                coffeeBeansUsed = 12;
+                moneyCollected = 6;
+            }
 
-        String inventoryCheck = isEnoughIngredients(coffeeMachineArray, waterUsed, milkUsed, coffeeBeansUsed, disposableCupsUsed);
+            String inventoryCheck = isEnoughIngredients(coffeeMachineArray, waterUsed, milkUsed, coffeeBeansUsed, disposableCupsUsed);
 
-        if (inventoryCheck == null) {
-            System.out.println("I have enough resources, making you a coffee!");
-            coffeeMachineArray[0] -= waterUsed;
-            coffeeMachineArray[1] -= milkUsed;
-            coffeeMachineArray[2] -= coffeeBeansUsed;
-            coffeeMachineArray[3] -= disposableCupsUsed;
-            coffeeMachineArray[4] += moneyCollected;
-        } else {
-            System.out.println(inventoryCheck);
+            if (inventoryCheck == null) {
+                System.out.println("I have enough resources, making you a coffee!");
+                coffeeMachineArray[0] -= waterUsed;
+                coffeeMachineArray[1] -= milkUsed;
+                coffeeMachineArray[2] -= coffeeBeansUsed;
+                coffeeMachineArray[3] -= disposableCupsUsed;
+                coffeeMachineArray[4] += moneyCollected;
+            } else {
+                System.out.println(inventoryCheck);
+            }
         }
     }
 
