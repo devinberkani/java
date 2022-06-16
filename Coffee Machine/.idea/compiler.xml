@@ -9,6 +9,29 @@
       <module name="Coffee_Machine.Coffee_Machine-task-build-test-results.main" target="11" />
       <module name="Coffee_Machine.Coffee_Machine-task-build-tmp.main" target="11" />
       <module name="Coffee_Machine.Coffee_Machine-task.main" target="11" />
+      <module name="Coffee_Machine.Topics-Constructor-Characterize_the_constructors.main" target="11" />
+      <module name="Coffee_Machine.Topics-Constructor-Constructor_definition.main" target="11" />
+      <module name="Coffee_Machine.Topics-Constructor-Geometric_cube.main" target="11" />
+      <module name="Coffee_Machine.Topics-Constructor-Theory.main" target="11" />
+      <module name="Coffee_Machine.Topics-Defining_classes-Books.main" target="11" />
+      <module name="Coffee_Machine.Topics-Defining_classes-Correct_fields.main" target="11" />
+      <module name="Coffee_Machine.Topics-Defining_classes-Inner_boxes.main" target="11" />
+      <module name="Coffee_Machine.Topics-Defining_classes-Points.main" target="11" />
+      <module name="Coffee_Machine.Topics-Defining_classes-Theory.main" target="11" />
+      <module name="Coffee_Machine.Topics-Instance_methods-Circle.main" target="11" />
+      <module name="Coffee_Machine.Topics-Instance_methods-Patient_needs_a_doctor.main" target="11" />
+      <module name="Coffee_Machine.Topics-Instance_methods-Simulating_a_clock.main" target="11" />
+      <module name="Coffee_Machine.Topics-Instance_methods-The_Robot_class.main" target="11" />
+      <module name="Coffee_Machine.Topics-Instance_methods-Theory.main" target="11" />
+      <module name="Coffee_Machine.Topics-Objects-Change_identities.main" target="11" />
+      <module name="Coffee_Machine.Topics-Objects-Null_or_not.main" target="11" />
+      <module name="Coffee_Machine.Topics-Objects-Theory.main" target="11" />
+      <module name="Coffee_Machine.Topics-Static_members-Accessing_static_members.main" target="11" />
+      <module name="Coffee_Machine.Topics-Static_members-Applying_the_static_keyword.main" target="11" />
+      <module name="Coffee_Machine.Topics-Static_members-Mystery_of_the_methods.main" target="11" />
+      <module name="Coffee_Machine.Topics-Static_members-Project_constants_and_methods.main" target="11" />
+      <module name="Coffee_Machine.Topics-Static_members-Theory.main" target="11" />
+      <module name="Coffee_Machine.Topics-Static_members-Time_constants.main" target="11" />
       <module name="Coffee_Machine.Topics-The_while_and_do-while_loops-Magic_code.main" target="11" />
       <module name="Coffee_Machine.Topics-The_while_and_do-while_loops-The_largest_element_of_a_sequence.main" target="11" />
       <module name="Coffee_Machine.Topics-The_while_and_do-while_loops-The_sequence.main" target="11" />
