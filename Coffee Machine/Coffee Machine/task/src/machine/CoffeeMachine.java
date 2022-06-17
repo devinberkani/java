@@ -4,6 +4,97 @@ import java.util.Scanner;
 
 public class CoffeeMachine {
 
+    static Scanner scanner = new Scanner(System.in);
+
+    static int waterHad = 400; // ml
+    static int milkHad = 540; // ml
+    static int coffeeBeansHad = 120; // g
+    static int disposableCupsHad = 9; // cups
+    static int moneyHad = 550; // $
+
+    // array of all items to be given to and returned by methods
+
+    static int[] coffeeMachineArray = {waterHad, milkHad, coffeeBeansHad, disposableCupsHad, moneyHad};
+
+    static boolean isComplete = false;
+
+    public enum Status {
+        CHOOSING, BUYING, FILLING, TAKING, REMAINING, EXITING
+    }
+
+    public static void main(String[] args) {
+
+        Status choose = Status.CHOOSING;
+        Status buy = Status.BUYING;
+        Status fill = Status.FILLING;
+        Status take = Status.TAKING;
+        Status remaining = Status.REMAINING;
+        Status exit = Status.EXITING;
+
+        Status currentState = choose;
+
+        while (!isComplete) {
+            System.out.println("Write action (buy, fill, take, remaining, exit)");
+
+            String action = scanner.nextLine();
+
+            switch(action) {
+                case "buy":
+                    currentState = buy;
+                    break;
+
+                case "fill":
+                    currentState = fill;
+                    break;
+
+                case "take":
+                    currentState = take;
+                    break;
+
+                case "remaining":
+                    currentState = remaining;
+                    break;
+
+                case "exit":
+                    currentState = exit;
+                    break;
+
+                default:
+                    System.out.println("Please choose a valid action");
+                    break;
+            }
+
+            switch(currentState) {
+
+                case BUYING:
+                    System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu:");
+                    String coffeeSelection = scanner.nextLine();
+                    buyCoffee(coffeeSelection, coffeeMachineArray);
+                    break;
+
+                case FILLING:
+                    fillCoffeeMachine(coffeeMachineArray);
+                    break;
+
+                case TAKING:
+                    take(coffeeMachineArray);
+                    break;
+
+                case REMAINING:
+                    printRemaining(coffeeMachineArray);
+                    break;
+
+                case EXITING:
+                    isComplete = true;
+                    break;
+
+                default:
+                    break;
+            }
+
+        }
+    }
+
     public static void buyCoffee(String coffeeSelection, int[] coffeeMachineArray) {
         if(!coffeeSelection.equals("back")) { // as long as selection does not equal back, continue
             int waterUsed = 0;
@@ -104,48 +195,5 @@ public class CoffeeMachine {
                 coffeeMachineArray[2] + " g of coffee beans\n" +
                 coffeeMachineArray[3] + " disposable cups\n" +
                 "$" + coffeeMachineArray[4] + " of money");
-    }
-
-    public static void printMenu() {
-        Scanner scanner = new Scanner(System.in);
-
-        int waterHad = 400; // ml
-        int milkHad = 540; // ml
-        int coffeeBeansHad = 120; // g
-        int disposableCupsHad = 9; // cups
-        int moneyHad = 550; // $
-
-        // array of all items to be given to and returned by methods
-
-        int[] coffeeMachineArray = {waterHad, milkHad, coffeeBeansHad, disposableCupsHad, moneyHad};
-
-        boolean isComplete = false;
-
-        while (!isComplete) {
-            System.out.println("Write action (buy, fill, take, remaining, exit)");
-
-            String action = scanner.nextLine();
-
-            if (action.equalsIgnoreCase("buy")) {
-                System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu:");
-                String coffeeSelection = scanner.nextLine();
-                buyCoffee(coffeeSelection, coffeeMachineArray);
-            } else if (action.equalsIgnoreCase("fill")) {
-                fillCoffeeMachine(coffeeMachineArray);
-            } else if (action.equalsIgnoreCase("take")) {
-                take(coffeeMachineArray);
-            } else if (action.equalsIgnoreCase("remaining")) {
-                printRemaining(coffeeMachineArray);
-            } else if (action.equalsIgnoreCase("exit")) {
-                isComplete = true;
-            } else {
-                // put error here
-            }
-        }
-
-    }
-
-    public static void main(String[] args) {
-        printMenu();
     }
 }

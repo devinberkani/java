@@ -18,6 +18,9 @@
       <module name="Coffee_Machine.Topics-Defining_classes-Inner_boxes.main" target="11" />
       <module name="Coffee_Machine.Topics-Defining_classes-Points.main" target="11" />
       <module name="Coffee_Machine.Topics-Defining_classes-Theory.main" target="11" />
+      <module name="Coffee_Machine.Topics-Enums_in_Java-Hidden_enumeration.main" target="11" />
+      <module name="Coffee_Machine.Topics-Enums_in_Java-Reasons_to_use_enum.main" target="11" />
+      <module name="Coffee_Machine.Topics-Enums_in_Java-Theory.main" target="11" />
       <module name="Coffee_Machine.Topics-Instance_methods-Circle.main" target="11" />
       <module name="Coffee_Machine.Topics-Instance_methods-Patient_needs_a_doctor.main" target="11" />
       <module name="Coffee_Machine.Topics-Instance_methods-Simulating_a_clock.main" target="11" />
