@@ -9,6 +9,10 @@
       <module name="Amazing_Numbers.Amazing_Numbers-task-build-test-results.main" target="11" />
       <module name="Amazing_Numbers.Amazing_Numbers-task-build-tmp.main" target="11" />
       <module name="Amazing_Numbers.Amazing_Numbers-task.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Overloading-A_pair_of_not_overloaded_methods.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Overloading-Overloading_methods.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Overloading-Print.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Overloading-Theory.main" target="11" />
       <module name="Amazing_Numbers.util.main" target="11" />
     </bytecodeTargetLevel>
   </component>

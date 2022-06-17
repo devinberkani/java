@@ -122,6 +122,7 @@ public class Main {
         for (String num : userInput.split("")) {
             if (num.equals("0")) {
                 isDuckNumber = true;
+                break;
             }
         }
 
