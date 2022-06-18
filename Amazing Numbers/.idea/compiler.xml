@@ -13,6 +13,9 @@
       <module name="Amazing_Numbers.Topics-Overloading-Overloading_methods.main" target="11" />
       <module name="Amazing_Numbers.Topics-Overloading-Print.main" target="11" />
       <module name="Amazing_Numbers.Topics-Overloading-Theory.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Package-Binary_search.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Package-Getting_input.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Package-Theory.main" target="11" />
       <module name="Amazing_Numbers.util.main" target="11" />
     </bytecodeTargetLevel>
   </component>
