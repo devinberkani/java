@@ -4,3 +4,4 @@ content:
 - Getters and setters
 - Multiple constructors
 - The keyword super
+- Hiding and overriding

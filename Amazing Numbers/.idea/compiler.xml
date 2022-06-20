@@ -13,6 +13,10 @@
       <module name="Amazing_Numbers.Topics-Getters_and_setters-Choose_a_pair_of_getter_and_setter.main" target="11" />
       <module name="Amazing_Numbers.Topics-Getters_and_setters-Getting_the_fullname.main" target="11" />
       <module name="Amazing_Numbers.Topics-Getters_and_setters-Theory.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Hiding_and_overriding-Employee_and_Programmer.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Hiding_and_overriding-Overriding_rules.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Hiding_and_overriding-Shapes_area.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Hiding_and_overriding-Theory.main" target="11" />
       <module name="Amazing_Numbers.Topics-Multiple_constructors-Class_instantiation.main" target="11" />
       <module name="Amazing_Numbers.Topics-Multiple_constructors-Employee.main" target="11" />
       <module name="Amazing_Numbers.Topics-Multiple_constructors-Entanglement.main" target="11" />
