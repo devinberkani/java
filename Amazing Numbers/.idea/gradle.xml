@@ -25,6 +25,10 @@
             <option value="$PROJECT_DIR$/Topics/Hiding and overriding/Overriding rules" />
             <option value="$PROJECT_DIR$/Topics/Hiding and overriding/Shapes area" />
             <option value="$PROJECT_DIR$/Topics/Hiding and overriding/Theory" />
+            <option value="$PROJECT_DIR$/Topics/Interface/Compact strings with AsciiCharSequence" />
+            <option value="$PROJECT_DIR$/Topics/Interface/Properties of methods" />
+            <option value="$PROJECT_DIR$/Topics/Interface/Theory" />
+            <option value="$PROJECT_DIR$/Topics/Interface/Which methods must be overridden" />
             <option value="$PROJECT_DIR$/Topics/Multiple constructors/Class instantiation" />
             <option value="$PROJECT_DIR$/Topics/Multiple constructors/Employee" />
             <option value="$PROJECT_DIR$/Topics/Multiple constructors/Entanglement" />

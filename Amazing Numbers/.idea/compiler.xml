@@ -17,6 +17,10 @@
       <module name="Amazing_Numbers.Topics-Hiding_and_overriding-Overriding_rules.main" target="11" />
       <module name="Amazing_Numbers.Topics-Hiding_and_overriding-Shapes_area.main" target="11" />
       <module name="Amazing_Numbers.Topics-Hiding_and_overriding-Theory.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Interface-Compact_strings_with_AsciiCharSequence.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Interface-Properties_of_methods.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Interface-Theory.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Interface-Which_methods_must_be_overridden.main" target="11" />
       <module name="Amazing_Numbers.Topics-Multiple_constructors-Class_instantiation.main" target="11" />
       <module name="Amazing_Numbers.Topics-Multiple_constructors-Employee.main" target="11" />
       <module name="Amazing_Numbers.Topics-Multiple_constructors-Entanglement.main" target="11" />
