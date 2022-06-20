@@ -29,6 +29,9 @@
       <module name="Amazing_Numbers.Topics-Package-Binary_search.main" target="11" />
       <module name="Amazing_Numbers.Topics-Package-Getting_input.main" target="11" />
       <module name="Amazing_Numbers.Topics-Package-Theory.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Polymorphism-Find_mistake.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Polymorphism-Notification.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Polymorphism-Theory.main" target="11" />
       <module name="Amazing_Numbers.Topics-The_keyword_super-Bank_account.main" target="11" />
       <module name="Amazing_Numbers.Topics-The_keyword_super-Fix_the_non-compiled_hierarchy.main" target="11" />
       <module name="Amazing_Numbers.Topics-The_keyword_super-Statements.main" target="11" />
