@@ -13,6 +13,11 @@
       <module name="Amazing_Numbers.Topics-Getters_and_setters-Choose_a_pair_of_getter_and_setter.main" target="11" />
       <module name="Amazing_Numbers.Topics-Getters_and_setters-Getting_the_fullname.main" target="11" />
       <module name="Amazing_Numbers.Topics-Getters_and_setters-Theory.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Multiple_constructors-Class_instantiation.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Multiple_constructors-Employee.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Multiple_constructors-Entanglement.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Multiple_constructors-Suppose,_you_have_a_class.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Multiple_constructors-Theory.main" target="11" />
       <module name="Amazing_Numbers.Topics-Overloading-A_pair_of_not_overloaded_methods.main" target="11" />
       <module name="Amazing_Numbers.Topics-Overloading-Overloading_methods.main" target="11" />
       <module name="Amazing_Numbers.Topics-Overloading-Print.main" target="11" />
@@ -20,6 +25,10 @@
       <module name="Amazing_Numbers.Topics-Package-Binary_search.main" target="11" />
       <module name="Amazing_Numbers.Topics-Package-Getting_input.main" target="11" />
       <module name="Amazing_Numbers.Topics-Package-Theory.main" target="11" />
+      <module name="Amazing_Numbers.Topics-The_keyword_super-Bank_account.main" target="11" />
+      <module name="Amazing_Numbers.Topics-The_keyword_super-Fix_the_non-compiled_hierarchy.main" target="11" />
+      <module name="Amazing_Numbers.Topics-The_keyword_super-Statements.main" target="11" />
+      <module name="Amazing_Numbers.Topics-The_keyword_super-Theory.main" target="11" />
       <module name="Amazing_Numbers.util.main" target="11" />
     </bytecodeTargetLevel>
   </component>
