@@ -20,6 +20,10 @@
             <option value="$PROJECT_DIR$/Topics/Boxing and unboxing/Initializing long value" />
             <option value="$PROJECT_DIR$/Topics/Boxing and unboxing/Safe converting" />
             <option value="$PROJECT_DIR$/Topics/Boxing and unboxing/Theory" />
+            <option value="$PROJECT_DIR$/Topics/Generics and Object/Correct the usage of non-generic class" />
+            <option value="$PROJECT_DIR$/Topics/Generics and Object/Reusing code with Object" />
+            <option value="$PROJECT_DIR$/Topics/Generics and Object/Theory" />
+            <option value="$PROJECT_DIR$/Topics/Generics and Object/What is wrong" />
             <option value="$PROJECT_DIR$/Topics/Getters and setters/Book" />
             <option value="$PROJECT_DIR$/Topics/Getters and setters/Choose a pair of getter and setter" />
             <option value="$PROJECT_DIR$/Topics/Getters and setters/Getting the fullname" />
@@ -32,6 +36,10 @@
             <option value="$PROJECT_DIR$/Topics/Interface/Properties of methods" />
             <option value="$PROJECT_DIR$/Topics/Interface/Theory" />
             <option value="$PROJECT_DIR$/Topics/Interface/Which methods must be overridden" />
+            <option value="$PROJECT_DIR$/Topics/Introduction to generic programming/Correct the program" />
+            <option value="$PROJECT_DIR$/Topics/Introduction to generic programming/Generic parameter values" />
+            <option value="$PROJECT_DIR$/Topics/Introduction to generic programming/Theory" />
+            <option value="$PROJECT_DIR$/Topics/Introduction to generic programming/Type parameter inside a class body" />
             <option value="$PROJECT_DIR$/Topics/Multiple constructors/Class instantiation" />
             <option value="$PROJECT_DIR$/Topics/Multiple constructors/Employee" />
             <option value="$PROJECT_DIR$/Topics/Multiple constructors/Entanglement" />

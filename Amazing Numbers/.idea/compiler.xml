@@ -12,6 +12,10 @@
       <module name="Amazing_Numbers.Topics-Boxing_and_unboxing-Initializing_long_value.main" target="11" />
       <module name="Amazing_Numbers.Topics-Boxing_and_unboxing-Safe_converting.main" target="11" />
       <module name="Amazing_Numbers.Topics-Boxing_and_unboxing-Theory.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Generics_and_Object-Correct_the_usage_of_non-generic_class.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Generics_and_Object-Reusing_code_with_Object.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Generics_and_Object-Theory.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Generics_and_Object-What_is_wrong.main" target="11" />
       <module name="Amazing_Numbers.Topics-Getters_and_setters-Book.main" target="11" />
       <module name="Amazing_Numbers.Topics-Getters_and_setters-Choose_a_pair_of_getter_and_setter.main" target="11" />
       <module name="Amazing_Numbers.Topics-Getters_and_setters-Getting_the_fullname.main" target="11" />
@@ -24,6 +28,10 @@
       <module name="Amazing_Numbers.Topics-Interface-Properties_of_methods.main" target="11" />
       <module name="Amazing_Numbers.Topics-Interface-Theory.main" target="11" />
       <module name="Amazing_Numbers.Topics-Interface-Which_methods_must_be_overridden.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Introduction_to_generic_programming-Correct_the_program.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Introduction_to_generic_programming-Generic_parameter_values.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Introduction_to_generic_programming-Theory.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Introduction_to_generic_programming-Type_parameter_inside_a_class_body.main" target="11" />
       <module name="Amazing_Numbers.Topics-Multiple_constructors-Class_instantiation.main" target="11" />
       <module name="Amazing_Numbers.Topics-Multiple_constructors-Employee.main" target="11" />
       <module name="Amazing_Numbers.Topics-Multiple_constructors-Entanglement.main" target="11" />
