@@ -47,6 +47,11 @@
       <module name="Amazing_Numbers.Topics-Polymorphism-Find_mistake.main" target="11" />
       <module name="Amazing_Numbers.Topics-Polymorphism-Notification.main" target="11" />
       <module name="Amazing_Numbers.Topics-Polymorphism-Theory.main" target="11" />
+      <module name="Amazing_Numbers.Topics-The_Collections_Framework_overview-Blacklist.main" target="11" />
+      <module name="Amazing_Numbers.Topics-The_Collections_Framework_overview-Collection_interfaces.main" target="11" />
+      <module name="Amazing_Numbers.Topics-The_Collections_Framework_overview-Extra_methods.main" target="11" />
+      <module name="Amazing_Numbers.Topics-The_Collections_Framework_overview-Supported_collections.main" target="11" />
+      <module name="Amazing_Numbers.Topics-The_Collections_Framework_overview-Theory.main" target="11" />
       <module name="Amazing_Numbers.Topics-The_keyword_super-Bank_account.main" target="11" />
       <module name="Amazing_Numbers.Topics-The_keyword_super-Fix_the_non-compiled_hierarchy.main" target="11" />
       <module name="Amazing_Numbers.Topics-The_keyword_super-Statements.main" target="11" />
