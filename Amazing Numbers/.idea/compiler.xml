@@ -9,6 +9,10 @@
       <module name="Amazing_Numbers.Amazing_Numbers-task-build-test-results.main" target="11" />
       <module name="Amazing_Numbers.Amazing_Numbers-task-build-tmp.main" target="11" />
       <module name="Amazing_Numbers.Amazing_Numbers-task.main" target="11" />
+      <module name="Amazing_Numbers.Topics-ArrayList-Concat_positive_numbers.main" target="11" />
+      <module name="Amazing_Numbers.Topics-ArrayList-Find_the_nearest_number.main" target="11" />
+      <module name="Amazing_Numbers.Topics-ArrayList-The_behavior_of_methods.main" target="11" />
+      <module name="Amazing_Numbers.Topics-ArrayList-Theory.main" target="11" />
       <module name="Amazing_Numbers.Topics-Boxing_and_unboxing-Initializing_long_value.main" target="11" />
       <module name="Amazing_Numbers.Topics-Boxing_and_unboxing-Safe_converting.main" target="11" />
       <module name="Amazing_Numbers.Topics-Boxing_and_unboxing-Theory.main" target="11" />
