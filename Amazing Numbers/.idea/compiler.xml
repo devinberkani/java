@@ -60,6 +60,10 @@
       <module name="Amazing_Numbers.Topics-The_keyword_super-Fix_the_non-compiled_hierarchy.main" target="11" />
       <module name="Amazing_Numbers.Topics-The_keyword_super-Statements.main" target="11" />
       <module name="Amazing_Numbers.Topics-The_keyword_super-Theory.main" target="11" />
+      <module name="Amazing_Numbers.Topics-The_List_interface-Companies.main" target="11" />
+      <module name="Amazing_Numbers.Topics-The_List_interface-Filtering_the_list.main" target="11" />
+      <module name="Amazing_Numbers.Topics-The_List_interface-Split_a_list_into_sublists.main" target="11" />
+      <module name="Amazing_Numbers.Topics-The_List_interface-Theory.main" target="11" />
       <module name="Amazing_Numbers.util.main" target="11" />
     </bytecodeTargetLevel>
   </component>
