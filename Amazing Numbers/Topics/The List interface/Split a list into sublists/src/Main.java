@@ -12,10 +12,26 @@ class ListUtils {
     public static <T> List<List<T>> splitListIntoSubLists(List<T> list, int subListSize) {
         List<List<T>> sublists = new ArrayList<>();
 
-        
+        //create sublists needed
+        double listSize = list.size();
+        double listsNeededD = Math.ceil(listSize / (double) subListSize);
+        int listsNeeded = (int) listsNeededD;
 
+
+        for(int i = 0; i < list.size(); i++) {
+            int itemsInListNeeded = subListSize;
+            List<T> newList = new ArrayList<>();
+            do {
+                newList.add(list.get(i));
+                itemsInListNeeded--;
+            }
+            while (itemsInListNeeded > 0 && i != list.size() - 1);
+            sublists.add(newList);
+        }
         return sublists;
     }
+    // you may be done with this? test code
+
 }
 
 /* Please, do not modify code in this class */
