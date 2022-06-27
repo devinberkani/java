@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 class ListUtils {
 
     /**
-     * It splits the passed list into a sequence of sublists with a predefined size 
+     * It splits the passed list into a sequence of sublists with a predefined size
      */
     public static <T> List<List<T>> splitListIntoSubLists(List<T> list, int subListSize) {
         List<List<T>> sublists = new ArrayList<>();
@@ -17,21 +17,20 @@ class ListUtils {
         double listsNeededD = Math.ceil(listSize / (double) subListSize);
         int listsNeeded = (int) listsNeededD;
 
-
-        for(int i = 0; i < list.size(); i++) {
-            int itemsInListNeeded = subListSize;
-            List<T> newList = new ArrayList<>();
-            do {
-                newList.add(list.get(i));
-                itemsInListNeeded--;
+        int start = 0;
+        int end = Math.min(subListSize, list.size());
+        while (listsNeeded > 0) {
+            sublists.add(list.subList(start, end));
+            start += subListSize;
+            if (end + subListSize <= list.size()) {
+                end += subListSize;
+            } else {
+                end = list.size();
             }
-            while (itemsInListNeeded > 0 && i != list.size() - 1);
-            sublists.add(newList);
+            listsNeeded--;
         }
         return sublists;
     }
-    // you may be done with this? test code
-
 }
 
 /* Please, do not modify code in this class */
