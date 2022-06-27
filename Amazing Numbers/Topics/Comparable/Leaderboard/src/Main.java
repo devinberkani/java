@@ -24,7 +24,24 @@ class Score implements Comparable<Score> {
 
     @Override
     public int compareTo(Score score) {
-        // your code here
+        int comparison = Integer.compare(this.getTotalScore(), score.getTotalScore());
+        if (comparison == 0) {
+            int playerOneLength = this.getPlayer().length();
+            int playerTwoLength = score.getPlayer().length();
+            int shorterPlayerLength = Math.min(playerOneLength, playerTwoLength);
+            for (int i = 0; i < shorterPlayerLength; i++) {
+                if (this.getPlayer().charAt(i) != score.getPlayer().charAt(i)) {
+                    if (this.getPlayer().charAt(i) < score.getPlayer().charAt(i)) {
+                        comparison = -1;
+                        break;
+                    } else {
+                        comparison = 1;
+                        break;
+                    }
+                }
+            }
+        }
+        return comparison;
     }
 }
 
