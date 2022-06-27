@@ -16,6 +16,9 @@
       <module name="Amazing_Numbers.Topics-Boxing_and_unboxing-Initializing_long_value.main" target="11" />
       <module name="Amazing_Numbers.Topics-Boxing_and_unboxing-Safe_converting.main" target="11" />
       <module name="Amazing_Numbers.Topics-Boxing_and_unboxing-Theory.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Comparable-Leaderboard.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Comparable-Ratings.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Comparable-Theory.main" target="11" />
       <module name="Amazing_Numbers.Topics-Generics_and_Object-Correct_the_usage_of_non-generic_class.main" target="11" />
       <module name="Amazing_Numbers.Topics-Generics_and_Object-Reusing_code_with_Object.main" target="11" />
       <module name="Amazing_Numbers.Topics-Generics_and_Object-Theory.main" target="11" />
