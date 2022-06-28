@@ -58,6 +58,11 @@
       <module name="Amazing_Numbers.Topics-Polymorphism-Find_mistake.main" target="11" />
       <module name="Amazing_Numbers.Topics-Polymorphism-Notification.main" target="11" />
       <module name="Amazing_Numbers.Topics-Polymorphism-Theory.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Processing_strings-Cutting_out_the_middle_of_a_string.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Processing_strings-Generating_passwords.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Processing_strings-Palindrome.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Processing_strings-The_percentage_of_G_and_C_characters.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Processing_strings-Theory.main" target="11" />
       <module name="Amazing_Numbers.Topics-The_Collections_Framework_overview-Blacklist.main" target="11" />
       <module name="Amazing_Numbers.Topics-The_Collections_Framework_overview-Collection_interfaces.main" target="11" />
       <module name="Amazing_Numbers.Topics-The_Collections_Framework_overview-Extra_methods.main" target="11" />

@@ -35,21 +35,8 @@ files:
     }
   learner_created: false
 feedback_link: https://hyperskill.org/learn/step/19393#comment
-status: Failed
+status: Solved
 feedback:
-  message: "Failed test #1 of 4. Runtime error\n\nError:\nException in thread \"main\"\
-    \ java.lang.ClassCastException: class Age cannot be cast to class java.lang.Comparable\
-    \ (Age is in unnamed module of loader 'app'; java.lang.Comparable is in module\
-    \ java.base of loader 'bootstrap')\n\tat java.base/java.util.Comparators$NaturalOrderComparator.compare(Comparators.java:47)\n\
-    \tat java.base/java.util.TimSort.countRunAndMakeAscending(TimSort.java:355)\n\t\
-    at java.base/java.util.TimSort.sort(TimSort.java:220)\n\tat java.base/java.util.Arrays.sort(Arrays.java:1307)\n\
-    \tat java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:353)\n\
-    \tat java.base/java.util.stream.Sink$ChainedInt.end(Sink.java:290)\n\tat java.base/java.util.stream.Sink$ChainedReference.end(Sink.java:258)\n\
-    \tat java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:510)\n\
-    \tat java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)\n\
-    \tat java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921)\n\
-    \tat java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)\n\
-    \tat java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:682)\n\
-    \tat Main.main(Main.java:30)\n"
-  time: Mon, 27 Jun 2022 14:13:54 UTC
+  message: <html>Correct solution</html>
+  time: Mon, 27 Jun 2022 14:15:30 UTC
 record: -1
