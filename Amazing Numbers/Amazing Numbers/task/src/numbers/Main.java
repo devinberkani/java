@@ -18,12 +18,18 @@ public class Main {
         do {
             System.out.println("Supported requests:\n" +
                     "- enter a natural number to know its properties;\n" +
+                    "- enter two natural numbers to obtain the properties of the list:\n" +
+                    "  * the first parameter represents a starting number;\n" +
+                    "  * the second parameter shows how many consecutive numbers are to be printed;\n" +
+                    "- separate the parameters with one space;\n" +
                     "- enter 0 to exit.");
 
             // handle errors
-            userNumber = ValidateInput();
+            long userInput[] = validateInput();
 
-            if (userNumber == 0) {
+            // THIS IS WHERE YOU CURRENTLY ARE - YOU JUST GOT TO THE POINT WHERE YOU RETURNED AN ARRAY OF INPUT (EITHER ONE OR TWO NUMBERS) THROUGH VALIDATION BACK TO THIS POINT, SEEMS TO BE WORKING AS OF NOW BUT YOU NEED TO CHANGE ALL EXISTING METHODS TO ACCEPT AN ARRAY AND GIVE DIFFERENT OUTPUT FORMATTING BASED ON THE LENGTH OF THE ARRAY (ONE OR TWO)
+
+            if (userInput[0] == 0) {
                 isExiting = true;
                 System.out.println("Goodbye!");
             } else {
@@ -34,30 +40,53 @@ public class Main {
         } while (!isExiting);
     }
 
-    static long ValidateInput() {
+    static long[] validateInput() {
         // error handling to determine if input is a natural number - must be a number greater than 0
+        boolean firstNumberValid;
+        boolean secondNumberValid = false;
+
+        // initialize array to be returned with user input
+        long[] userInputArr = new long[0];
+
         while (!isValidInput) {
 
             System.out.print("Enter a request: ");
 
             String userInput = scanner.nextLine();
+            String[] userInputArrS = userInput.split(" ");
 
-            for (String input : userInput.split("")) {
-                if (!input.matches("\\d+")) {
-                    isValidInput = false;
-                    break;
+            int userInputArrLength = userInputArrS.length;
+
+            // check to make sure number(s) are natural
+
+            if (userInputArrLength == 1) {
+                firstNumberValid = Integer.parseInt(userInputArrS[0]) >= 0;
+                isValidInput = Integer.parseInt(userInputArrS[0]) >= 0;
+            } else {
+                firstNumberValid = Integer.parseInt(userInputArrS[0]) >= 0;
+                secondNumberValid = Integer.parseInt(userInputArrS[1]) > 0;
+                isValidInput = Integer.parseInt(userInputArrS[0]) >= 0 && Integer.parseInt(userInputArrS[1]) > 0;
+            }
+
+            if (!isValidInput) {
+                if (!firstNumberValid) {
+                    System.out.println("The first parameter should be a natural number or zero.");
+                } else if (!secondNumberValid) {
+                    System.out.println("The second parameter should be a natural number.");
+                }
+            } else {
+                if (userInputArrLength == 1) {
+                    userInputArr = new long[1];
+                    userInputArr[0] = Long.parseLong(userInputArrS[0]);
                 } else {
-                    isValidInput = true;
+                    userInputArr = new long[2];
+                    userInputArr[0] = Long.parseLong(userInputArrS[0]);
+                    userInputArr[1] = Long.parseLong(userInputArrS[1]);
                 }
             }
-            if (!isValidInput) {
-                System.out.println("The first parameter should be a natural number or zero.");
-            } else {
-                userNumber = Long.parseLong(userInput);
-                isValidInput = userNumber >= 0;
-            }
         }
-        return userNumber;
+        System.out.println(userInputArr.length);
+        return userInputArr;
     }
 
     static void printProperties() {
@@ -67,6 +96,7 @@ public class Main {
         buzzNumber();
         duckNumber();
         palindromicNumber();
+        gapfulNumber();
     }
 
     // is number odd or even - true means even, false means odd
@@ -156,6 +186,31 @@ public class Main {
         } else {
             System.out.println("palindromic: false");
         }
+    }
+
+    // is number gapful - at least 3 digits and is divisible by first and last digit
+    static void gapfulNumber() {
+
+        // get user number split into array
+        String[] userNumberArr = Long.toString(userNumber).split("");
+        int userNumberLength = userNumberArr.length;
+
+        // get first and last number
+        String firstNumber = userNumberArr[0];
+        String lastNumber = userNumberArr[userNumberLength - 1];
+
+        // concat them to get new number
+        String firstAndLastS = firstNumber + lastNumber;
+        int firstAndLast = Integer.parseInt(firstAndLastS);
+
+        boolean isGapful = userNumberLength >= 3 && userNumber % firstAndLast == 0;
+
+        if (isGapful) {
+            System.out.println("gapful: true");
+        } else {
+            System.out.println("gapful: false");
+        }
+
     }
 
 }
