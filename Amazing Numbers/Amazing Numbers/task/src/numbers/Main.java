@@ -8,6 +8,8 @@ public class Main {
     static boolean isValidInput = false;
     static long userNumber;
 
+    static long listLength = 1; // so that all current methods work if this number is not provided
+
     public static void main(String[] args) {
         printMenu();
     }
@@ -25,17 +27,27 @@ public class Main {
                     "- enter 0 to exit.");
 
             // handle errors
-            long userInput[] = validateInput();
+            long[] userInput = validateInput();
 
-            // THIS IS WHERE YOU CURRENTLY ARE - YOU JUST GOT TO THE POINT WHERE YOU RETURNED AN ARRAY OF INPUT (EITHER ONE OR TWO NUMBERS) THROUGH VALIDATION BACK TO THIS POINT, SEEMS TO BE WORKING AS OF NOW BUT YOU NEED TO CHANGE ALL EXISTING METHODS TO ACCEPT AN ARRAY AND GIVE DIFFERENT OUTPUT FORMATTING BASED ON THE LENGTH OF THE ARRAY (ONE OR TWO)
+            if (userInput.length == 1) {
+                userNumber = userInput[0];
+            } else {
+                userNumber = userInput[0];
+                listLength = userInput[1];
+            }
 
-            if (userInput[0] == 0) {
+            if (userNumber == 0) {
                 isExiting = true;
                 System.out.println("Goodbye!");
             } else {
                 printProperties();
+                listLength = 1; // reset listLength
                 isValidInput = false; // in order to prevent infinite loop
             }
+
+            // THIS IS WHERE YOU CURRENTLY ARE - YOU JUST GOT TO THE POINT WHERE YOU RETURNED AN ARRAY OF INPUT (EITHER ONE OR TWO NUMBERS) THROUGH VALIDATION BACK TO THIS POINT, AND SET USERNUMBER AND LISTLENGTH VARIABLES (DEFAULTS VALUE FOR LISTLENGTH IS 1)
+            // First, make it so that listLength is used in all current methods in a loop so that as the listLength scales up, you can process things to work as they are WITH CURRENT FORMATTING
+            // Next, change the formatting to pass the tests (formatting is different when there are more numbers)
 
         } while (!isExiting);
     }
@@ -85,7 +97,6 @@ public class Main {
                 }
             }
         }
-        System.out.println(userInputArr.length);
         return userInputArr;
     }
 
