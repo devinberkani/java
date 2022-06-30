@@ -1,5 +1,8 @@
 package numbers;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
@@ -7,8 +10,8 @@ public class Main {
     static boolean isExiting = false;
     static boolean isValidInput = false;
     static long userNumber;
-
     static long listLength = 1; // so that all current methods work if this number is not provided
+    static long userInputArrLength;
 
     public static void main(String[] args) {
         printMenu();
@@ -16,20 +19,21 @@ public class Main {
 
     static void printMenu() {
         System.out.println("Welcome to Amazing Numbers!");
+        System.out.println("Supported requests:\n" +
+                "- enter a natural number to know its properties;\n" +
+                "- enter two natural numbers to obtain the properties of the list:\n" +
+                "  * the first parameter represents a starting number;\n" +
+                "  * the second parameter shows how many consecutive numbers are to be printed;\n" +
+                "- separate the parameters with one space;\n" +
+                "- enter 0 to exit.");
 
         do {
-            System.out.println("Supported requests:\n" +
-                    "- enter a natural number to know its properties;\n" +
-                    "- enter two natural numbers to obtain the properties of the list:\n" +
-                    "  * the first parameter represents a starting number;\n" +
-                    "  * the second parameter shows how many consecutive numbers are to be printed;\n" +
-                    "- separate the parameters with one space;\n" +
-                    "- enter 0 to exit.");
 
-            // handle errors
+            // handle errors - get input array
             long[] userInput = validateInput();
+            userInputArrLength = userInput.length;
 
-            if (userInput.length == 1) {
+            if (userInputArrLength == 1) {
                 userNumber = userInput[0];
             } else {
                 userNumber = userInput[0];
@@ -40,7 +44,12 @@ public class Main {
                 isExiting = true;
                 System.out.println("Goodbye!");
             } else {
-                printProperties();
+                long printsLeft = listLength; // number of times to print properties
+                while (printsLeft > 0) {
+                    printProperties(printsLeft);
+                    userNumber++; // add one to the userNumber after every print
+                    printsLeft--;
+                }
                 listLength = 1; // reset listLength
                 isValidInput = false; // in order to prevent infinite loop
             }
@@ -54,7 +63,7 @@ public class Main {
 
     static long[] validateInput() {
         // error handling to determine if input is a natural number - must be a number greater than 0
-        boolean firstNumberValid;
+        boolean firstNumberValid = false;
         boolean secondNumberValid = false;
 
         // initialize array to be returned with user input
@@ -65,19 +74,25 @@ public class Main {
             System.out.print("Enter a request: ");
 
             String userInput = scanner.nextLine();
+
             String[] userInputArrS = userInput.split(" ");
 
             int userInputArrLength = userInputArrS.length;
 
-            // check to make sure number(s) are natural
+            // check to make sure input is a number
 
-            if (userInputArrLength == 1) {
-                firstNumberValid = Integer.parseInt(userInputArrS[0]) >= 0;
-                isValidInput = Integer.parseInt(userInputArrS[0]) >= 0;
-            } else {
-                firstNumberValid = Integer.parseInt(userInputArrS[0]) >= 0;
-                secondNumberValid = Integer.parseInt(userInputArrS[1]) > 0;
-                isValidInput = Integer.parseInt(userInputArrS[0]) >= 0 && Integer.parseInt(userInputArrS[1]) > 0;
+            if (userInputArrS[0].matches("\\d+")) {
+
+                // check to make sure number(s) are natural
+
+                if (userInputArrLength == 1) {
+                    firstNumberValid = Long.parseLong(userInputArrS[0]) >= 0;
+                    isValidInput = Long.parseLong(userInputArrS[0]) >= 0;
+                } else {
+                    firstNumberValid = Long.parseLong(userInputArrS[0]) >= 0;
+                    secondNumberValid = Long.parseLong(userInputArrS[1]) > 0;
+                    isValidInput = Long.parseLong(userInputArrS[0]) >= 0 && Long.parseLong(userInputArrS[1]) > 0;
+                }
             }
 
             if (!isValidInput) {
@@ -100,29 +115,60 @@ public class Main {
         return userInputArr;
     }
 
-    static void printProperties() {
-        System.out.println("Properties of " + userNumber);
+    static void printProperties(long printsLeft) {
 
-        oddOrEven();
-        buzzNumber();
-        duckNumber();
-        palindromicNumber();
-        gapfulNumber();
+        if (userInputArrLength == 1) {
+            System.out.println("Properties of " + userNumber);
+            System.out.println(buzzNumber());
+            System.out.println(duckNumber());
+            System.out.println(palindromicNumber());
+            System.out.println(gapfulNumber());
+            System.out.println(oddOrEven());
+        } else {
+            List<String> properties = new ArrayList<>();
+            properties.add(buzzNumber());
+            properties.add(duckNumber());
+            properties.add(palindromicNumber());
+            properties.add(gapfulNumber());
+            properties.add(oddOrEven());
+            // remove nulls
+            properties.removeIf(Objects::isNull);
+            if (printsLeft > 0) {
+                System.out.print(userNumber + " is "); // complete this
+                for (String p : properties) {
+                    System.out.print(p);
+                    if (properties.indexOf(p) != properties.size() - 1) {
+                        System.out.print(", ");
+                    }
+                }
+                System.out.println();
+
+            }
+        }
     }
 
     // is number odd or even - true means even, false means odd
-    static void oddOrEven () {
-        if (userNumber % 2 == 0) {
-            System.out.println("even: true");
-            System.out.println("odd: false");
+    static String oddOrEven () {
+
+        if (userInputArrLength == 1) {
+            if (userNumber % 2 == 0) {
+                return "even: true \n" +
+                        "odd: false";
+            } else {
+                return "even: false \n" +
+                        "odd: true";
+            }
         } else {
-            System.out.println("even: false");
-            System.out.println("odd: true");
+            if (userNumber % 2 == 0) {
+                return "even";
+            } else {
+                return "odd";
+            }
         }
     }
 
     // is number a buzz number - must be divisible by 7 or end with 7
-    static void buzzNumber() {
+    static String buzzNumber() {
 
         // find out if divisible by 7
         boolean isDivisibleBy7 = userNumber % 7 == 0;
@@ -147,15 +193,23 @@ public class Main {
 
         // buzz number or not printout
         if (isBuzzNumber) {
-            System.out.println("buzz: true");
+            if (userInputArrLength == 1) {
+                return "buzz: true";
+            } else {
+                return "buzz";
+            }
         } else {
-            System.out.println("buzz: false");
+            if (userInputArrLength == 1) {
+                return "buzz: false";
+            } else {
+                return null;
+            }
         }
 
     }
 
     // is number a duck number - must contain a 0 (doesn't count if it only begins with one)
-    static void duckNumber() {
+    static String duckNumber() {
         String userInput = String.valueOf(userNumber);
         boolean isDuckNumber = false;
 
@@ -168,14 +222,22 @@ public class Main {
         }
 
         if (isDuckNumber) {
-            System.out.println("duck: true");
+            if (userInputArrLength == 1) {
+                return "duck: true";
+            } else {
+                return "duck";
+            }
         } else {
-            System.out.println("duck: false");
+            if (userInputArrLength == 1) {
+                return "duck: false";
+            } else {
+                return null;
+            }
         }
     }
 
     // is number palindromic - must be the same if reversed
-    static void palindromicNumber() {
+    static String palindromicNumber() {
         long originalNumber = userNumber;
         long reversed = 0;
 
@@ -193,14 +255,22 @@ public class Main {
         boolean isPalindrome = userNumber == reversed;
 
         if (isPalindrome) {
-            System.out.println("palindromic: true");
+            if (userInputArrLength == 1) {
+                return "palindromic: true";
+            } else {
+                return "palindromic";
+            }
         } else {
-            System.out.println("palindromic: false");
+            if (userInputArrLength == 1) {
+                return "palindromic: false";
+            } else {
+                return null;
+            }
         }
     }
 
     // is number gapful - at least 3 digits and is divisible by first and last digit
-    static void gapfulNumber() {
+    static String gapfulNumber() {
 
         // get user number split into array
         String[] userNumberArr = Long.toString(userNumber).split("");
@@ -217,9 +287,17 @@ public class Main {
         boolean isGapful = userNumberLength >= 3 && userNumber % firstAndLast == 0;
 
         if (isGapful) {
-            System.out.println("gapful: true");
+            if (userInputArrLength == 1) {
+                return "gapful: true";
+            } else {
+                return "gapful";
+            }
         } else {
-            System.out.println("gapful: false");
+            if (userInputArrLength == 1) {
+                return "gapful: false";
+            } else {
+                return null;
+            }
         }
 
     }
