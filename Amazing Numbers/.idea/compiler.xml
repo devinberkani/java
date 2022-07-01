@@ -23,6 +23,13 @@
       <module name="Amazing_Numbers.Topics-Comparable-Rules.main" target="11" />
       <module name="Amazing_Numbers.Topics-Comparable-Theory.main" target="11" />
       <module name="Amazing_Numbers.Topics-Comparable-Value_class.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Constructor-Automatically_created_constructor.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Constructor-Characterize_the_constructors.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Constructor-Complex_numbers.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Constructor-Constructor_definition.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Constructor-Geometric_cube.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Constructor-How_to_write_a_constructor.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Constructor-Theory.main" target="11" />
       <module name="Amazing_Numbers.Topics-Generics_and_Object-Correct_the_usage_of_non-generic_class.main" target="11" />
       <module name="Amazing_Numbers.Topics-Generics_and_Object-Reusing_code_with_Object.main" target="11" />
       <module name="Amazing_Numbers.Topics-Generics_and_Object-Theory.main" target="11" />
@@ -63,6 +70,10 @@
       <module name="Amazing_Numbers.Topics-Processing_strings-Palindrome.main" target="11" />
       <module name="Amazing_Numbers.Topics-Processing_strings-The_percentage_of_G_and_C_characters.main" target="11" />
       <module name="Amazing_Numbers.Topics-Processing_strings-Theory.main" target="11" />
+      <module name="Amazing_Numbers.Topics-StringBuilder-Concat_all_strings_without_digits.main" target="11" />
+      <module name="Amazing_Numbers.Topics-StringBuilder-Multiple_modifications.main" target="11" />
+      <module name="Amazing_Numbers.Topics-StringBuilder-The_English_alphabet.main" target="11" />
+      <module name="Amazing_Numbers.Topics-StringBuilder-Theory.main" target="11" />
       <module name="Amazing_Numbers.Topics-The_Collections_Framework_overview-Blacklist.main" target="11" />
       <module name="Amazing_Numbers.Topics-The_Collections_Framework_overview-Collection_interfaces.main" target="11" />
       <module name="Amazing_Numbers.Topics-The_Collections_Framework_overview-Extra_methods.main" target="11" />

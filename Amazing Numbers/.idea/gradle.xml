@@ -31,6 +31,13 @@
             <option value="$PROJECT_DIR$/Topics/Comparable/Theory" />
             <option value="$PROJECT_DIR$/Topics/Comparable/Value class" />
             <option value="$PROJECT_DIR$/Topics/Comparable/compareTo" />
+            <option value="$PROJECT_DIR$/Topics/Constructor/Automatically created constructor" />
+            <option value="$PROJECT_DIR$/Topics/Constructor/Characterize the constructors" />
+            <option value="$PROJECT_DIR$/Topics/Constructor/Complex numbers" />
+            <option value="$PROJECT_DIR$/Topics/Constructor/Constructor definition" />
+            <option value="$PROJECT_DIR$/Topics/Constructor/Geometric cube" />
+            <option value="$PROJECT_DIR$/Topics/Constructor/How to write a constructor" />
+            <option value="$PROJECT_DIR$/Topics/Constructor/Theory" />
             <option value="$PROJECT_DIR$/Topics/Generics and Object/Correct the usage of non-generic class" />
             <option value="$PROJECT_DIR$/Topics/Generics and Object/Reusing code with Object" />
             <option value="$PROJECT_DIR$/Topics/Generics and Object/Theory" />
@@ -71,6 +78,10 @@
             <option value="$PROJECT_DIR$/Topics/Processing strings/Palindrome" />
             <option value="$PROJECT_DIR$/Topics/Processing strings/The percentage of G and C characters" />
             <option value="$PROJECT_DIR$/Topics/Processing strings/Theory" />
+            <option value="$PROJECT_DIR$/Topics/StringBuilder/Concat all strings without digits" />
+            <option value="$PROJECT_DIR$/Topics/StringBuilder/Multiple modifications" />
+            <option value="$PROJECT_DIR$/Topics/StringBuilder/The English alphabet" />
+            <option value="$PROJECT_DIR$/Topics/StringBuilder/Theory" />
             <option value="$PROJECT_DIR$/Topics/The Collections Framework overview/Blacklist" />
             <option value="$PROJECT_DIR$/Topics/The Collections Framework overview/Collection interfaces" />
             <option value="$PROJECT_DIR$/Topics/The Collections Framework overview/Extra methods" />

@@ -15,3 +15,5 @@ content:
 - The List interface
 - Comparable
 - Processing strings
+- Constructor
+- StringBuilder
