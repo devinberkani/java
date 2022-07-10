@@ -16,6 +16,12 @@
       <module name="Amazing_Numbers.Topics-Boxing_and_unboxing-Initializing_long_value.main" target="11" />
       <module name="Amazing_Numbers.Topics-Boxing_and_unboxing-Safe_converting.main" target="11" />
       <module name="Amazing_Numbers.Topics-Boxing_and_unboxing-Theory.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Branching_statements-A_keyword_to_terminate_the_loop.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Branching_statements-A_suitable_output.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Branching_statements-Bus_tour.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Branching_statements-The_same_results.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Branching_statements-Theory.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Branching_statements-What_is_the_output.main" target="11" />
       <module name="Amazing_Numbers.Topics-Comparable-compareTo.main" target="11" />
       <module name="Amazing_Numbers.Topics-Comparable-Leaderboard.main" target="11" />
       <module name="Amazing_Numbers.Topics-Comparable-Ratings.main" target="11" />
