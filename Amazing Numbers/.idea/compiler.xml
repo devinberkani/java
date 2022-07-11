@@ -36,6 +36,10 @@
       <module name="Amazing_Numbers.Topics-Constructor-Geometric_cube.main" target="11" />
       <module name="Amazing_Numbers.Topics-Constructor-How_to_write_a_constructor.main" target="11" />
       <module name="Amazing_Numbers.Topics-Constructor-Theory.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Declaring_a_method-Calculating_factorials.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Declaring_a_method-Greatest_common_divisor.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Declaring_a_method-Theory.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Declaring_a_method-Vowel_or_not.main" target="11" />
       <module name="Amazing_Numbers.Topics-Generics_and_Object-Correct_the_usage_of_non-generic_class.main" target="11" />
       <module name="Amazing_Numbers.Topics-Generics_and_Object-Reusing_code_with_Object.main" target="11" />
       <module name="Amazing_Numbers.Topics-Generics_and_Object-Theory.main" target="11" />

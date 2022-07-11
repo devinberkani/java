@@ -12,11 +12,13 @@ public class Main {
     static long userNumber;
     static long listLength = 1; // so that all current methods work if this number is not provided
 
-    static String propertySearch;
+    static String propertySearchOne; // first property being searched for
+
+    static String propertySearchTwo; // second property being searched for
     static long userInputArrLength;
 
     // available properties for user input
-    static String[] availableProperties = {"BUZZ", "DUCK", "PALINDROMIC", "GAPFUL", "SPY", "EVEN", "ODD"};
+    static String[] availableProperties = {"BUZZ", "DUCK", "PALINDROMIC", "GAPFUL", "SPY", "SUNNY", "SQUARE", "EVEN", "ODD"};
 
     public static void main(String[] args) {
         printMenu();
@@ -25,11 +27,12 @@ public class Main {
     static void printMenu() {
         System.out.println("Welcome to Amazing Numbers!");
         System.out.println("Supported requests:\n" +
-                "- enter a natural number to know its properties;\n" +
+                "- enter a natural number to know its properties; \n" +
                 "- enter two natural numbers to obtain the properties of the list:\n" +
                 "  * the first parameter represents a starting number;\n" +
                 "  * the second parameter shows how many consecutive numbers are to be printed;\n" +
                 "- two natural numbers and a property to search for;\n" +
+                "- two natural numbers and two properties to search for;\n" +
                 "- separate the parameters with one space;\n" +
                 "- enter 0 to exit.");
 
@@ -47,7 +50,12 @@ public class Main {
             } else if (userInputArrLength == 3) {
                 userNumber = userInput[0];
                 listLength = userInput[1];
-                propertySearch = availableProperties[(int)userInput[2]];
+                propertySearchOne = availableProperties[(int)userInput[2]];
+            } else if (userInputArrLength == 4) {
+                userNumber = userInput[0];
+                listLength = userInput[1];
+                propertySearchOne = availableProperties[(int)userInput[2]];
+                propertySearchTwo = availableProperties[(int)userInput[3]];
             }
 
             if (userNumber == 0) {
@@ -62,46 +70,55 @@ public class Main {
                         printsLeft--;
                     }
                 } else if (userInputArrLength == 3) {
+
+                    List<String> userProperties = new ArrayList<>(); // array to hold all properties user is searching for
+                    userProperties.add(propertySearchOne);
+
+                    // variables to store methods to be used
+                    String methodOne = null;
+
                     while (printsLeft > 0) {
-                        // get the property being searched for
-                        if (propertySearch.equalsIgnoreCase("BUZZ")) {
-                            if (buzzNumber() != null) {
-                                printProperties(printsLeft);
-                                printsLeft--;
+
+                        for (String property : userProperties) {
+                            if (property.equalsIgnoreCase(propertySearchOne)) {
+                                methodOne = methodReturn(propertySearchOne);
                             }
-                        } else if (propertySearch.equalsIgnoreCase("DUCK")) {
-                            if (duckNumber() != null) {
-                                printProperties(printsLeft);
-                                printsLeft--;
-                            }
-                        } else if (propertySearch.equalsIgnoreCase("PALINDROMIC")) {
-                            if (palindromicNumber() != null) {
-                                printProperties(printsLeft);
-                                printsLeft--;
-                            }
-                        } else if (propertySearch.equalsIgnoreCase("GAPFUL")) {
-                            if (gapfulNumber() != null) {
-                                printProperties(printsLeft);
-                                printsLeft--;
-                            }
-                        } else if (propertySearch.equalsIgnoreCase("SPY")) {
-                            if (spyNumber() != null) {
-                                printProperties(printsLeft);
-                                printsLeft--;
-                            }
-                        } else if (propertySearch.equalsIgnoreCase("EVEN")) {
-                            if (oddOrEven().equals("even")) {
-                                printProperties(printsLeft);
-                                printsLeft--;
-                            }
-                        } else if (propertySearch.equalsIgnoreCase("ODD")) {
-                            if (oddOrEven().equals("odd")) {
-                                printProperties(printsLeft);
-                                printsLeft--;
-                            }
+                        }
+                        if (methodOne != null) {
+                            printProperties(printsLeft);
+                            printsLeft--;
                         }
                         userNumber++; // add one to the userNumber after every print
                     }
+
+                } else if (userInputArrLength == 4) {
+
+                    List<String> userProperties = new ArrayList<>(); // array to hold all properties user is searching for
+                    userProperties.add(propertySearchOne);
+                    userProperties.add(propertySearchTwo);
+
+                    // variables to store methods to be used
+                    String methodOne = null;
+                    String methodTwo = null;
+
+                    while (printsLeft > 0) {
+
+                        for (String property : userProperties) {
+
+                            if (property.equalsIgnoreCase(propertySearchOne)) {
+                                methodOne = methodReturn(propertySearchOne);
+                            }
+                            if (property.equalsIgnoreCase(propertySearchTwo)) {
+                                methodTwo = methodReturn(propertySearchTwo);
+                            }
+                        }
+                        if (methodOne != null && methodTwo != null) {
+                            printProperties(printsLeft);
+                            printsLeft--;
+                        }
+                        userNumber++; // add one to the userNumber after every print
+                    }
+
                 }
                 listLength = 1; // reset listLength
                 isValidInput = false; // in order to prevent infinite loop
@@ -110,18 +127,50 @@ public class Main {
         } while (!isExiting);
     }
 
+    static String methodReturn(String method) {
+
+        if (method.equalsIgnoreCase("BUZZ")) {
+            return buzzNumber();
+        } else if (method.equalsIgnoreCase("DUCK")) {
+            return duckNumber();
+        } else if (method.equalsIgnoreCase("PALINDROMIC")) {
+            return palindromicNumber();
+        } else if (method.equalsIgnoreCase("GAPFUL")) {
+            return gapfulNumber();
+        } else if (method.equalsIgnoreCase("SPY")) {
+            return spyNumber();
+        } else if (method.equalsIgnoreCase("SUNNY")) {
+            return sunnyNumber();
+        } else if (method.equalsIgnoreCase("SQUARE")) {
+            return squareNumber();
+        } else if (method.equalsIgnoreCase("EVEN")) {
+            return evenNumber();
+        } else if (method.equalsIgnoreCase("ODD")) {
+            return oddNumber();
+        } else {
+            return null;
+        }
+    }
+
     static long[] validateInput() {
-        // error handling to determine if input is a natural number - must be a number greater than 0
-        boolean firstNumberValid = false; // number input
-        boolean secondNumberValid = false; // list length input
-        boolean thirdInputValid = false; // type of numbers being searched for
 
         // initialize array to be returned with user input
         long[] userInputArr = new long[0];
 
-        int currentPropertyIndex = 0; // index to be used to reference property being searched for
+        int firstPropertyIndex = 0; // index to be used to reference first property being searched for
+        int secondPropertyIndex = 0; // index to be used to reference second property being searched for
 
         while (!isValidInput) {
+
+            // error handling to determine if input is a natural number - must be a number greater than 0
+            boolean firstNumberValid = false; // number input
+            boolean secondNumberValid = false; // list length input
+            boolean thirdInputValid = false; // type of numbers being searched for
+            boolean fourthInputValid = false; // second type of numbers being searched for
+            boolean notMutuallyExclusive = false; // flag for mutually exclusive properties - specific ones below
+            boolean evenAndOdd = false;
+            boolean sunnyAndSquare = false;
+            boolean duckAndSpy = false;
 
             System.out.print("Enter a request: ");
 
@@ -149,12 +198,39 @@ public class Main {
                     secondNumberValid = Long.parseLong(userInputArrS[1]) > 0;
                     for (int i = 0; i < availableProperties.length; i++) {
                         if (userInputArrS[2].equalsIgnoreCase(availableProperties[i])) {
-                            currentPropertyIndex = i;
+                            firstPropertyIndex = i;
                             thirdInputValid = true;
                             break;
                         }
                     }
                     isValidInput = firstNumberValid && secondNumberValid && thirdInputValid;
+                } else if (userInputArrLength == 4) { // searching for specific info on list of numbers - second property
+                    firstNumberValid = Long.parseLong(userInputArrS[0]) >= 0;
+                    secondNumberValid = Long.parseLong(userInputArrS[1]) > 0;
+                    for (int i = 0; i < availableProperties.length; i++) {
+                        if (userInputArrS[2].equalsIgnoreCase(availableProperties[i])) {
+                            firstPropertyIndex = i;
+                            thirdInputValid = true;
+                        }
+                        if (userInputArrS[3].equalsIgnoreCase(availableProperties[i])) {
+                            secondPropertyIndex = i;
+                            fourthInputValid = true;
+                        }
+                    }
+                    // catch mutually exclusive properties
+                    if ((firstPropertyIndex == 7 && secondPropertyIndex == 8) || (firstPropertyIndex == 8 && secondPropertyIndex == 7)) {
+                        notMutuallyExclusive = false;
+                        evenAndOdd = true;
+                    } else if ((firstPropertyIndex == 5 && secondPropertyIndex == 6) || (firstPropertyIndex == 6 && secondPropertyIndex == 5)) {
+                        notMutuallyExclusive = false;
+                        sunnyAndSquare = true;
+                    } else if ((firstPropertyIndex == 1 && secondPropertyIndex == 4) || (firstPropertyIndex == 4 && secondPropertyIndex == 1)) {
+                        notMutuallyExclusive = false;
+                        duckAndSpy = true;
+                    } else {
+                        notMutuallyExclusive = true;
+                    }
+                    isValidInput = firstNumberValid && secondNumberValid && thirdInputValid && fourthInputValid && notMutuallyExclusive;
                 }
             }
 
@@ -163,9 +239,26 @@ public class Main {
                     System.out.println("The first parameter should be a natural number or zero.");
                 } else if (!secondNumberValid) {
                     System.out.println("The second parameter should be a natural number.");
+                } else if (userInputArrLength == 4 && !thirdInputValid && !fourthInputValid) {
+                    System.out.println("The properties [" + userInputArrS[2].toUpperCase() + ", " + userInputArrS[3].toUpperCase() + "] are wrong.");
+                    System.out.println("Available properties: [EVEN, ODD, BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY, SQUARE, SUNNY]");
                 } else if (!thirdInputValid) {
                     System.out.println("The property [" + userInputArrS[2].toUpperCase() + "] is wrong.");
-                    System.out.println("Available properties: [BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY, EVEN, ODD]");
+                    System.out.println("Available properties: [EVEN, ODD, BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY, SQUARE, SUNNY]");
+                } else if (!fourthInputValid) {
+                    System.out.println("The property [" + userInputArrS[3].toUpperCase() + "] is wrong.");
+                    System.out.println("Available properties: [EVEN, ODD, BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY, SQUARE, SUNNY]");
+                } else if (!notMutuallyExclusive) {
+                    if (evenAndOdd) {
+                        System.out.println("The request contains mutually exclusive properties: [EVEN, ODD]\n" +
+                                "There are no numbers with these properties.");
+                    } else if (sunnyAndSquare) {
+                        System.out.println("The request contains mutually exclusive properties: [SUNNY, SQUARE]\n" +
+                                "There are no numbers with these properties.");
+                    } else if (duckAndSpy) {
+                        System.out.println("The request contains mutually exclusive properties: [DUCK, SPY]\n" +
+                                "There are no numbers with these properties.");
+                    }
                 }
             } else {
                 if (userInputArrLength == 1) {
@@ -179,7 +272,13 @@ public class Main {
                     userInputArr = new long[3];
                     userInputArr[0] = Long.parseLong(userInputArrS[0]);
                     userInputArr[1] = Long.parseLong(userInputArrS[1]);
-                    userInputArr[2] = currentPropertyIndex;
+                    userInputArr[2] = firstPropertyIndex;
+                } else if (userInputArrLength == 4) {
+                    userInputArr = new long[4];
+                    userInputArr[0] = Long.parseLong(userInputArrS[0]);
+                    userInputArr[1] = Long.parseLong(userInputArrS[1]);
+                    userInputArr[2] = firstPropertyIndex;
+                    userInputArr[3] = secondPropertyIndex;
                 }
             }
         }
@@ -194,16 +293,20 @@ public class Main {
             System.out.println(duckNumber());
             System.out.println(palindromicNumber());
             System.out.println(gapfulNumber());
-            System.out.println(oddOrEven());
             System.out.println(spyNumber());
+            System.out.println(sunnyNumber());
+            System.out.println(squareNumber());
+            System.out.println(oddOrEven());
         } else {
             List<String> properties = new ArrayList<>();
             properties.add(buzzNumber());
             properties.add(duckNumber());
             properties.add(palindromicNumber());
             properties.add(gapfulNumber());
-            properties.add(oddOrEven());
             properties.add(spyNumber());
+            properties.add(sunnyNumber());
+            properties.add(squareNumber());
+            properties.add(oddOrEven());
             // remove nulls
             properties.removeIf(Objects::isNull);
             if (printsLeft > 0) {
@@ -232,19 +335,35 @@ public class Main {
 
     static String evenNumber() {
         if (userInputArrLength == 1) {
-            return "even: true \n" +
-                    "odd: false";
+            if (userNumber % 2 == 0) {
+                return "even: true \n" +
+                        "odd: false";
+            } else {
+                return null;
+            }
         } else {
-            return "even";
+            if (userNumber % 2 == 0) {
+                return "even";
+            } else {
+                return null;
+            }
         }
     }
 
     static String oddNumber() {
         if (userInputArrLength == 1) {
-            return "even: false \n" +
-                    "odd: true";
+            if (userNumber % 2 != 0) {
+                return "even: false \n" +
+                        "odd: true";
+            } else {
+                return null;
+            }
         } else {
-            return "odd";
+            if (userNumber % 2 != 0) {
+                return "odd";
+            } else {
+                return null;
+            }
         }
     }
 
@@ -416,6 +535,48 @@ public class Main {
             }
         }
 
+    }
+
+    // is number sunny - N + 1 equals a perfect square
+    static String sunnyNumber() {
+
+        // test number to compare to squared result
+        double testNumber = Math.sqrt(userNumber + 1);
+        boolean isSunny = testNumber == (int) testNumber;
+
+        if (isSunny) {
+            if (userInputArrLength == 1) {
+                return "sunny: true";
+            } else {
+                return "sunny";
+            }
+        } else {
+            if (userInputArrLength == 1) {
+                return "sunny: false";
+            } else {
+                return null;
+            }
+        }
+    }
+
+    // is number square
+    static String squareNumber() {
+        double testNumber = Math.sqrt(userNumber);
+        boolean isSquare = testNumber == (int) testNumber;
+
+        if (isSquare) {
+            if (userInputArrLength == 1) {
+                return "square: true";
+            } else {
+                return "square";
+            }
+        } else {
+            if (userInputArrLength == 1) {
+                return "square: false";
+            } else {
+                return null;
+            }
+        }
     }
 
 }
