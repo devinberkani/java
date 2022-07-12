@@ -18,7 +18,7 @@ public class Main {
     static long userInputArrLength;
 
     // available properties for user input
-    static String[] availableProperties = {"BUZZ", "DUCK", "PALINDROMIC", "GAPFUL", "SPY", "SUNNY", "SQUARE", "EVEN", "ODD"};
+    static String[] availableProperties = {"BUZZ", "DUCK", "PALINDROMIC", "GAPFUL", "SPY", "SUNNY", "JUMPING", "SQUARE", "EVEN", "ODD"};
 
     public static void main(String[] args) {
         printMenu();
@@ -143,6 +143,8 @@ public class Main {
             return sunnyNumber();
         } else if (method.equalsIgnoreCase("SQUARE")) {
             return squareNumber();
+        } else if (method.equalsIgnoreCase("JUMPING")) {
+            return jumpingNumber();
         } else if (method.equalsIgnoreCase("EVEN")) {
             return evenNumber();
         } else if (method.equalsIgnoreCase("ODD")) {
@@ -219,13 +221,10 @@ public class Main {
                     }
                     // catch mutually exclusive properties
                     if ((firstPropertyIndex == 7 && secondPropertyIndex == 8) || (firstPropertyIndex == 8 && secondPropertyIndex == 7)) {
-                        notMutuallyExclusive = false;
                         evenAndOdd = true;
                     } else if ((firstPropertyIndex == 5 && secondPropertyIndex == 6) || (firstPropertyIndex == 6 && secondPropertyIndex == 5)) {
-                        notMutuallyExclusive = false;
                         sunnyAndSquare = true;
                     } else if ((firstPropertyIndex == 1 && secondPropertyIndex == 4) || (firstPropertyIndex == 4 && secondPropertyIndex == 1)) {
-                        notMutuallyExclusive = false;
                         duckAndSpy = true;
                     } else {
                         notMutuallyExclusive = true;
@@ -296,6 +295,7 @@ public class Main {
             System.out.println(spyNumber());
             System.out.println(sunnyNumber());
             System.out.println(squareNumber());
+            System.out.println(jumpingNumber());
             System.out.println(oddOrEven());
         } else {
             List<String> properties = new ArrayList<>();
@@ -306,6 +306,7 @@ public class Main {
             properties.add(spyNumber());
             properties.add(sunnyNumber());
             properties.add(squareNumber());
+            properties.add(jumpingNumber());
             properties.add(oddOrEven());
             // remove nulls
             properties.removeIf(Objects::isNull);
@@ -577,6 +578,58 @@ public class Main {
                 return null;
             }
         }
+    }
+
+    // is jumping number - adjacent digits inside number differ by 1
+    static String jumpingNumber() {
+
+        // *******************this takes a long time to complete, this is as far as you gotten -- remmber that the way you have it now you are modifying the user number which probably won't work long term
+
+        // boolean flag for jumping number
+        boolean isJumpingNumber = false;
+
+        // get user number split into array
+        String[] userNumberArr = Long.toString(userNumber).split("");
+        int userNumberLength = userNumberArr.length;
+
+        // handle big numbers
+        int firstNumber = Integer.parseInt(userNumberArr[0]);
+        int secondNumber = Integer.parseInt(userNumberArr[1]);
+        if (userNumberLength > 9 && secondNumber != (firstNumber + 1) && secondNumber != firstNumber - 1) {
+            userNumber+= 1000000;
+            userNumberArr = Long.toString(userNumber).split("");
+            userNumberLength = userNumberArr.length;
+        }
+
+        for (int i = 0; i < userNumberLength; i++) {
+            int currentNumber = Integer.parseInt(userNumberArr[i]);
+            if (i != userNumberLength - 1) {
+                int nextNumber = Integer.parseInt(userNumberArr[i + 1]);
+                if (nextNumber == (currentNumber + 1) || nextNumber == (currentNumber - 1)) {
+                    isJumpingNumber = true;
+                } else {
+                    isJumpingNumber = false;
+                    break;
+                }
+            } else {
+                break;
+            }
+        }
+
+        if (isJumpingNumber) {
+            if (userInputArrLength == 1) {
+                return "jumping: true";
+            } else {
+                return "jumping";
+            }
+        } else {
+            if (userInputArrLength == 1) {
+                return "jumping: false";
+            } else {
+                return null;
+            }
+        }
+
     }
 
 }
