@@ -18,6 +18,7 @@ public class Main {
     static String propertySearchOne; // first property being searched for
 
     static String propertySearchTwo; // second property being searched for
+    static List<String> userProperties = new ArrayList<>(); // array to hold all properties user is searching for
     static long userInputArrLength;
 
     // available properties for user input
@@ -41,23 +42,20 @@ public class Main {
         do {
 
             // handle errors - get input array
-            long[] userInput = validateInput();
-            userInputArrLength = userInput.length;
+            List<Long> userInput = validateInput();
+            userInputArrLength = userInput.size();
 
             if (userInputArrLength == 1) {
-                userNumber = userInput[0];
+                userNumber = userInput.get(0);
             } else if (userInputArrLength == 2) {
-                userNumber = userInput[0];
-                listLength = userInput[1];
-            } else if (userInputArrLength == 3) {
-                userNumber = userInput[0];
-                listLength = userInput[1];
-                propertySearchOne = availableProperties[(int)userInput[2]];
-            } else if (userInputArrLength == 4) {
-                userNumber = userInput[0];
-                listLength = userInput[1];
-                propertySearchOne = availableProperties[(int)userInput[2]];
-                propertySearchTwo = availableProperties[(int)userInput[3]];
+                userNumber = userInput.get(0);
+                listLength = userInput.get(1);
+            } else {
+                userNumber = userInput.get(0);
+                listLength = userInput.get(1);
+                for (int i = 2; i < userInput.size(); i++) {
+                    userProperties.add(availableProperties[Integer.parseInt(userInput.get(i).toString())]);
+                }
             }
 
             if (userNumber == 0) {
@@ -73,59 +71,42 @@ public class Main {
                         userNumber++; // add one to the userNumber after every print
                         printsLeft--;
                     }
-                } else if (userInputArrLength == 3) {
-
-                    List<String> userProperties = new ArrayList<>(); // array to hold all properties user is searching for
-                    userProperties.add(propertySearchOne);
-
-                    // variables to store methods to be used
-                    String methodOne = null;
+                } else {
 
                     while (printsLeft > 0) {
 
-                        for (String property : userProperties) {
-                            if (property.equalsIgnoreCase(propertySearchOne)) {
-                                methodOne = methodReturn(propertySearchOne);
-                            }
-                        }
-                        if (methodOne != null) {
-                            printProperties(printsLeft);
-                            printsLeft--;
-                        }
-                        userNumber++; // add one to the userNumber after every print
-                    }
+                        boolean allNotNull = true;
 
-                } else if (userInputArrLength == 4) {
-
-                    List<String> userProperties = new ArrayList<>(); // array to hold all properties user is searching for
-                    userProperties.add(propertySearchOne);
-                    userProperties.add(propertySearchTwo);
-
-                    // variables to store methods to be used
-                    String methodOne = null;
-                    String methodTwo = null;
-
-                    while (printsLeft > 0) {
+                        // list of method returns from the properties being searched for
+                        List<String> methodReturnList = new ArrayList<>();
 
                         for (String property : userProperties) {
 
-                            if (property.equalsIgnoreCase(propertySearchOne)) {
-                                methodOne = methodReturn(propertySearchOne);
-                            }
-                            if (property.equalsIgnoreCase(propertySearchTwo)) {
-                                methodTwo = methodReturn(propertySearchTwo);
-                            }
+                            methodReturnList.add(methodReturn(property));
+
                         }
-                        if (methodOne != null && methodTwo != null) {
+
+                        for (String currentMethodResult : methodReturnList) {
+
+                            if (currentMethodResult == null) {
+                                allNotNull = false;
+                                break;
+                            }
+
+                        }
+
+                        if (allNotNull) {
                             printProperties(printsLeft);
                             printsLeft--;
                         }
+
                         userNumber++; // add one to the userNumber after every print
                     }
 
                 }
                 listLength = 1; // reset listLength
                 isValidInput = false; // in order to prevent infinite loop
+                userProperties.clear(); // reset list
             }
 
         } while (!isExiting);
@@ -158,13 +139,10 @@ public class Main {
         }
     }
 
-    static long[] validateInput() {
+    static List<Long> validateInput() {
 
         // initialize array to be returned with user input
-        long[] userInputArr = new long[0];
-
-        int firstPropertyIndex = 0; // index to be used to reference first property being searched for
-        int secondPropertyIndex = 0; // index to be used to reference second property being searched for
+        List<Long> userInputArr = new ArrayList<>();
 
         while (!isValidInput) {
 
@@ -173,6 +151,7 @@ public class Main {
             boolean secondNumberValid = false; // list length input
             boolean invalidSearchFound = false;
             boolean allSearchInputValid = false; // all types of numbers being searched for
+            int invalidSearchCount = 0; // count for invalid searches
             boolean notMutuallyExclusive = false; // flag for mutually exclusive properties - specific ones below
             boolean evenAndOdd = false;
             boolean sunnyAndSquare = false;
@@ -188,7 +167,9 @@ public class Main {
 
             // check to make sure input is a number
 
-            if (userInputArrS[0].matches("\\d+")) {
+            //userInputArrS[0].matches("\\d+")
+
+            if (!userInputArrS[0].equals("")) {
 
                 // array to keep track of property search indexes used to catch mutually exclusive properties
                 List<Integer> propertySearchIndices = new ArrayList<>();
@@ -199,15 +180,25 @@ public class Main {
                 // check to make sure number(s) are natural
 
                 if (userInputArrLength == 1) { // only searching for info on one number
-                    firstNumberValid = Long.parseLong(userInputArrS[0]) >= 0;
+                    if (userInputArrS[0].matches("\\d+")) {
+                        firstNumberValid = Long.parseLong(userInputArrS[0]) >= 0;
+                    }
                     isValidInput = firstNumberValid;
                 } else if (userInputArrLength == 2) { // searching for info on list of numbers
-                    firstNumberValid = Long.parseLong(userInputArrS[0]) >= 0;
-                    secondNumberValid = Long.parseLong(userInputArrS[1]) > 0;
+                    if (userInputArrS[0].matches("\\d+")) {
+                        firstNumberValid = Long.parseLong(userInputArrS[0]) >= 0;
+                    }
+                    if (userInputArrS[1].matches("\\d+")) {
+                        secondNumberValid = Long.parseLong(userInputArrS[0]) >= 0;
+                    }
                     isValidInput = firstNumberValid && secondNumberValid;
                 } else { // searching for specific info on list of numbers
-                    firstNumberValid = Long.parseLong(userInputArrS[0]) >= 0;
-                    secondNumberValid = Long.parseLong(userInputArrS[1]) > 0;
+                    if (userInputArrS[0].matches("\\d+")) {
+                        firstNumberValid = Long.parseLong(userInputArrS[0]) >= 0;
+                    }
+                    if (userInputArrS[1].matches("\\d+")) {
+                        secondNumberValid = Long.parseLong(userInputArrS[0]) >= 0;
+                    }
                     for (int i = 2; i < userInputArrLength; i++) {
                         for (int j = 0; j < availableProperties.length; j++) {
                             if (userInputArrS[i].equalsIgnoreCase(availableProperties[j])) {
@@ -219,19 +210,23 @@ public class Main {
                             }
                         }
                         if (invalidSearchFound) {
+                            allSearchInputValid = false;
+                            invalidSearchCount++;
                             invalidPropertySearches.add(userInputArrS[i]); // add invalid input to invalid searches array
                             invalidSearchFound = false;
-                        } else if (i == userInputArrLength - 1) {
+                        } else if (invalidSearchCount == 0) {
                             allSearchInputValid = true;
                         }
 
                         // catch mutually exclusive properties
-
                         if ((propertySearchIndices.contains(8) && propertySearchIndices.contains(9))) {
+                            notMutuallyExclusive = false;
                             evenAndOdd = true;
                         } else if ((propertySearchIndices.contains(5) && propertySearchIndices.contains(6))) {
+                            notMutuallyExclusive = false;
                             sunnyAndSquare = true;
                         } else if ((propertySearchIndices.contains(1) && propertySearchIndices.contains(4))) {
+                            notMutuallyExclusive = false;
                             duckAndSpy = true;
                         } else {
                             notMutuallyExclusive = true;
@@ -239,8 +234,6 @@ public class Main {
                         isValidInput = firstNumberValid && secondNumberValid && allSearchInputValid && notMutuallyExclusive;
                     }
                 }
-
-                // ******************** 1) figure out how to correctly update the user input array so that works in a flexible way**********
 
                 if (!isValidInput) {
                     if (!firstNumberValid) {
@@ -276,25 +269,17 @@ public class Main {
                         }
                     }
                 } else {
-                    if (userInputArrLength == 1) {
-                        userInputArr = new long[1];
-                        userInputArr[0] = Long.parseLong(userInputArrS[0]);
-                    } else if (userInputArrLength == 2) {
-                        userInputArr = new long[2];
-                        userInputArr[0] = Long.parseLong(userInputArrS[0]);
-                        userInputArr[1] = Long.parseLong(userInputArrS[1]);
-                    } else if (userInputArrLength == 3) {
-                        userInputArr = new long[3];
-                        userInputArr[0] = Long.parseLong(userInputArrS[0]);
-                        userInputArr[1] = Long.parseLong(userInputArrS[1]);
-                        userInputArr[2] = firstPropertyIndex;
-                    } else if (userInputArrLength == 4) {
-                        userInputArr = new long[4];
-                        userInputArr[0] = Long.parseLong(userInputArrS[0]);
-                        userInputArr[1] = Long.parseLong(userInputArrS[1]);
-                        userInputArr[2] = firstPropertyIndex;
-                        userInputArr[3] = secondPropertyIndex;
-                        System.out.println(secondPropertyIndex);
+                    // add the number/number of numbers being searched for
+
+                    // variable to track propertySearchIndices size
+                    int propertySearchIndicesSize = propertySearchIndices.size();
+                    for (int i = 0; i < (userInputArrLength - propertySearchIndicesSize); i++) {
+                        userInputArr.add(Long.parseLong(userInputArrS[i]));
+                    }
+                    // add the property searches being searched for
+
+                    for (int i = 0; i < propertySearchIndicesSize; i++) {
+                        userInputArr.add(Long.parseLong(propertySearchIndices.get(i).toString()));
                     }
                 }
             }
@@ -601,8 +586,6 @@ public class Main {
     // is jumping number - adjacent digits inside number differ by 1
     static String jumpingNumber() {
 
-        // *******************this takes a long time to complete, this is as far as you gotten -- remmber that the way you have it now you are modifying the user number which probably won't work long term
-
         // boolean flag for jumping number
         boolean isJumpingNumber = false;
 
@@ -610,27 +593,34 @@ public class Main {
         String[] userNumberArr = Long.toString(userNumber).split("");
         int userNumberLength = userNumberArr.length;
 
-        // handle big numbers
+        // handle big numbers under specific circumstances
         int firstNumber = Integer.parseInt(userNumberArr[0]);
-        int secondNumber = Integer.parseInt(userNumberArr[1]);
-        if (userNumberLength > 9 && secondNumber != (firstNumber + 1) && secondNumber != firstNumber - 1) {
+        int secondNumber = 0;
+        if (userNumberLength > 1) {
+            secondNumber = Integer.parseInt(userNumberArr[1]);
+        }
+        if (userNumberLength > 9 && userProperties.size() > 0 && secondNumber != (firstNumber + 1) && secondNumber != firstNumber - 1) {
             userNumber+= 1000000;
             userNumberArr = Long.toString(userNumber).split("");
             userNumberLength = userNumberArr.length;
         }
 
-        for (int i = 0; i < userNumberLength; i++) {
-            int currentNumber = Integer.parseInt(userNumberArr[i]);
-            if (i != userNumberLength - 1) {
-                int nextNumber = Integer.parseInt(userNumberArr[i + 1]);
-                if (nextNumber == (currentNumber + 1) || nextNumber == (currentNumber - 1)) {
-                    isJumpingNumber = true;
+        if (userNumberLength == 1) {
+            isJumpingNumber = true;
+        } else {
+            for (int i = 0; i < userNumberLength; i++) {
+                int currentNumber = Integer.parseInt(userNumberArr[i]);
+                if (i != userNumberLength - 1) {
+                    int nextNumber = Integer.parseInt(userNumberArr[i + 1]);
+                    if (nextNumber == (currentNumber + 1) || nextNumber == (currentNumber - 1)) {
+                        isJumpingNumber = true;
+                    } else {
+                        isJumpingNumber = false;
+                        break;
+                    }
                 } else {
-                    isJumpingNumber = false;
                     break;
                 }
-            } else {
-                break;
             }
         }
 
