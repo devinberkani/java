@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
+// ******************** ALL THAT NEEDS DONE IS INCLUDING LOGIC FOR EXCLUDING PROPERTIES FROM SEARCHES AS WELL AS SPECIFYING THE "-" SYMBOL IN MUTUALLY EXCLUSIVE PROPERTY SEARCHES -- SEE NOTES BELOW @ lines 211 and 81
+
 public class Main {
     static Scanner scanner = new Scanner(System.in);
     static boolean isExiting = false;
@@ -22,7 +24,7 @@ public class Main {
     static long userInputArrLength;
 
     // available properties for user input
-    static String[] availableProperties = {"BUZZ", "DUCK", "PALINDROMIC", "GAPFUL", "SPY", "SUNNY", "SQUARE", "JUMPING", "EVEN", "ODD"};
+    static String[] availableProperties = {"BUZZ", "DUCK", "PALINDROMIC", "GAPFUL", "SPY", "SUNNY", "SQUARE", "JUMPING", "EVEN", "ODD", "HAPPY", "SAD"};
 
     public static void main(String[] args) {
         printMenu();
@@ -76,6 +78,7 @@ public class Main {
                     while (printsLeft > 0) {
 
                         boolean allNotNull = true;
+                        // create separate boolean flag for whether there is a property match from exclusion array? if so this could be put into logic as counting as null?
 
                         // list of method returns from the properties being searched for
                         List<String> methodReturnList = new ArrayList<>();
@@ -134,6 +137,10 @@ public class Main {
             return evenNumber();
         } else if (method.equalsIgnoreCase("ODD")) {
             return oddNumber();
+        } else if (method.equalsIgnoreCase("HAPPY")) {
+            return happyNumber();
+        } else if (method.equalsIgnoreCase("SAD")) {
+            return sadNumber();
         } else {
             return null;
         }
@@ -156,6 +163,7 @@ public class Main {
             boolean evenAndOdd = false;
             boolean sunnyAndSquare = false;
             boolean duckAndSpy = false;
+            boolean happyAndSad = false;
 
             System.out.print("Enter a request: ");
 
@@ -201,6 +209,8 @@ public class Main {
                     }
                     for (int i = 2; i < userInputArrLength; i++) {
                         for (int j = 0; j < availableProperties.length; j++) {
+                            // going to need to create an additional array of all properties with the "-" symbol to match with
+                            // add additional if statement here based on whether a user input matches with "-" symbol -- add these properties to a separate list/array (static?) -- this will also prevent these searches from getting caught by invalid search flag
                             if (userInputArrS[i].equalsIgnoreCase(availableProperties[j])) {
                                 propertySearchIndices.add(j);
                                 break;
@@ -228,7 +238,11 @@ public class Main {
                         } else if ((propertySearchIndices.contains(1) && propertySearchIndices.contains(4))) {
                             notMutuallyExclusive = false;
                             duckAndSpy = true;
-                        } else {
+                        } else if ((propertySearchIndices.contains(10) && propertySearchIndices.contains(11))) {
+                            notMutuallyExclusive = false;
+                            happyAndSad = true;
+                        }
+                        else {
                             notMutuallyExclusive = true;
                         }
                         isValidInput = firstNumberValid && secondNumberValid && allSearchInputValid && notMutuallyExclusive;
@@ -243,7 +257,7 @@ public class Main {
                     } else if (!allSearchInputValid) {
                         if (invalidPropertySearches.size() == 1) {
                             System.out.println("The property [" + invalidPropertySearches.get(0).toUpperCase() + "] is wrong.");
-                            System.out.println("Available properties: [EVEN, ODD, BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY, SQUARE, SUNNY, JUMPING]");
+                            System.out.println("Available properties: [EVEN, ODD, BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY, SQUARE, SUNNY, JUMPING, HAPPY, SAD]");
                         } else {
                             System.out.print("The properties [");
                             for (int i = 0; i < invalidPropertySearches.size(); i++) {
@@ -254,7 +268,7 @@ public class Main {
                                 }
                             }
                             System.out.println("] are wrong.");
-                            System.out.println("Available properties: [EVEN, ODD, BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY, SQUARE, SUNNY, JUMPING]");
+                            System.out.println("Available properties: [EVEN, ODD, BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY, SQUARE, SUNNY, JUMPING, HAPPY, SAD]");
                         }
                     } else if (!notMutuallyExclusive) {
                         if (evenAndOdd) {
@@ -265,6 +279,9 @@ public class Main {
                                     "There are no numbers with these properties.");
                         } else if (duckAndSpy) {
                             System.out.println("The request contains mutually exclusive properties: [DUCK, SPY]\n" +
+                                    "There are no numbers with these properties.");
+                        } else if (happyAndSad) {
+                            System.out.println("The request contains mutually exclusive properties: [HAPPY, SAD]\n" +
                                     "There are no numbers with these properties.");
                         }
                     }
@@ -300,6 +317,8 @@ public class Main {
             System.out.println(squareNumber());
             System.out.println(jumpingNumber());
             System.out.println(oddOrEven());
+            System.out.println(happyNumber());
+            System.out.println(sadNumber());
         } else {
             List<String> properties = new ArrayList<>();
             properties.add(buzzNumber());
@@ -311,6 +330,8 @@ public class Main {
             properties.add(squareNumber());
             properties.add(jumpingNumber());
             properties.add(oddOrEven());
+            properties.add(happyNumber());
+            properties.add(sadNumber());
             // remove nulls
             properties.removeIf(Objects::isNull);
             if (printsLeft > 0) {
@@ -640,4 +661,90 @@ public class Main {
 
     }
 
+    // find happy and sad numbers - is happy if squaring individual digits results in 1 in the end, else is sad
+    static String happyNumber() {
+
+        // boolean flag for happy number
+        boolean isHappyNumber = false;
+
+        // get user number split into array
+        String[] userNumberArr = Long.toString(userNumber).split("");
+        int userNumberLength = userNumberArr.length;
+
+        // variable to track result of calculations
+        int result = 0;
+
+        while(true) {
+            for (String s : userNumberArr) {
+                int currentNumber = Integer.parseInt(s);
+                result += (currentNumber * currentNumber);
+            }
+            // update result array
+            userNumberArr = Integer.toString(result).split("");
+            if (result == 1) {
+                isHappyNumber = true;
+                break;
+            } else if (result == 4) {
+                break;
+            } else {
+                result = 0;
+            }
+        }
+        if (isHappyNumber) {
+            if (userInputArrLength == 1) {
+                return "happy: true";
+            } else {
+                return "happy";
+            }
+        } else {
+            if (userInputArrLength == 1) {
+                return "happy: false";
+            } else {
+                return null;
+            }
+        }
+    }
+
+    static String sadNumber() {
+
+        // boolean flag for happy number
+        boolean isSadNumber = false;
+
+        // get user number split into array
+        String[] userNumberArr = Long.toString(userNumber).split("");
+        int userNumberLength = userNumberArr.length;
+
+        // variable to track result of calculations
+        int result = 0;
+
+        while(true) {
+            for (String s : userNumberArr) {
+                int currentNumber = Integer.parseInt(s);
+                result += (currentNumber * currentNumber);
+            }
+            // update result array
+            userNumberArr = Integer.toString(result).split("");
+            if (result == 1) {
+                break;
+            } else if (result == 4) {
+                isSadNumber = true;
+                break;
+            } else {
+                result = 0;
+            }
+        }
+        if (isSadNumber) {
+            if (userInputArrLength == 1) {
+                return "sad: true";
+            } else {
+                return "sad";
+            }
+        } else {
+            if (userInputArrLength == 1) {
+                return "sad: false";
+            } else {
+                return null;
+            }
+        }
+    }
 }
