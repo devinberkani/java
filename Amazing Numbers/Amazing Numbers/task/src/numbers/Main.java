@@ -1,12 +1,9 @@
 package numbers;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
-
-// ******************** ALL THAT NEEDS DONE IS INCLUDING LOGIC FOR EXCLUDING PROPERTIES FROM SEARCHES AS WELL AS SPECIFYING THE "-" SYMBOL IN MUTUALLY EXCLUSIVE PROPERTY SEARCHES -- SEE NOTES BELOW @ lines 211 and 81
 
 public class Main {
     static Scanner scanner = new Scanner(System.in);
@@ -16,15 +13,17 @@ public class Main {
 
     static long userNumberCopy;
     static long listLength = 1; // so that all current methods work if this number is not provided
-
-    static String propertySearchOne; // first property being searched for
-
-    static String propertySearchTwo; // second property being searched for
     static List<String> userProperties = new ArrayList<>(); // array to hold all properties user is searching for
     static long userInputArrLength;
 
     // available properties for user input
     static String[] availableProperties = {"BUZZ", "DUCK", "PALINDROMIC", "GAPFUL", "SPY", "SUNNY", "SQUARE", "JUMPING", "EVEN", "ODD", "HAPPY", "SAD"};
+
+    // all properties to match to, to be excluded based on user input
+    static String[] availableExcludedProperties = {"-BUZZ", "-DUCK", "-PALINDROMIC", "-GAPFUL", "-SPY", "-SUNNY", "-SQUARE", "-JUMPING", "-EVEN", "-ODD", "-HAPPY", "-SAD"};
+
+    // list to hold all excluded properties user has input
+    static List<String> userExcludedProperties = new ArrayList<>();
 
     public static void main(String[] args) {
         printMenu();
@@ -38,6 +37,7 @@ public class Main {
                 "  * the first parameter represents a starting number;\n" +
                 "  * the second parameter shows how many consecutive numbers are to be printed;\n" +
                 "- two natural numbers and properties to search for;\n" +
+                "- a property preceded by minus must not be present in numbers;\n" +
                 "- separate the parameters with one space;\n" +
                 "- enter 0 to exit.");
 
@@ -55,9 +55,9 @@ public class Main {
             } else {
                 userNumber = userInput.get(0);
                 listLength = userInput.get(1);
-                for (int i = 2; i < userInput.size(); i++) {
+                for (int i = 2; i < userInput.size() - userExcludedProperties.size(); i++) {
                     userProperties.add(availableProperties[Integer.parseInt(userInput.get(i).toString())]);
-                }
+                } // updates the array length for proper routing without messing with previous logic (adding exclusions)
             }
 
             if (userNumber == 0) {
@@ -77,28 +77,45 @@ public class Main {
 
                     while (printsLeft > 0) {
 
-                        boolean allNotNull = true;
+                        boolean isValidNumber = true;
+                        boolean excludedPropertyFound = false;
                         // create separate boolean flag for whether there is a property match from exclusion array? if so this could be put into logic as counting as null?
 
                         // list of method returns from the properties being searched for
                         List<String> methodReturnList = new ArrayList<>();
 
+                        // list of method returns from excluded properties
+                        List<String> excludedMethodReturnList = new ArrayList<>();
+
+                        // add method returns from property searches
                         for (String property : userProperties) {
-
                             methodReturnList.add(methodReturn(property));
-
                         }
 
-                        for (String currentMethodResult : methodReturnList) {
+                        // add method returns from excluded properties
+                        for (String userExcludedProperty : userExcludedProperties) {
+                            excludedMethodReturnList.add(methodReturn(userExcludedProperty));
+                        }
 
-                            if (currentMethodResult == null) {
-                                allNotNull = false;
+                        // find out if any of excluded properties are returned as valid and set boolean flag
+                        for (String currentMethodResult : excludedMethodReturnList) {
+                            if (currentMethodResult != null) {
+                                excludedPropertyFound = true;
                                 break;
                             }
-
                         }
 
-                        if (allNotNull) {
+                        if (!excludedPropertyFound) {
+                            for (String currentMethodResult : methodReturnList) {
+
+                                if (currentMethodResult == null) {
+                                    isValidNumber = false;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (isValidNumber && !excludedPropertyFound) {
                             printProperties(printsLeft);
                             printsLeft--;
                         }
@@ -110,6 +127,7 @@ public class Main {
                 listLength = 1; // reset listLength
                 isValidInput = false; // in order to prevent infinite loop
                 userProperties.clear(); // reset list
+                userExcludedProperties.clear(); // reset list
             }
 
         } while (!isExiting);
@@ -161,9 +179,12 @@ public class Main {
             int invalidSearchCount = 0; // count for invalid searches
             boolean notMutuallyExclusive = false; // flag for mutually exclusive properties - specific ones below
             boolean evenAndOdd = false;
+            boolean excludeEvenAndOdd = false;
             boolean sunnyAndSquare = false;
             boolean duckAndSpy = false;
             boolean happyAndSad = false;
+            boolean excludeHappyAndSad = false;
+
 
             System.out.print("Enter a request: ");
 
@@ -175,8 +196,6 @@ public class Main {
 
             // check to make sure input is a number
 
-            //userInputArrS[0].matches("\\d+")
-
             if (!userInputArrS[0].equals("")) {
 
                 // array to keep track of property search indexes used to catch mutually exclusive properties
@@ -184,6 +203,9 @@ public class Main {
 
                 // create array of incorrect inputs
                 List<String> invalidPropertySearches = new ArrayList<>();
+
+                // array of mutually exclusive properties to be used in error messages
+                List<String> mutuallyExclusiveProperties = new ArrayList<>(); // widen the scope of this
 
                 // check to make sure number(s) are natural
 
@@ -209,10 +231,11 @@ public class Main {
                     }
                     for (int i = 2; i < userInputArrLength; i++) {
                         for (int j = 0; j < availableProperties.length; j++) {
-                            // going to need to create an additional array of all properties with the "-" symbol to match with
-                            // add additional if statement here based on whether a user input matches with "-" symbol -- add these properties to a separate list/array (static?) -- this will also prevent these searches from getting caught by invalid search flag
-                            if (userInputArrS[i].equalsIgnoreCase(availableProperties[j])) {
-                                propertySearchIndices.add(j);
+                            if (userInputArrS[i].equalsIgnoreCase(availableExcludedProperties[j])) {
+                                userExcludedProperties.add(availableProperties[j]); // using available properties since they're in the same order
+                                break;
+                            } else if (userInputArrS[i].equalsIgnoreCase(availableProperties[j])) {
+                                propertySearchIndices.add(j); // this could be removed and just directly added to static user properties array
                                 break;
                             } else if (j == availableProperties.length - 1) {
                                 invalidSearchFound = true; // add invalid input to invalid searches array
@@ -229,6 +252,9 @@ public class Main {
                         }
 
                         // catch mutually exclusive properties
+
+                        // catch obvious mutually exclusive properties
+
                         if ((propertySearchIndices.contains(8) && propertySearchIndices.contains(9))) {
                             notMutuallyExclusive = false;
                             evenAndOdd = true;
@@ -241,10 +267,31 @@ public class Main {
                         } else if ((propertySearchIndices.contains(10) && propertySearchIndices.contains(11))) {
                             notMutuallyExclusive = false;
                             happyAndSad = true;
+                        } else if ((userExcludedProperties.contains("EVEN") && userExcludedProperties.contains("ODD"))) {
+                            notMutuallyExclusive = false;
+                            excludeEvenAndOdd = true;
+                        }  else if ((userExcludedProperties.contains("HAPPY") && userExcludedProperties.contains("SAD"))) {
+                            notMutuallyExclusive = false;
+                            excludeHappyAndSad = true;
                         }
                         else {
                             notMutuallyExclusive = true;
                         }
+
+                        // catch non-obvious mutually exclusive properties
+
+                        if (propertySearchIndices.size() > 0 || userExcludedProperties.size() > 0) {
+                            for (int propertySearchIndex : propertySearchIndices) {
+                                for (String userExcludedProperty : userExcludedProperties) {
+                                    if (userExcludedProperty.equalsIgnoreCase(availableProperties[propertySearchIndex])) {
+                                        mutuallyExclusiveProperties.add(availableProperties[propertySearchIndex]);
+                                        mutuallyExclusiveProperties.add(availableExcludedProperties[propertySearchIndex]);
+                                        notMutuallyExclusive = false;
+                                    }
+                                }
+                            }
+                        }
+
                         isValidInput = firstNumberValid && secondNumberValid && allSearchInputValid && notMutuallyExclusive;
                     }
                 }
@@ -283,20 +330,49 @@ public class Main {
                         } else if (happyAndSad) {
                             System.out.println("The request contains mutually exclusive properties: [HAPPY, SAD]\n" +
                                     "There are no numbers with these properties.");
+                        } else if (excludeEvenAndOdd) {
+                            System.out.println("The request contains mutually exclusive properties: [-EVEN, -ODD]\n" +
+                                    "There are no numbers with these properties.");
+                        } else if (excludeHappyAndSad) {
+                            System.out.println("The request contains mutually exclusive properties: [-HAPPY, -SAD]\n" +
+                                    "There are no numbers with these properties.");
+                        } else {
+                            System.out.print("The request contains mutually exclusive properties: [");
+                            for (int i = 0; i < mutuallyExclusiveProperties.size(); i++) {
+                                if (i != mutuallyExclusiveProperties.size()  - 1) {
+                                    System.out.print(mutuallyExclusiveProperties.get(i) + ", ");
+                                } else {
+                                    System.out.print(mutuallyExclusiveProperties.get(i));
+                                }
+                            }
+                            System.out.println("]");
+                            System.out.println("There are no numbers with these properties.");
                         }
                     }
+                    userExcludedProperties.clear(); // reset user excluded properties
                 } else {
                     // add the number/number of numbers being searched for
 
                     // variable to track propertySearchIndices size
                     int propertySearchIndicesSize = propertySearchIndices.size();
-                    for (int i = 0; i < (userInputArrLength - propertySearchIndicesSize); i++) {
+                    // variable to track excluded property list size
+                    int excludedPropertyListSize = userExcludedProperties.size();
+                    for (int i = 0; i < (userInputArrLength - propertySearchIndicesSize - excludedPropertyListSize); i++) {
                         userInputArr.add(Long.parseLong(userInputArrS[i]));
                     }
                     // add the property searches being searched for
 
                     for (int i = 0; i < propertySearchIndicesSize; i++) {
                         userInputArr.add(Long.parseLong(propertySearchIndices.get(i).toString()));
+                    }
+
+                    // add excluded properties being searched for
+                    for (int i = 0; i < availableExcludedProperties.length; i++) {
+                        for (String userExcludedProperty : userExcludedProperties) {
+                            if (userExcludedProperty.equalsIgnoreCase(availableProperties[i])) {
+                                userInputArr.add(Long.parseLong(String.valueOf(i)));
+                            }
+                        }
                     }
                 }
             }
