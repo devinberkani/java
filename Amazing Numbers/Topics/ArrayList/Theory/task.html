@@ -25,8 +25,7 @@
    <code class="language-java">ArrayList</code> via its 
    <code class="language-java">List</code> interface. We will do it in the next lessons after learning 
    <strong>inheritance</strong>. We believe that the current approach is enough for now since it requires less knowledge to start using dynamic collections.
-  </div>
-  <p></p> 
+  </div> 
   <h5 id="basic-methods" style="text-align: center;">Basic methods</h5> 
   <p>The collection has a set of convenient methods that emulate and extend the functionality of standard arrays. Let's discuss what they are. First, let's initialize some collection:</p> 
   <pre><code class="language-java">ArrayList&lt;String&gt; names = new ArrayList&lt;&gt;(); // empty collection of strings</code></pre> 
@@ -64,8 +63,7 @@ names.clear();          // []</code></pre>
   <p></p>
   <div class="alert alert-warning">
    Important: indexes of elements start with 0 just like for standard arrays
-  </div>
-  <p></p> 
+  </div> 
   <p>Try to play with this code by yourself and enjoy the power of <code class="language-java">ArrayList</code> . </p> 
   <h5 id="more-arraylist-methods" style="text-align: center;">More ArrayList methods</h5> 
   <p>We've illustrated the possibilities of basic methods for collections in Java applied to an <code class="language-java">ArrayList</code> object. But this class has some more methods of its own. First, let's create another <code class="language-java">ArrayList</code>:</p> 
@@ -80,13 +78,13 @@ numbers.add(1);</code></pre>
   <pre><code class="language-java">ArrayList&lt;Integer&gt; numbers2 = new ArrayList&lt;&gt;();    // creating another list of Integers
 numbers2.add(100);
 numbers2.addAll(numbers); // [100, 1, 2, 3, 1]</code></pre> 
-  <p>The class also has a method called <code class="language-java">contains</code> that checks whether a list contains a value or not, and two methods <code class="language-java">indexOf </code><span style="color: #222222;">and</span><code class="language-java">lastIndexOf</code> that find the index of the first and the last occurrences of an element, respectively. They return <code class="language-java">-1</code> if there is no such index.</p> 
+  <p>The class also has a method called <code class="language-java">contains</code> that checks whether a list contains a value or not, and two methods <code class="language-java">indexOf </code><span style="color: #222222;">and</span><code class="language-java">lastIndexOf</code> that find the index of the first and the last occurrences of an element, respectively. They return <code class="language-java">-1</code> if there is no such element.</p> 
   <p>Let's see:</p> 
-  <pre><code class="language-java">System.out.println(numbers.contains(2));    // true
-System.out.println(numbers.contains(4));    // false
-System.out.println(numbers.indexOf(1));     // 0
-System.out.println(numbers.lastIndexOf(1)); // 3
-System.out.println(numbers.lastIndexOf(4)); // -1</code></pre> 
+  <pre><code class="language-java">System.out.println(numbers2.contains(2));    // true
+System.out.println(numbers2.contains(4));    // false
+System.out.println(numbers2.indexOf(1));     // 1
+System.out.println(numbers2.lastIndexOf(1)); // 4
+System.out.println(numbers2.lastIndexOf(4)); // -1</code></pre> 
   <p>As you see, this class provides a rich set of methods to work with elements. You do not have to write them by yourself, as you do for standard arrays.</p> 
   <h5 id="iterating-over-arraylist" style="text-align: center;">Iterating over ArrayList</h5> 
   <p>It is possible to iterate over elements of an instance of the class. It is done in the same way as iterating over an array. In the following example, we use <em>for </em>and <em>for-each</em> loops to add the five first powers of ten in a list and then print the numbers to the standard output.</p> 

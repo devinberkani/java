@@ -80,6 +80,14 @@
       <module name="Amazing_Numbers.Topics-Processing_strings-Palindrome.main" target="11" />
       <module name="Amazing_Numbers.Topics-Processing_strings-The_percentage_of_G_and_C_characters.main" target="11" />
       <module name="Amazing_Numbers.Topics-Processing_strings-Theory.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Static_members-Accessing_static_members.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Static_members-Applying_the_static_keyword.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Static_members-Mystery_of_the_methods.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Static_members-Project_constants_and_methods.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Static_members-Statements.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Static_members-Theory.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Static_members-Time_constants.main" target="11" />
+      <module name="Amazing_Numbers.Topics-Static_members-Too_many_cats.main" target="11" />
       <module name="Amazing_Numbers.Topics-StringBuilder-Concat_all_strings_without_digits.main" target="11" />
       <module name="Amazing_Numbers.Topics-StringBuilder-Multiple_modifications.main" target="11" />
       <module name="Amazing_Numbers.Topics-StringBuilder-The_English_alphabet.main" target="11" />

@@ -927,9 +927,15 @@ files:
         }
     }
   learner_created: false
+- name: test/ListChecker 2.java
+  visible: true
+  learner_created: true
+- name: test/Request 2.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/13205#comment
 status: Solved
 feedback:
   message: Congratulations!
   time: Sun, 17 Jul 2022 19:50:26 UTC
-record: -1
+record: 8
