@@ -9,13 +9,8 @@ files:
     }
   learner_created: false
 feedback_link: https://hyperskill.org/learn/step/16171#comment
-status: Failed
+status: Solved
 feedback:
-  message: |
-    Compilation error
-    Main.java:14: error: unreported exception BadRequestException; must be caught or declared to be thrown
-                throw badRequestException;
-                ^
-    1 error
-  time: Tue, 19 Jul 2022 02:40:29 UTC
+  message: <html>Correct solution</html>
+  time: Tue, 19 Jul 2022 02:41:38 UTC
 record: -1
