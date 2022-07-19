@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Battleship.iml" filepath="$PROJECT_DIR$/.idea/modules/Battleship.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Topics/Hierarchy of exceptions/BadRequestException/Battleship.Topics-Hierarchy_of_exceptions-BadRequestException.iml" filepath="$PROJECT_DIR$/.idea/modules/Topics/Hierarchy of exceptions/BadRequestException/Battleship.Topics-Hierarchy_of_exceptions-BadRequestException.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Topics/Hierarchy of exceptions/BadRequestException/Battleship.Topics-Hierarchy_of_exceptions-BadRequestException.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Topics/Hierarchy of exceptions/BadRequestException/Battleship.Topics-Hierarchy_of_exceptions-BadRequestException.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Topics/Hierarchy of exceptions/BadRequestException/Battleship.Topics-Hierarchy_of_exceptions-BadRequestException.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Topics/Hierarchy of exceptions/BadRequestException/Battleship.Topics-Hierarchy_of_exceptions-BadRequestException.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Topics/Hierarchy of exceptions/Base class/Battleship.Topics-Hierarchy_of_exceptions-Base_class.iml" filepath="$PROJECT_DIR$/.idea/modules/Topics/Hierarchy of exceptions/Base class/Battleship.Topics-Hierarchy_of_exceptions-Base_class.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Topics/Hierarchy of exceptions/Base class/Battleship.Topics-Hierarchy_of_exceptions-Base_class.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Topics/Hierarchy of exceptions/Base class/Battleship.Topics-Hierarchy_of_exceptions-Base_class.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Topics/Hierarchy of exceptions/Base class/Battleship.Topics-Hierarchy_of_exceptions-Base_class.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Topics/Hierarchy of exceptions/Base class/Battleship.Topics-Hierarchy_of_exceptions-Base_class.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Topics/Hierarchy of exceptions/Checked exceptions/Battleship.Topics-Hierarchy_of_exceptions-Checked_exceptions.iml" filepath="$PROJECT_DIR$/.idea/modules/Topics/Hierarchy of exceptions/Checked exceptions/Battleship.Topics-Hierarchy_of_exceptions-Checked_exceptions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Topics/Hierarchy of exceptions/Checked exceptions/Battleship.Topics-Hierarchy_of_exceptions-Checked_exceptions.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Topics/Hierarchy of exceptions/Checked exceptions/Battleship.Topics-Hierarchy_of_exceptions-Checked_exceptions.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Topics/Hierarchy of exceptions/Checked exceptions/Battleship.Topics-Hierarchy_of_exceptions-Checked_exceptions.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Topics/Hierarchy of exceptions/Checked exceptions/Battleship.Topics-Hierarchy_of_exceptions-Checked_exceptions.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Topics/Hierarchy of exceptions/Theory/Battleship.Topics-Hierarchy_of_exceptions-Theory.iml" filepath="$PROJECT_DIR$/.idea/modules/Topics/Hierarchy of exceptions/Theory/Battleship.Topics-Hierarchy_of_exceptions-Theory.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Topics/Hierarchy of exceptions/Theory/Battleship.Topics-Hierarchy_of_exceptions-Theory.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Topics/Hierarchy of exceptions/Theory/Battleship.Topics-Hierarchy_of_exceptions-Theory.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Topics/Hierarchy of exceptions/Theory/Battleship.Topics-Hierarchy_of_exceptions-Theory.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Topics/Hierarchy of exceptions/Theory/Battleship.Topics-Hierarchy_of_exceptions-Theory.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/util/Battleship.util.iml" filepath="$PROJECT_DIR$/.idea/modules/util/Battleship.util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/util/Battleship.util.main.iml" filepath="$PROJECT_DIR$/.idea/modules/util/Battleship.util.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/util/Battleship.util.test.iml" filepath="$PROJECT_DIR$/.idea/modules/util/Battleship.util.test.iml" />
+    </modules>
+  </component>
+</project>
