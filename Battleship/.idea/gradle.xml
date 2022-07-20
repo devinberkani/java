@@ -13,6 +13,11 @@
             <option value="$PROJECT_DIR$/Topics/Hierarchy of exceptions/Base class" />
             <option value="$PROJECT_DIR$/Topics/Hierarchy of exceptions/Checked exceptions" />
             <option value="$PROJECT_DIR$/Topics/Hierarchy of exceptions/Theory" />
+            <option value="$PROJECT_DIR$/Topics/Throwing exceptions/Days of the week" />
+            <option value="$PROJECT_DIR$/Topics/Throwing exceptions/The root of a number" />
+            <option value="$PROJECT_DIR$/Topics/Throwing exceptions/Theory" />
+            <option value="$PROJECT_DIR$/Topics/Throwing exceptions/Throw a checked exception" />
+            <option value="$PROJECT_DIR$/Topics/Throwing exceptions/Throw an IOException" />
             <option value="$PROJECT_DIR$/util" />
           </set>
         </option>
