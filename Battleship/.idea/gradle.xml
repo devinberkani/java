@@ -9,6 +9,11 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Topics/Custom exceptions/Checked exception with constructor" />
+            <option value="$PROJECT_DIR$/Topics/Custom exceptions/Custom exceptions features" />
+            <option value="$PROJECT_DIR$/Topics/Custom exceptions/DriverNotReadyException" />
+            <option value="$PROJECT_DIR$/Topics/Custom exceptions/Square class" />
+            <option value="$PROJECT_DIR$/Topics/Custom exceptions/Theory" />
             <option value="$PROJECT_DIR$/Topics/Hierarchy of exceptions/BadRequestException" />
             <option value="$PROJECT_DIR$/Topics/Hierarchy of exceptions/Base class" />
             <option value="$PROJECT_DIR$/Topics/Hierarchy of exceptions/Checked exceptions" />
