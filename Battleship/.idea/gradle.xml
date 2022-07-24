@@ -9,6 +9,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Battleship/task" />
             <option value="$PROJECT_DIR$/Topics/Custom exceptions/Checked exception with constructor" />
             <option value="$PROJECT_DIR$/Topics/Custom exceptions/Custom exceptions features" />
             <option value="$PROJECT_DIR$/Topics/Custom exceptions/DriverNotReadyException" />

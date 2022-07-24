@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="11" />
+    <bytecodeTargetLevel target="17">
+      <module name="Battleship.Battleship-task.main" target="11" />
+      <module name="Battleship.Topics-Custom_exceptions-Checked_exception_with_constructor.main" target="11" />
+      <module name="Battleship.Topics-Custom_exceptions-Custom_exceptions_features.main" target="11" />
+      <module name="Battleship.Topics-Custom_exceptions-DriverNotReadyException.main" target="11" />
+      <module name="Battleship.Topics-Custom_exceptions-Square_class.main" target="11" />
+      <module name="Battleship.Topics-Custom_exceptions-Theory.main" target="11" />
+      <module name="Battleship.Topics-Files-Are_siblings.main" target="11" />
+      <module name="Battleship.Topics-Files-Theory.main" target="11" />
+      <module name="Battleship.Topics-Hierarchy_of_exceptions-BadRequestException.main" target="11" />
+      <module name="Battleship.Topics-Hierarchy_of_exceptions-Base_class.main" target="11" />
+      <module name="Battleship.Topics-Hierarchy_of_exceptions-Checked_exceptions.main" target="11" />
+      <module name="Battleship.Topics-Hierarchy_of_exceptions-Theory.main" target="11" />
+      <module name="Battleship.Topics-Input_streams-Count_words.main" target="11" />
+      <module name="Battleship.Topics-Input_streams-Read_into_an_array.main" target="11" />
+      <module name="Battleship.Topics-Input_streams-Theory.main" target="11" />
+      <module name="Battleship.Topics-Throwing_exceptions-Days_of_the_week.main" target="11" />
+      <module name="Battleship.Topics-Throwing_exceptions-The_root_of_a_number.main" target="11" />
+      <module name="Battleship.Topics-Throwing_exceptions-Theory.main" target="11" />
+      <module name="Battleship.Topics-Throwing_exceptions-Throw_a_checked_exception.main" target="11" />
+      <module name="Battleship.Topics-Throwing_exceptions-Throw_an_IOException.main" target="11" />
+      <module name="Battleship.util.main" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>
