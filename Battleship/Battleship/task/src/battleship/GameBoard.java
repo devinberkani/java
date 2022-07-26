@@ -106,13 +106,16 @@ public class GameBoard {
 
         int currentGamePieceIndex = 0;
         boolean allCoordinatesReceived = false;
+        boolean exceptionThrown = false;
 
         while (!allCoordinatesReceived) {
 
             Scanner scanner = new Scanner(System.in);
 
-            System.out.printf("Enter the coordinates of the %s %s:", gamePieceChoices[currentGamePieceIndex], gamePieceChoicesLengths[currentGamePieceIndex]);
-            System.out.println();
+            if (!exceptionThrown) {
+                System.out.printf("Enter the coordinates of the %s %s:", gamePieceChoices[currentGamePieceIndex], gamePieceChoicesLengths[currentGamePieceIndex]);
+                System.out.println();
+            }
 
             String[] coordinateStart = scanner.next().split("");
             String[] coordinateEnd = scanner.next().split("");
@@ -147,36 +150,70 @@ public class GameBoard {
             gamePieceCoordinates[2] = Integer.parseInt(coordinateEnd[0]);
             gamePieceCoordinates[3] = Integer.parseInt(coordinateEnd[1]) - 1;
 
-            // ********** VALIDATE GAME PIECES HERE **********
-
             String[][] updatedGameBoard;
 
             if (currentGamePieceIndex == 0) {
-                setAircraftCarrier(new GamePiece(gamePieceCoordinates));
-                updatedGameBoard = getAircraftCarrier().setGamePiece(getGameBoard(), gamePieceCoordinates);
-                currentGamePieceIndex++;
+                try {
+                    setAircraftCarrier(new GamePiece(getGameBoard(), gamePieceCoordinates, currentGamePieceIndex));
+                    updatedGameBoard = getAircraftCarrier().setGamePiece();
+                    setGameBoard(updatedGameBoard);
+                    printGameBoard();
+                    exceptionThrown = false;
+                    currentGamePieceIndex++;
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    exceptionThrown = true;
+                }
             } else if (currentGamePieceIndex == 1) {
-                setBattleship(new GamePiece(gamePieceCoordinates));
-                updatedGameBoard = getBattleship().setGamePiece(getGameBoard(), gamePieceCoordinates);
-                currentGamePieceIndex++;
+                try {
+                    setBattleship(new GamePiece(getGameBoard(), gamePieceCoordinates, currentGamePieceIndex));
+                    updatedGameBoard = getBattleship().setGamePiece();
+                    setGameBoard(updatedGameBoard);
+                    printGameBoard();
+                    exceptionThrown = false;
+                    currentGamePieceIndex++;
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    exceptionThrown = true;
+                }
             } else if (currentGamePieceIndex == 2) {
-                setSubmarine(new GamePiece(gamePieceCoordinates));
-                updatedGameBoard = getSubmarine().setGamePiece(getGameBoard(), gamePieceCoordinates);
-                currentGamePieceIndex++;
+                try {
+                    setSubmarine(new GamePiece(getGameBoard(), gamePieceCoordinates, currentGamePieceIndex));
+                    updatedGameBoard = getSubmarine().setGamePiece();
+                    setGameBoard(updatedGameBoard);
+                    printGameBoard();
+                    exceptionThrown = false;
+                    currentGamePieceIndex++;
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    exceptionThrown = true;
+                }
             } else if (currentGamePieceIndex == 3) {
-                setCruiser(new GamePiece(gamePieceCoordinates));
-                updatedGameBoard = getCruiser().setGamePiece(getGameBoard(), gamePieceCoordinates);
-                currentGamePieceIndex++;
+                try {
+                    setCruiser(new GamePiece(getGameBoard(), gamePieceCoordinates, currentGamePieceIndex));
+                    updatedGameBoard = getCruiser().setGamePiece();
+                    setGameBoard(updatedGameBoard);
+                    printGameBoard();
+                    exceptionThrown = false;
+                    currentGamePieceIndex++;
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    exceptionThrown = true;
+                }
             } else {
-                setDestroyer(new GamePiece(gamePieceCoordinates));
-                updatedGameBoard = getDestroyer().setGamePiece(getGameBoard(), gamePieceCoordinates);
-                allCoordinatesReceived = true;
-                scanner.close();
+                try {
+                    setDestroyer(new GamePiece(getGameBoard(), gamePieceCoordinates, currentGamePieceIndex));
+                    updatedGameBoard = getDestroyer().setGamePiece();
+                    setGameBoard(updatedGameBoard);
+                    printGameBoard();
+                    exceptionThrown = false;
+                    allCoordinatesReceived = true;
+                    scanner.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    exceptionThrown = true;
+                }
             }
-
-            setGameBoard(updatedGameBoard);
-
-            printGameBoard();
         }
 
     }
