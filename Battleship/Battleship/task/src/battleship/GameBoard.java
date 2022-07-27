@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class GameBoard {
+    static Scanner scanner = new Scanner(System.in);
     private final String[] rowNumbers = {" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
     private final String[] columnLetters = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
     private String[][] gameBoard = new String[10][10];
@@ -110,8 +111,6 @@ public class GameBoard {
 
         while (!allCoordinatesReceived) {
 
-            Scanner scanner = new Scanner(System.in);
-
             if (!exceptionThrown) {
                 System.out.printf("Enter the coordinates of the %s %s:", gamePieceChoices[currentGamePieceIndex], gamePieceChoicesLengths[currentGamePieceIndex]);
                 System.out.println();
@@ -208,7 +207,8 @@ public class GameBoard {
                     printGameBoard();
                     exceptionThrown = false;
                     allCoordinatesReceived = true;
-                    scanner.close();
+                    System.out.println("The game starts!");
+                    printGameBoard();
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                     exceptionThrown = true;
@@ -216,5 +216,92 @@ public class GameBoard {
             }
         }
 
+    }
+
+    // ***** TAKE SHOT *****
+    public void takeShot() {
+
+        String hit = "X";
+        String miss = "M";
+        String result = "~";
+
+        System.out.println("Take a shot!");
+
+        boolean correctShotCoordinates = false;
+
+        while (!correctShotCoordinates) {
+
+            String[] shotCoordinatesString = scanner.next().split("");
+
+            if (correctShotCoordinates(shotCoordinatesString)) {
+                correctShotCoordinates = true;
+                int[] shotCoordinatesIndices = translateShotCoordinates(shotCoordinatesString);
+
+                String shotLocation = getGameBoard()[shotCoordinatesIndices[0]][shotCoordinatesIndices[1]];
+
+                if (shotLocation.equals("~")) {
+                    result = miss;
+                } else if (shotLocation.equals("O")) {
+                    result = hit;
+                }
+
+                String[][] updatedGameboard = new String[10][10];
+
+                for(int i = 0; i < getGameBoard().length; i++) {
+                    for (int j = 0; j < getGameBoard()[i].length; j++) {
+                        if (i == shotCoordinatesIndices[0] && j == shotCoordinatesIndices[1]) {
+                            updatedGameboard[i][j] = result;
+                        } else {
+                            updatedGameboard[i][j] = getGameBoard()[i][j];
+                        }
+                    }
+                }
+
+                setGameBoard(updatedGameboard);
+                printGameBoard();
+
+                if (result.equals(miss)) {
+                    System.out.println("You missed!");
+                } else if (result.equals(hit)) {
+                    System.out.println("You hit a ship!");
+                }
+
+            } else {
+                System.out.println("Error! You entered the wrong coordinates! Try again:");
+            }
+        }
+    }
+
+    public boolean correctShotCoordinates (String[] shotCoordinates) {
+        for (String letter : columnLetters) {
+            if (shotCoordinates[0].equalsIgnoreCase(letter)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int[] translateShotCoordinates(String[] shotCoordinates) {
+
+        int[] shotCoordinatesIndices = new int[2];
+
+        // translate the coordinates into indices
+        int letterCount = 0;
+        for (String letter : columnLetters) {
+            if (shotCoordinates[0].equalsIgnoreCase(letter)) {
+                shotCoordinates[0] = String.valueOf(letterCount);
+            }
+            letterCount++;
+        }
+
+        // handle 3 digit coordinate lengths (the number 10)
+        if (shotCoordinates.length > 2) {
+            shotCoordinates[1] = "10";
+        }
+
+        shotCoordinatesIndices[0] = Integer.parseInt(shotCoordinates[0]);
+        shotCoordinatesIndices[1] = Integer.parseInt(shotCoordinates[1]) - 1;
+
+        return shotCoordinatesIndices;
     }
 }

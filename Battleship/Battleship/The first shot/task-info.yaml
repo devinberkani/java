@@ -450,6 +450,643 @@ files:
         }
     }
   learner_created: false
-feedback_link: https://hyperskill.org/projects/125/stages/664/implement#comment
-status: Unchecked
+- name: src/battleship/GameBoard.java
+  visible: true
+  text: |
+    package battleship;
+
+    import java.util.Arrays;
+    import java.util.Scanner;
+
+    public class GameBoard {
+        static Scanner scanner = new Scanner(System.in);
+        private final String[] rowNumbers = {" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+        private final String[] columnLetters = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
+        private String[][] gameBoard = new String[10][10];
+        private final String[] gamePieceChoices = {"Aircraft Carrier", "Battleship", "Submarine", "Cruiser", "Destroyer"};
+        private final String[] gamePieceChoicesLengths = {"(5 cells)", "(4 cells)", "(3 cells)", "(3 cells)", "(2 cells)"};
+        private GamePiece aircraftCarrier;
+        private GamePiece battleship;
+        private GamePiece submarine;
+        private GamePiece cruiser;
+        private GamePiece destroyer;
+
+        public GameBoard() {
+            // initialize empty game board
+            for (String[] cell : gameBoard) {
+                Arrays.fill(cell, "~");
+            }
+        }
+
+        // ***** GAME BOARD *****
+
+        public String[][] getGameBoard() {
+            return gameBoard;
+        }
+
+        public void setGameBoard(String[][] gameBoard) {
+            this.gameBoard = gameBoard;
+        }
+
+        public void printGameBoard() {
+
+            // print top row of game board
+            for (int i = 0; i < rowNumbers.length; i++) {
+                System.out.print(rowNumbers[i]);
+                if (i != rowNumbers.length - 1) {
+                    System.out.print(" ");
+                } else {
+                    System.out.println();
+                }
+            }
+
+            // print the rest of the game board
+            for (int i = 0; i < getGameBoard().length; i++) {
+                System.out.print(columnLetters[i]);
+                System.out.print(" ");
+                for (int j = 0; j < getGameBoard()[i].length; j++) {
+                    System.out.print(getGameBoard()[i][j]);
+                    if (j != getGameBoard()[i].length - 1) {
+                        System.out.print(" ");
+                    } else {
+                        System.out.println();
+                    }
+                }
+            }
+        }
+
+        // ***** GAME PIECES *****
+        public GamePiece getAircraftCarrier() {
+            return aircraftCarrier;
+        }
+
+        public void setAircraftCarrier(GamePiece aircraftCarrier) {
+            this.aircraftCarrier = aircraftCarrier;
+        }
+
+        public GamePiece getBattleship() {
+            return battleship;
+        }
+
+        public void setBattleship(GamePiece battleship) {
+            this.battleship = battleship;
+        }
+
+        public GamePiece getSubmarine() {
+            return submarine;
+        }
+
+        public void setSubmarine(GamePiece submarine) {
+            this.submarine = submarine;
+        }
+
+        public GamePiece getCruiser() {
+            return cruiser;
+        }
+
+        public void setCruiser(GamePiece cruiser) {
+            this.cruiser = cruiser;
+        }
+
+        public GamePiece getDestroyer() {
+            return destroyer;
+        }
+
+        public void setDestroyer(GamePiece destroyer) {
+            this.destroyer = destroyer;
+        }
+
+        // ***** GET COORDINATES *****
+
+        public void getCoordinates() {
+
+            int currentGamePieceIndex = 0;
+            boolean allCoordinatesReceived = false;
+            boolean exceptionThrown = false;
+
+            while (!allCoordinatesReceived) {
+
+                if (!exceptionThrown) {
+                    System.out.printf("Enter the coordinates of the %s %s:", gamePieceChoices[currentGamePieceIndex], gamePieceChoicesLengths[currentGamePieceIndex]);
+                    System.out.println();
+                }
+
+                String[] coordinateStart = scanner.next().split("");
+                String[] coordinateEnd = scanner.next().split("");
+
+                // translate the coordinates into indices
+                int letterCount = 0;
+                for (String letter : columnLetters) {
+                    if (coordinateStart[0].equalsIgnoreCase(letter)) {
+                        coordinateStart[0] = String.valueOf(letterCount);
+                    }
+                    if (coordinateEnd[0].equalsIgnoreCase(letter)) {
+                        coordinateEnd[0] = String.valueOf(letterCount);
+                    }
+                    letterCount++;
+                }
+
+                // handle 3 digit coordinate lengths (the number 10)
+
+                if (coordinateStart.length > 2) {
+                    coordinateStart[1] = "10";
+                }
+                if (coordinateEnd.length > 2) {
+                    coordinateEnd[1] = "10";
+
+                }
+
+                // change from strings to integers
+                int[] gamePieceCoordinates = new int[4];
+
+                gamePieceCoordinates[0] = Integer.parseInt(coordinateStart[0]);
+                gamePieceCoordinates[1] = Integer.parseInt(coordinateStart[1]) - 1;
+                gamePieceCoordinates[2] = Integer.parseInt(coordinateEnd[0]);
+                gamePieceCoordinates[3] = Integer.parseInt(coordinateEnd[1]) - 1;
+
+                String[][] updatedGameBoard;
+
+                if (currentGamePieceIndex == 0) {
+                    try {
+                        setAircraftCarrier(new GamePiece(getGameBoard(), gamePieceCoordinates, currentGamePieceIndex));
+                        updatedGameBoard = getAircraftCarrier().setGamePiece();
+                        setGameBoard(updatedGameBoard);
+                        printGameBoard();
+                        exceptionThrown = false;
+                        currentGamePieceIndex++;
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                        exceptionThrown = true;
+                    }
+                } else if (currentGamePieceIndex == 1) {
+                    try {
+                        setBattleship(new GamePiece(getGameBoard(), gamePieceCoordinates, currentGamePieceIndex));
+                        updatedGameBoard = getBattleship().setGamePiece();
+                        setGameBoard(updatedGameBoard);
+                        printGameBoard();
+                        exceptionThrown = false;
+                        currentGamePieceIndex++;
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                        exceptionThrown = true;
+                    }
+                } else if (currentGamePieceIndex == 2) {
+                    try {
+                        setSubmarine(new GamePiece(getGameBoard(), gamePieceCoordinates, currentGamePieceIndex));
+                        updatedGameBoard = getSubmarine().setGamePiece();
+                        setGameBoard(updatedGameBoard);
+                        printGameBoard();
+                        exceptionThrown = false;
+                        currentGamePieceIndex++;
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                        exceptionThrown = true;
+                    }
+                } else if (currentGamePieceIndex == 3) {
+                    try {
+                        setCruiser(new GamePiece(getGameBoard(), gamePieceCoordinates, currentGamePieceIndex));
+                        updatedGameBoard = getCruiser().setGamePiece();
+                        setGameBoard(updatedGameBoard);
+                        printGameBoard();
+                        exceptionThrown = false;
+                        currentGamePieceIndex++;
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                        exceptionThrown = true;
+                    }
+                } else {
+                    try {
+                        setDestroyer(new GamePiece(getGameBoard(), gamePieceCoordinates, currentGamePieceIndex));
+                        updatedGameBoard = getDestroyer().setGamePiece();
+                        setGameBoard(updatedGameBoard);
+                        printGameBoard();
+                        exceptionThrown = false;
+                        allCoordinatesReceived = true;
+                        System.out.println("The game starts!");
+                        printGameBoard();
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                        exceptionThrown = true;
+                    }
+                }
+            }
+
+        }
+
+        // ***** TAKE SHOT *****
+        public void takeShot() {
+
+            String hit = "X";
+            String miss = "M";
+            String result = "~";
+
+            System.out.println("Take a shot!");
+
+            boolean correctShotCoordinates = false;
+
+            while (!correctShotCoordinates) {
+
+                String[] shotCoordinatesString = scanner.next().split("");
+
+                if (correctShotCoordinates(shotCoordinatesString)) {
+                    correctShotCoordinates = true;
+                    int[] shotCoordinatesIndices = translateShotCoordinates(shotCoordinatesString);
+
+                    String shotLocation = getGameBoard()[shotCoordinatesIndices[0]][shotCoordinatesIndices[1]];
+
+                    if (shotLocation.equals("~")) {
+                        result = miss;
+                    } else if (shotLocation.equals("O")) {
+                        result = hit;
+                    }
+
+                    String[][] updatedGameboard = new String[10][10];
+
+                    for(int i = 0; i < getGameBoard().length; i++) {
+                        for (int j = 0; j < getGameBoard()[i].length; j++) {
+                            if (i == shotCoordinatesIndices[0] && j == shotCoordinatesIndices[1]) {
+                                updatedGameboard[i][j] = result;
+                            } else {
+                                updatedGameboard[i][j] = getGameBoard()[i][j];
+                            }
+                        }
+                    }
+
+                    setGameBoard(updatedGameboard);
+                    printGameBoard();
+
+                    if (result.equals(miss)) {
+                        System.out.println("You missed!");
+                    } else if (result.equals(hit)) {
+                        System.out.println("You hit a ship!");
+                    }
+
+                } else {
+                    System.out.println("Error! You entered the wrong coordinates! Try again:");
+                }
+            }
+        }
+
+        public boolean correctShotCoordinates (String[] shotCoordinates) {
+            for (String letter : columnLetters) {
+                if (shotCoordinates[0].equalsIgnoreCase(letter)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public int[] translateShotCoordinates(String[] shotCoordinates) {
+
+            int[] shotCoordinatesIndices = new int[2];
+
+            // translate the coordinates into indices
+            int letterCount = 0;
+            for (String letter : columnLetters) {
+                if (shotCoordinates[0].equalsIgnoreCase(letter)) {
+                    shotCoordinates[0] = String.valueOf(letterCount);
+                }
+                letterCount++;
+            }
+
+            // handle 3 digit coordinate lengths (the number 10)
+            if (shotCoordinates.length > 2) {
+                shotCoordinates[1] = "10";
+            }
+
+            shotCoordinatesIndices[0] = Integer.parseInt(shotCoordinates[0]);
+            shotCoordinatesIndices[1] = Integer.parseInt(shotCoordinates[1]) - 1;
+
+            return shotCoordinatesIndices;
+        }
+    }
+  learner_created: true
+- name: src/battleship/GamePiece.java
+  visible: true
+  text: |
+    package battleship;
+
+    public class GamePiece {
+
+        private final String[] gamePieceChoices = {"Aircraft Carrier", "Battleship", "Submarine", "Cruiser", "Destroyer"};
+        private final int[] gamePieceLengths = {5, 4, 3, 3, 2};
+        private String[][] gameBoard;
+        private int[] gamePieceCoordinates;
+
+        public GamePiece(String[][] gameBoard, int[] gamePieceCoordinates, int gamePieceIndex) throws Exception {
+            int x1 = gamePieceCoordinates[0];
+            int x2 = gamePieceCoordinates[1];
+            int y1 = gamePieceCoordinates[2];
+            int y2 = gamePieceCoordinates[3];
+
+            // catch wrong game piece location
+            if (x1 != y1 && x2 != y2) {
+                throw new Exception("Error! Wrong ship location! Try again:");
+            // catch wrong length of game piece
+            } else if ((Math.abs(x1 - y1) + 1) != gamePieceLengths[gamePieceIndex] && (Math.abs(x2 - y2) + 1) != gamePieceLengths[gamePieceIndex]) {
+                throw new Exception("Error! Wrong length of the " + gamePieceChoices[gamePieceIndex] + "! Try again:"); // need to fix this
+            // catch game piece being too close to another
+            } else if (isTooClose(gameBoard, gamePieceCoordinates, gamePieceIndex)) {
+                throw new Exception("Error! You placed it too close to another one. Try again:");
+            } else {
+                this.gameBoard = gameBoard;
+                this.gamePieceCoordinates = gamePieceCoordinates;
+            }
+        }
+
+        private boolean isTooClose(String[][] gameBoard, int[] gamePieceCoordinates, int gamePieceIndex) {
+            // catch game piece being too close to another - length is good and is entered correctly
+
+            int x1 = gamePieceCoordinates[0];
+            int x2 = gamePieceCoordinates[1];
+            int y1 = gamePieceCoordinates[2];
+            int y2 = gamePieceCoordinates[3];
+
+            int[][] coordinateList = new int[gamePieceLengths[gamePieceIndex]][2];
+
+            int indexCount = 0;
+            int secondIndexCount = 0;
+            for (int i = 0; i < gameBoard.length; i++) {
+                for (int j = 0; j < gameBoard[i].length; j++) {
+                    if (x1 == y1 && i == x1) { // x is equal
+                        if (x2 < y2) { // if y2 is greater...
+                            if (j >= x2 && j <= y2) { // j must be less than y2
+                                coordinateList[indexCount][secondIndexCount] = i;
+                                secondIndexCount++;
+                                coordinateList[indexCount][secondIndexCount] = j;
+                                indexCount++;
+                                secondIndexCount--;
+                            }
+                        } else {
+                            if (j <= x2 && j >= y2) {
+                                coordinateList[indexCount][secondIndexCount] = i;
+                                secondIndexCount++;
+                                coordinateList[indexCount][secondIndexCount] = j;
+                                indexCount++;
+                                secondIndexCount--;
+                            }
+                        }
+                    } else if (x2 == y2 && j == x2) { // y is equal
+                        if (x1 > y1) { // if x is greater...
+                            if (i <= x1 && i >= y1) { // i must be less than x1
+                                coordinateList[indexCount][secondIndexCount] = i;
+                                secondIndexCount++;
+                                coordinateList[indexCount][secondIndexCount] = j;
+                                indexCount++;
+                                secondIndexCount--;
+                            }
+                        } else {
+                            if (i >= x1 && i <= y1) {
+                                coordinateList[indexCount][secondIndexCount] = i;
+                                secondIndexCount++;
+                                coordinateList[indexCount][secondIndexCount] = j;
+                                indexCount++;
+                                secondIndexCount--;
+                            }
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < coordinateList.length; i++) {
+                int currentX = coordinateList[i][0];
+                int currentY = coordinateList[i][1];
+                // already contains a game piece
+                if (gameBoard[currentX][currentY].equals("O")) {
+                    return true;
+                    // check above
+                }
+                if ((currentX - 1) >= 0) {
+                    if (gameBoard[currentX - 1][currentY].equals("O")) {
+                        return true;
+                    }
+                    // check below
+                }
+                if ((currentX + 1) < gameBoard.length) {
+                    if (gameBoard[currentX + 1][currentY].equals("O")) {
+                        return true;
+                    }
+                    // check left
+                }
+                if ((currentY - 1) >= 0) {
+                    if (gameBoard[currentX][currentY - 1].equals("O")) {
+                        return true;
+                    }
+                }
+                if ((currentY + 1) < gameBoard[0].length) {
+                    if (gameBoard[currentX][currentY + 1].equals("O")) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public String[][] getGameBoard() {
+            return gameBoard;
+        }
+
+        public void setGameBoard(String[][] gameBoard) {
+            this.gameBoard = gameBoard;
+        }
+
+        public int[] getGamePieceCoordinates() {
+            return gamePieceCoordinates;
+        }
+
+        public void setGamePieceCoordinates(int[] gamePieceCoordinates) {
+            this.gamePieceCoordinates = gamePieceCoordinates;
+        }
+
+        public String[][] setGamePiece() {
+
+            int x1 = getGamePieceCoordinates()[0];
+            int x2 = getGamePieceCoordinates()[1];
+            int y1 = getGamePieceCoordinates()[2];
+            int y2 = getGamePieceCoordinates()[3];
+
+            for (int i = 0; i < this.getGameBoard().length; i++) {
+                for (int j = 0; j < getGameBoard()[i].length; j++) {
+                    if (x1 == y1 && i == x1) { // x is equal
+                        if (x2 < y2) { // if y2 is greater...
+                            if (j >= x2 && j <= y2) { // j must be less than y2
+                                getGameBoard()[i][j] = "O";
+                            }
+                        } else {
+                            if (j <= x2 && j >= y2) {
+                                getGameBoard()[i][j] = "O";
+                            }
+                        }
+                    } else if (x2 == y2 && j == x2) { // y is equal
+                        if (x1 > y1) { // if x is greater...
+                            if (i <= x1 && i >= y1) { // i must be less than x1
+                                getGameBoard()[i][j] = "O";
+                            }
+                        } else {
+                            if (i >= x1 && i <= y1) {
+                                getGameBoard()[i][j] = "O";
+                            }
+                        }
+                    }
+                }
+            }
+            return getGameBoard();
+        }
+    }
+  learner_created: true
+- name: src/battleship/BattleshipGame.java
+  visible: true
+  text: |
+    package battleship;
+
+    public class BattleshipGame {
+
+        public BattleshipGame() {
+            Player playerOne = new Player();
+        }
+
+        // switchPlayer() method to
+
+    }
+  learner_created: true
+- name: src/battleship/Player.java
+  visible: true
+  text: |
+    package battleship;
+
+    public class Player {
+
+        public Player () {
+            GameBoard gameBoard = new GameBoard();
+            gameBoard.printGameBoard();
+            gameBoard.getCoordinates();
+            gameBoard.takeShot();
+        }
+
+    }
+  learner_created: true
+feedback_link: https://hyperskill.org/learn/step/10595#comment
+status: Failed
+feedback:
+  message: |-
+    Wrong answer in test #2
+
+    Your program should not print a game field if there is an input mistake.
+
+    Please find below the output of your program during this failed test.
+    Note that the &#39;&gt;&#39; character indicates the beginning of the input line.
+
+    ---
+
+    1 2 3 4 5 6 7 8 9 10
+    A ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    B ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    C ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    D ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    E ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    F ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    H ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    J ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    Enter the coordinates of the Aircraft Carrier (5 cells):
+    &gt; J3 J7
+      1 2 3 4 5 6 7 8 9 10
+    A ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    B ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    C ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    D ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    E ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    F ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    H ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    J ~ ~ O O O O O ~ ~ ~
+    Enter the coordinates of the Battleship (4 cells):
+    &gt; C8 B8
+    Error! Wrong length of the Battleship! Try again:
+    &gt; C8 F8
+      1 2 3 4 5 6 7 8 9 10
+    A ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    B ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    C ~ ~ ~ ~ ~ ~ ~ O ~ ~
+    D ~ ~ ~ ~ ~ ~ ~ O ~ ~
+    E ~ ~ ~ ~ ~ ~ ~ O ~ ~
+    F ~ ~ ~ ~ ~ ~ ~ O ~ ~
+    G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    H ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    J ~ ~ O O O O O ~ ~ ~
+    Enter the coordinates of the Submarine (3 cells):
+    &gt; A1 C2
+    Error! Wrong ship location! Try again:
+    &gt; A1 C1
+      1 2 3 4 5 6 7 8 9 10
+    A O ~ ~ ~ ~ ~ ~ ~ ~ ~
+    B O ~ ~ ~ ~ ~ ~ ~ ~ ~
+    C O ~ ~ ~ ~ ~ ~ O ~ ~
+    D ~ ~ ~ ~ ~ ~ ~ O ~ ~
+    E ~ ~ ~ ~ ~ ~ ~ O ~ ~
+    F ~ ~ ~ ~ ~ ~ ~ O ~ ~
+    G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    H ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    J ~ ~ O O O O O ~ ~ ~
+    Enter the coordinates of the Cruiser (3 cells):
+    &gt; H1 H3
+      1 2 3 4 5 6 7 8 9 10
+    A O ~ ~ ~ ~ ~ ~ ~ ~ ~
+    B O ~ ~ ~ ~ ~ ~ ~ ~ ~
+    C O ~ ~ ~ ~ ~ ~ O ~ ~
+    D ~ ~ ~ ~ ~ ~ ~ O ~ ~
+    E ~ ~ ~ ~ ~ ~ ~ O ~ ~
+    F ~ ~ ~ ~ ~ ~ ~ O ~ ~
+    G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    H O O O ~ ~ ~ ~ ~ ~ ~
+    I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    J ~ ~ O O O O O ~ ~ ~
+    Enter the coordinates of the Destroyer (2 cells):
+    &gt; G2 E2
+    Error! Wrong length of the Destroyer! Try again:
+    &gt; B5 C5
+      1 2 3 4 5 6 7 8 9 10
+    A O ~ ~ ~ ~ ~ ~ ~ ~ ~
+    B O ~ ~ ~ O ~ ~ ~ ~ ~
+    C O ~ ~ ~ O ~ ~ O ~ ~
+    D ~ ~ ~ ~ ~ ~ ~ O ~ ~
+    E ~ ~ ~ ~ ~ ~ ~ O ~ ~
+    F ~ ~ ~ ~ ~ ~ ~ O ~ ~
+    G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    H O O O ~ ~ ~ ~ ~ ~ ~
+    I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    J ~ ~ O O O O O ~ ~ ~
+    The game starts!
+      1 2 3 4 5 6 7 8 9 10
+    A O ~ ~ ~ ~ ~ ~ ~ ~ ~
+    B O ~ ~ ~ O ~ ~ ~ ~ ~
+    C O ~ ~ ~ O ~ ~ O ~ ~
+    D ~ ~ ~ ~ ~ ~ ~ O ~ ~
+    E ~ ~ ~ ~ ~ ~ ~ O ~ ~
+    F ~ ~ ~ ~ ~ ~ ~ O ~ ~
+    G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    H O O O ~ ~ ~ ~ ~ ~ ~
+    I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    J ~ ~ O O O O O ~ ~ ~
+    Take a shot!
+    &gt; M1
+    Error! You entered the wrong coordinates! Try again:
+    &gt; A11
+      1 2 3 4 5 6 7 8 9 10
+    A O ~ ~ ~ ~ ~ ~ ~ ~ M
+    B O ~ ~ ~ O ~ ~ ~ ~ ~
+    C O ~ ~ ~ O ~ ~ O ~ ~
+    D ~ ~ ~ ~ ~ ~ ~ O ~ ~
+    E ~ ~ ~ ~ ~ ~ ~ O ~ ~
+    F ~ ~ ~ ~ ~ ~ ~ O ~ ~
+    G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    H O O O ~ ~ ~ ~ ~ ~ ~
+    I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    J ~ ~ O O O O O ~ ~ ~
+    You missed!
+  time: Wed, 27 Jul 2022 12:44:02 UTC
 record: -1

@@ -291,9 +291,12 @@ files:
 - name: src/battleship/BattleshipGame.java
   visible: true
   learner_created: true
-feedback_link: https://hyperskill.org/projects/125/stages/663/implement#comment
+- name: src/battleship/Player.java
+  visible: true
+  learner_created: true
+feedback_link: https://hyperskill.org/learn/step/10594#comment
 status: Solved
 feedback:
   message: Congratulations!
   time: Tue, 26 Jul 2022 01:00:35 UTC
-record: -1
+record: 1
