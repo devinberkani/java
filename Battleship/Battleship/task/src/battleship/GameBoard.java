@@ -234,6 +234,7 @@ public class GameBoard {
             String[] shotCoordinatesString = scanner.next().split("");
 
             if (correctShotCoordinates(shotCoordinatesString)) {
+
                 correctShotCoordinates = true;
 
                 int[] shotCoordinatesIndices = translateShotCoordinates(shotCoordinatesString);
@@ -275,29 +276,40 @@ public class GameBoard {
 
     public boolean correctShotCoordinates (String[] shotCoordinates) {
 
+//        System.out.println("length of these coordinates is " + shotCoordinates.length);
+
         // if length of given coordinates is greater than 3
         if (shotCoordinates.length < 2 || shotCoordinates.length > 3) {
+//            System.out.println("length ok");
             return false;
         }
 
         // if first index isn't a letter
+        boolean letterFound = false;
         for (String letter : columnLetters) {
             if (shotCoordinates[0].equalsIgnoreCase(letter)) {
+//                System.out.println("letter ok");
+                letterFound = true;
                 break;
-            } else {
-                return false;
             }
+        }
+
+        if (!letterFound) {
+            return false;
         }
 
         // if second index is less than 1 or greater than 10
         String numberCoordinateString;
         if (shotCoordinates.length == 2) {
             numberCoordinateString = shotCoordinates[1];
+//            System.out.println("string number assigned");
         } else {
             numberCoordinateString = shotCoordinates[1] + shotCoordinates[2];
         }
 
         int numberCoordinate = Integer.parseInt(numberCoordinateString);
+
+//        System.out.println("number coordinate is " + numberCoordinate);
 
         if (numberCoordinate < 1 || numberCoordinate > 10) {
             return false;
