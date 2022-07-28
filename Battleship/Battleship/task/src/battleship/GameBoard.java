@@ -235,6 +235,7 @@ public class GameBoard {
 
             if (correctShotCoordinates(shotCoordinatesString)) {
                 correctShotCoordinates = true;
+
                 int[] shotCoordinatesIndices = translateShotCoordinates(shotCoordinatesString);
 
                 String shotLocation = getGameBoard()[shotCoordinatesIndices[0]][shotCoordinatesIndices[1]];
@@ -273,12 +274,36 @@ public class GameBoard {
     }
 
     public boolean correctShotCoordinates (String[] shotCoordinates) {
+
+        // if length of given coordinates is greater than 3
+        if (shotCoordinates.length < 2 || shotCoordinates.length > 3) {
+            return false;
+        }
+
+        // if first index isn't a letter
         for (String letter : columnLetters) {
             if (shotCoordinates[0].equalsIgnoreCase(letter)) {
-                return true;
+                break;
+            } else {
+                return false;
             }
         }
-        return false;
+
+        // if second index is less than 1 or greater than 10
+        String numberCoordinateString;
+        if (shotCoordinates.length == 2) {
+            numberCoordinateString = shotCoordinates[1];
+        } else {
+            numberCoordinateString = shotCoordinates[1] + shotCoordinates[2];
+        }
+
+        int numberCoordinate = Integer.parseInt(numberCoordinateString);
+
+        if (numberCoordinate < 1 || numberCoordinate > 10) {
+            return false;
+        }
+
+        return true;
     }
 
     public int[] translateShotCoordinates(String[] shotCoordinates) {
@@ -294,9 +319,11 @@ public class GameBoard {
             letterCount++;
         }
 
-        // handle 3 digit coordinate lengths (the number 10)
+        // handle 3 digit coordinate lengths
+
         if (shotCoordinates.length > 2) {
-            shotCoordinates[1] = "10";
+            String number = shotCoordinates[1] + shotCoordinates[2];
+            shotCoordinates[1] = number;
         }
 
         shotCoordinatesIndices[0] = Integer.parseInt(shotCoordinates[0]);

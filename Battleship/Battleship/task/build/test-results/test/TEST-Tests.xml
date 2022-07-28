@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Tests" tests="1" skipped="0" failures="1" errors="0" timestamp="2022-07-27T12:44:01" hostname="Devins-MacBook-Air.local" time="0.11">
+<testsuite name="Tests" tests="1" skipped="0" failures="1" errors="0" timestamp="2022-07-28T11:21:31" hostname="Devins-MacBook-Air.local" time="0.11">
   <properties/>
   <testcase name="start" classname="Tests" time="0.11">
-    <failure message="java.lang.AssertionError: Wrong answer in test #2&#10;&#10;Your program should not print a game field if there is an input mistake.&#10;&#10;Please find below the output of your program during this failed test.&#10;Note that the '&gt;' character indicates the beginning of the input line.&#10;&#10;---&#10;&#10;1 2 3 4 5 6 7 8 9 10&#10;A ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;B ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;C ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;D ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;E ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;F ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;H ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;J ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;Enter the coordinates of the Aircraft Carrier (5 cells):&#10;&gt; J3 J7&#10;  1 2 3 4 5 6 7 8 9 10&#10;A ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;B ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;C ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;D ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;E ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;F ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;H ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;J ~ ~ O O O O O ~ ~ ~&#10;Enter the coordinates of the Battleship (4 cells):&#10;&gt; C8 B8&#10;Error! Wrong length of the Battleship! Try again:&#10;&gt; C8 F8&#10;  1 2 3 4 5 6 7 8 9 10&#10;A ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;B ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;C ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;D ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;E ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;F ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;H ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;J ~ ~ O O O O O ~ ~ ~&#10;Enter the coordinates of the Submarine (3 cells):&#10;&gt; A1 C2&#10;Error! Wrong ship location! Try again:&#10;&gt; A1 C1&#10;  1 2 3 4 5 6 7 8 9 10&#10;A O ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;B O ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;C O ~ ~ ~ ~ ~ ~ O ~ ~&#10;D ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;E ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;F ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;H ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;J ~ ~ O O O O O ~ ~ ~&#10;Enter the coordinates of the Cruiser (3 cells):&#10;&gt; H1 H3&#10;  1 2 3 4 5 6 7 8 9 10&#10;A O ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;B O ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;C O ~ ~ ~ ~ ~ ~ O ~ ~&#10;D ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;E ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;F ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;H O O O ~ ~ ~ ~ ~ ~ ~&#10;I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;J ~ ~ O O O O O ~ ~ ~&#10;Enter the coordinates of the Destroyer (2 cells):&#10;&gt; G2 E2&#10;Error! Wrong length of the Destroyer! Try again:&#10;&gt; B5 C5&#10;  1 2 3 4 5 6 7 8 9 10&#10;A O ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;B O ~ ~ ~ O ~ ~ ~ ~ ~&#10;C O ~ ~ ~ O ~ ~ O ~ ~&#10;D ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;E ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;F ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;H O O O ~ ~ ~ ~ ~ ~ ~&#10;I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;J ~ ~ O O O O O ~ ~ ~&#10;The game starts!&#10;  1 2 3 4 5 6 7 8 9 10&#10;A O ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;B O ~ ~ ~ O ~ ~ ~ ~ ~&#10;C O ~ ~ ~ O ~ ~ O ~ ~&#10;D ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;E ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;F ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;H O O O ~ ~ ~ ~ ~ ~ ~&#10;I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;J ~ ~ O O O O O ~ ~ ~&#10;Take a shot!&#10;&gt; M1&#10;Error! You entered the wrong coordinates! Try again:&#10;&gt; A11&#10;  1 2 3 4 5 6 7 8 9 10&#10;A O ~ ~ ~ ~ ~ ~ ~ ~ M&#10;B O ~ ~ ~ O ~ ~ ~ ~ ~&#10;C O ~ ~ ~ O ~ ~ O ~ ~&#10;D ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;E ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;F ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;H O O O ~ ~ ~ ~ ~ ~ ~&#10;I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;J ~ ~ O O O O O ~ ~ ~&#10;You missed!" type="java.lang.AssertionError">java.lang.AssertionError: Wrong answer in test #2
+    <failure message="java.lang.AssertionError: Wrong answer in test #2&#10;&#10;Can't parse the game field&#10;Make sure you print it like in examples!&#10;&#10;Please find below the output of your program during this failed test.&#10;Note that the '&gt;' character indicates the beginning of the input line.&#10;&#10;---&#10;&#10;1 2 3 4 5 6 7 8 9 10&#10;A ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;B ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;C ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;D ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;E ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;F ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;H ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;J ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;Enter the coordinates of the Aircraft Carrier (5 cells):&#10;&gt; J3 J7&#10;  1 2 3 4 5 6 7 8 9 10&#10;A ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;B ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;C ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;D ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;E ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;F ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;H ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;J ~ ~ O O O O O ~ ~ ~&#10;Enter the coordinates of the Battleship (4 cells):&#10;&gt; C8 B8&#10;Error! Wrong length of the Battleship! Try again:&#10;&gt; C8 F8&#10;  1 2 3 4 5 6 7 8 9 10&#10;A ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;B ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;C ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;D ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;E ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;F ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;H ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;J ~ ~ O O O O O ~ ~ ~&#10;Enter the coordinates of the Submarine (3 cells):&#10;&gt; A1 C2&#10;Error! Wrong ship location! Try again:&#10;&gt; A1 C1&#10;  1 2 3 4 5 6 7 8 9 10&#10;A O ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;B O ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;C O ~ ~ ~ ~ ~ ~ O ~ ~&#10;D ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;E ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;F ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;H ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;J ~ ~ O O O O O ~ ~ ~&#10;Enter the coordinates of the Cruiser (3 cells):&#10;&gt; H1 H3&#10;  1 2 3 4 5 6 7 8 9 10&#10;A O ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;B O ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;C O ~ ~ ~ ~ ~ ~ O ~ ~&#10;D ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;E ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;F ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;H O O O ~ ~ ~ ~ ~ ~ ~&#10;I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;J ~ ~ O O O O O ~ ~ ~&#10;Enter the coordinates of the Destroyer (2 cells):&#10;&gt; G2 E2&#10;Error! Wrong length of the Destroyer! Try again:&#10;&gt; B5 C5&#10;  1 2 3 4 5 6 7 8 9 10&#10;A O ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;B O ~ ~ ~ O ~ ~ ~ ~ ~&#10;C O ~ ~ ~ O ~ ~ O ~ ~&#10;D ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;E ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;F ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;H O O O ~ ~ ~ ~ ~ ~ ~&#10;I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;J ~ ~ O O O O O ~ ~ ~&#10;The game starts!&#10;  1 2 3 4 5 6 7 8 9 10&#10;A O ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;B O ~ ~ ~ O ~ ~ ~ ~ ~&#10;C O ~ ~ ~ O ~ ~ O ~ ~&#10;D ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;E ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;F ~ ~ ~ ~ ~ ~ ~ O ~ ~&#10;G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;H O O O ~ ~ ~ ~ ~ ~ ~&#10;I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~&#10;J ~ ~ O O O O O ~ ~ ~&#10;Take a shot!&#10;&gt; M1&#10;Error! You entered the wrong coordinates! Try again:&#10;&gt; A11&#10;Error! You entered the wrong coordinates! Try again:&#10;&gt; E4&#10;Error! You entered the wrong coordinates! Try again:" type="java.lang.AssertionError">java.lang.AssertionError: Wrong answer in test #2
 
-Your program should not print a game field if there is an input mistake.
+Can't parse the game field
+Make sure you print it like in examples!
 
 Please find below the output of your program during this failed test.
 Note that the '&gt;' character indicates the beginning of the input line.
@@ -109,18 +110,9 @@ Take a shot!
 &gt; M1
 Error! You entered the wrong coordinates! Try again:
 &gt; A11
-  1 2 3 4 5 6 7 8 9 10
-A O ~ ~ ~ ~ ~ ~ ~ ~ M
-B O ~ ~ ~ O ~ ~ ~ ~ ~
-C O ~ ~ ~ O ~ ~ O ~ ~
-D ~ ~ ~ ~ ~ ~ ~ O ~ ~
-E ~ ~ ~ ~ ~ ~ ~ O ~ ~
-F ~ ~ ~ ~ ~ ~ ~ O ~ ~
-G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
-H O O O ~ ~ ~ ~ ~ ~ ~
-I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
-J ~ ~ O O O O O ~ ~ ~
-You missed!
+Error! You entered the wrong coordinates! Try again:
+&gt; E4
+Error! You entered the wrong coordinates! Try again:
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.hyperskill.hstest.stage.StageTest.start(StageTest.java:155)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -375,18 +367,9 @@ Take a shot!
 > M1
 Error! You entered the wrong coordinates! Try again:
 > A11
-  1 2 3 4 5 6 7 8 9 10
-A O ~ ~ ~ ~ ~ ~ ~ ~ M
-B O ~ ~ ~ O ~ ~ ~ ~ ~
-C O ~ ~ ~ O ~ ~ O ~ ~
-D ~ ~ ~ ~ ~ ~ ~ O ~ ~
-E ~ ~ ~ ~ ~ ~ ~ O ~ ~
-F ~ ~ ~ ~ ~ ~ ~ O ~ ~
-G ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
-H O O O ~ ~ ~ ~ ~ ~ ~
-I ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
-J ~ ~ O O O O O ~ ~ ~
-You missed!
+Error! You entered the wrong coordinates! Try again:
+> E4
+Error! You entered the wrong coordinates! Try again:
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
