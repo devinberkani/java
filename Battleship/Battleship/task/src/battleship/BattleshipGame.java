@@ -6,6 +6,6 @@ public class BattleshipGame {
         Player playerOne = new Player();
     }
 
-    // switchPlayer() method to
+    // switchPlayer() method
 
 }

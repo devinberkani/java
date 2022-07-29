@@ -1,9 +1,12 @@
 package battleship;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class GameBoard {
+
+    static int currentGamePieceIndex = 0;
     static Scanner scanner = new Scanner(System.in);
     private final String[] rowNumbers = {" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
     private final String[] columnLetters = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
@@ -35,6 +38,37 @@ public class GameBoard {
 
     public void printGameBoard() {
 
+
+        // print top row of game board
+        for (int i = 0; i < rowNumbers.length; i++) {
+            System.out.print(rowNumbers[i]);
+            if (i != rowNumbers.length - 1) {
+                System.out.print(" ");
+            } else {
+                System.out.println();
+            }
+        }
+
+        // list to hold all coordinates for each ship
+        ArrayList<int[]> coordinatesHolder = new ArrayList<>();
+
+        // print the rest of the game board
+        for (int i = 0; i < getGameBoard().length; i++) {
+            System.out.print(columnLetters[i]);
+            System.out.print(" ");
+            for (int j = 0; j < getGameBoard()[i].length; j++) {
+                System.out.print(getGameBoard()[i][j]);
+                if (j != getGameBoard()[i].length - 1) {
+                    System.out.print(" ");
+                } else {
+                    System.out.println();
+                }
+            }
+        }
+    }
+
+    public void printFogGameBoard() {
+
         // print top row of game board
         for (int i = 0; i < rowNumbers.length; i++) {
             System.out.print(rowNumbers[i]);
@@ -50,7 +84,11 @@ public class GameBoard {
             System.out.print(columnLetters[i]);
             System.out.print(" ");
             for (int j = 0; j < getGameBoard()[i].length; j++) {
-                System.out.print(getGameBoard()[i][j]);
+                if (getGameBoard()[i][j].equalsIgnoreCase("X") || getGameBoard()[i][j].equalsIgnoreCase("M")) {
+                    System.out.print(getGameBoard()[i][j]);
+                } else {
+                    System.out.print("~");
+                }
                 if (j != getGameBoard()[i].length - 1) {
                     System.out.print(" ");
                 } else {
@@ -58,6 +96,7 @@ public class GameBoard {
                 }
             }
         }
+
     }
 
     // ***** GAME PIECES *****
@@ -105,7 +144,6 @@ public class GameBoard {
 
     public void getCoordinates() {
 
-        int currentGamePieceIndex = 0;
         boolean allCoordinatesReceived = false;
         boolean exceptionThrown = false;
 
@@ -157,6 +195,10 @@ public class GameBoard {
                     updatedGameBoard = getAircraftCarrier().setGamePiece();
                     setGameBoard(updatedGameBoard);
                     printGameBoard();
+                    // add game piece index to printGameboard in order to track ships (printGameboard is only used for setting pieces anyways)
+                    // make an array of coordinates if printGameBoard()[i][j] is "0" - one array for each ship
+                    // update these arrays in separate method that is called each time takeShot() is called along with a check for each array -- if all coordinates in the array equal "X" then you can print the ship sank
+                    // use booleans to track each ship that is sank, and when they are all sunk you can print the winning message
                     exceptionThrown = false;
                     currentGamePieceIndex++;
                 } catch (Exception e) {
@@ -204,11 +246,12 @@ public class GameBoard {
                     setDestroyer(new GamePiece(getGameBoard(), gamePieceCoordinates, currentGamePieceIndex));
                     updatedGameBoard = getDestroyer().setGamePiece();
                     setGameBoard(updatedGameBoard);
+                    currentGamePieceIndex++;
                     printGameBoard();
                     exceptionThrown = false;
                     allCoordinatesReceived = true;
                     System.out.println("The game starts!");
-                    printGameBoard();
+                    printFogGameBoard();
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                     exceptionThrown = true;
@@ -227,9 +270,11 @@ public class GameBoard {
 
         System.out.println("Take a shot!");
 
-        boolean correctShotCoordinates = false;
 
-        while (!correctShotCoordinates) {
+        boolean correctShotCoordinates = false;
+        boolean gameComplete = false;
+
+        while (!correctShotCoordinates && !gameComplete) {
 
             String[] shotCoordinatesString = scanner.next().split("");
 
@@ -260,12 +305,12 @@ public class GameBoard {
                 }
 
                 setGameBoard(updatedGameboard);
-                printGameBoard();
+                printFogGameBoard();
 
                 if (result.equals(miss)) {
-                    System.out.println("You missed!");
+                    System.out.println("You missed. Try again:");
                 } else if (result.equals(hit)) {
-                    System.out.println("You hit a ship!");
+                    System.out.println("You hit a ship! Try again:");
                 }
 
             } else {
@@ -343,4 +388,5 @@ public class GameBoard {
 
         return shotCoordinatesIndices;
     }
+
 }
