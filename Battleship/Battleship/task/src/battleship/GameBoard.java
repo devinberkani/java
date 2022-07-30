@@ -1,5 +1,6 @@
 package battleship;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -7,6 +8,8 @@ import java.util.Scanner;
 
 public class GameBoard {
 
+    private boolean gameWon = false;
+    private int shipCount = 5;
     static int currentGamePieceIndex = 0;
     static Scanner scanner = new Scanner(System.in);
     private final String[] rowNumbers = {" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
@@ -33,6 +36,22 @@ public class GameBoard {
         for (String[] cell : gameBoard) {
             Arrays.fill(cell, "~");
         }
+    }
+
+    public boolean isGameWon() {
+        return gameWon;
+    }
+
+    public void setGameWon(boolean gameWon) {
+        this.gameWon = gameWon;
+    }
+
+    public int getShipCount() {
+        return shipCount;
+    }
+
+    public void setShipCount(int shipCount) {
+        this.shipCount = shipCount;
     }
 
     // ***** GAME BOARD *****
@@ -270,12 +289,11 @@ public class GameBoard {
                     updatedGameBoard = getDestroyer().setGamePiece();
                     setGameBoard(updatedGameBoard);
                     compareGameBoards(previousGameBoard);
-                    currentGamePieceIndex++;
+                    currentGamePieceIndex = 0;
                     printGameBoard();
                     exceptionThrown = false;
                     allCoordinatesReceived = true;
-                    System.out.println("The game starts!");
-                    printFogGameBoard();
+                    promptEnterKey();
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                     exceptionThrown = true;
@@ -283,6 +301,15 @@ public class GameBoard {
             }
         }
 
+    }
+
+    public static void promptEnterKey() {
+        System.out.println("Press Enter and pass the move to another player");
+        try {
+            System.in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public String[][] cloneCurrentGameBoard() {
@@ -345,55 +372,56 @@ public class GameBoard {
         String miss = "M";
         String result = "~";
 
-        System.out.println("Take a shot!");
+        boolean correctShotCoordinates = false;
 
-        int shipCount = 5;
-        boolean gameComplete = false;
-
-        while (!gameComplete) {
+        while (!correctShotCoordinates) {
 
             String[] shotCoordinatesString = scanner.next().split("");
 
             if (correctShotCoordinates(shotCoordinatesString)) {
 
+                correctShotCoordinates = true;
+
                 int[] shotCoordinatesIndices = translateShotCoordinates(shotCoordinatesString);
 
                 String shotLocation = getGameBoard()[shotCoordinatesIndices[0]][shotCoordinatesIndices[1]];
 
-                if (shotLocation.equals("~")) {
+                if (shotLocation.equals("~") || shotLocation.equals("M")) {
                     result = miss;
-                } else if (shotLocation.equals("O")) {
+                } else if (shotLocation.equals("O") || shotLocation.equals("X")) {
                     result = hit;
                 }
 
-                String[][] updatedGameboard = new String[10][10];
+                String[][] updatedGameBoard = new String[10][10];
 
                 for(int i = 0; i < getGameBoard().length; i++) {
                     for (int j = 0; j < getGameBoard()[i].length; j++) {
                         if (i == shotCoordinatesIndices[0] && j == shotCoordinatesIndices[1]) {
-                            updatedGameboard[i][j] = result;
+                            updatedGameBoard[i][j] = result;
                         } else {
-                            updatedGameboard[i][j] = getGameBoard()[i][j];
+                            updatedGameBoard[i][j] = getGameBoard()[i][j];
                         }
                     }
                 }
 
-                setGameBoard(updatedGameboard);
-                printFogGameBoard();
+                setGameBoard(updatedGameBoard);
 
                 if (result.equals(miss)) {
-                    System.out.println("You missed. Try again:");
+                    System.out.println("You missed!");
+                    promptEnterKey();
                 } else if (result.equals(hit)) {
                     if (shipSank()) {
-                        shipCount--;
-                        if (shipCount == 0) {
+                        setShipCount(getShipCount() - 1);
+                        if (getShipCount() == 0) {
+                            setGameWon(true);
                             System.out.println("You sank the last ship. You won. Congratulations!");
-                            gameComplete = true;
                         } else {
-                            System.out.println("You sank a ship! Specify a new target:");
+                            System.out.println("You sank a ship!");
+                            promptEnterKey();
                         }
                     } else {
-                        System.out.println("You hit a ship! Try again:");
+                        System.out.println("You hit a ship!");
+                        promptEnterKey();
                     }
                 }
 
