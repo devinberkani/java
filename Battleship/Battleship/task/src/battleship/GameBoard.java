@@ -2,6 +2,7 @@ package battleship;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class GameBoard {
@@ -18,6 +19,14 @@ public class GameBoard {
     private GamePiece submarine;
     private GamePiece cruiser;
     private GamePiece destroyer;
+
+    private ArrayList<ArrayList<Integer>> aircraftCarrierCoordinates = new ArrayList<>();
+    private ArrayList<ArrayList<Integer>> battleshipCoordinates = new ArrayList<>();
+    private ArrayList<ArrayList<Integer>> submarineCoordinates = new ArrayList<>();
+    private ArrayList<ArrayList<Integer>> cruiserCoordinates = new ArrayList<>();
+    private ArrayList<ArrayList<Integer>> destroyerCoordinates = new ArrayList<>();
+
+    private ArrayList<ArrayList<ArrayList<Integer>>> allShipCoordinates = new ArrayList<>();
 
     public GameBoard() {
         // initialize empty game board
@@ -97,6 +106,14 @@ public class GameBoard {
             }
         }
 
+    }
+
+    public ArrayList<ArrayList<ArrayList<Integer>>> getAllShipCoordinates() {
+        return allShipCoordinates;
+    }
+
+    public void setAllShipCoordinates(ArrayList<ArrayList<ArrayList<Integer>>> allShipCoordinates) {
+        this.allShipCoordinates = allShipCoordinates;
     }
 
     // ***** GAME PIECES *****
@@ -187,18 +204,17 @@ public class GameBoard {
             gamePieceCoordinates[2] = Integer.parseInt(coordinateEnd[0]);
             gamePieceCoordinates[3] = Integer.parseInt(coordinateEnd[1]) - 1;
 
+            String[][] previousGameBoard;
             String[][] updatedGameBoard;
 
             if (currentGamePieceIndex == 0) {
                 try {
                     setAircraftCarrier(new GamePiece(getGameBoard(), gamePieceCoordinates, currentGamePieceIndex));
+                    previousGameBoard = cloneCurrentGameBoard();
                     updatedGameBoard = getAircraftCarrier().setGamePiece();
                     setGameBoard(updatedGameBoard);
+                    compareGameBoards(previousGameBoard);
                     printGameBoard();
-                    // add game piece index to printGameboard in order to track ships (printGameboard is only used for setting pieces anyways)
-                    // make an array of coordinates if printGameBoard()[i][j] is "0" - one array for each ship
-                    // update these arrays in separate method that is called each time takeShot() is called along with a check for each array -- if all coordinates in the array equal "X" then you can print the ship sank
-                    // use booleans to track each ship that is sank, and when they are all sunk you can print the winning message
                     exceptionThrown = false;
                     currentGamePieceIndex++;
                 } catch (Exception e) {
@@ -208,8 +224,10 @@ public class GameBoard {
             } else if (currentGamePieceIndex == 1) {
                 try {
                     setBattleship(new GamePiece(getGameBoard(), gamePieceCoordinates, currentGamePieceIndex));
+                    previousGameBoard = cloneCurrentGameBoard();
                     updatedGameBoard = getBattleship().setGamePiece();
                     setGameBoard(updatedGameBoard);
+                    compareGameBoards(previousGameBoard);
                     printGameBoard();
                     exceptionThrown = false;
                     currentGamePieceIndex++;
@@ -220,8 +238,10 @@ public class GameBoard {
             } else if (currentGamePieceIndex == 2) {
                 try {
                     setSubmarine(new GamePiece(getGameBoard(), gamePieceCoordinates, currentGamePieceIndex));
+                    previousGameBoard = cloneCurrentGameBoard();
                     updatedGameBoard = getSubmarine().setGamePiece();
                     setGameBoard(updatedGameBoard);
+                    compareGameBoards(previousGameBoard);
                     printGameBoard();
                     exceptionThrown = false;
                     currentGamePieceIndex++;
@@ -232,8 +252,10 @@ public class GameBoard {
             } else if (currentGamePieceIndex == 3) {
                 try {
                     setCruiser(new GamePiece(getGameBoard(), gamePieceCoordinates, currentGamePieceIndex));
+                    previousGameBoard = cloneCurrentGameBoard();
                     updatedGameBoard = getCruiser().setGamePiece();
                     setGameBoard(updatedGameBoard);
+                    compareGameBoards(previousGameBoard);
                     printGameBoard();
                     exceptionThrown = false;
                     currentGamePieceIndex++;
@@ -244,8 +266,10 @@ public class GameBoard {
             } else {
                 try {
                     setDestroyer(new GamePiece(getGameBoard(), gamePieceCoordinates, currentGamePieceIndex));
+                    previousGameBoard = cloneCurrentGameBoard();
                     updatedGameBoard = getDestroyer().setGamePiece();
                     setGameBoard(updatedGameBoard);
+                    compareGameBoards(previousGameBoard);
                     currentGamePieceIndex++;
                     printGameBoard();
                     exceptionThrown = false;
@@ -261,6 +285,59 @@ public class GameBoard {
 
     }
 
+    public String[][] cloneCurrentGameBoard() {
+
+        String[][] previousGameBoard = new String[10][10];
+
+        for (int i = 0; i < getGameBoard().length; i++) {
+            for (int j = 0; j < getGameBoard()[i].length; j++) {
+                previousGameBoard[i][j] = getGameBoard()[i][j];
+            }
+        }
+
+        return previousGameBoard;
+
+    }
+
+    public void compareGameBoards(String[][] previousGameBoard) {
+
+        for (int i = 0; i < previousGameBoard.length; i++) {
+            for (int j = 0; j < previousGameBoard[i].length; j++) {
+                if (!Objects.equals(previousGameBoard[i][j], getGameBoard()[i][j])) {
+                    ArrayList<Integer> temporaryGamePieceCoordinates = new ArrayList<>();
+                    temporaryGamePieceCoordinates.add(i);
+                    temporaryGamePieceCoordinates.add(j);
+
+                    if (currentGamePieceIndex == 0) {
+                        aircraftCarrierCoordinates.add(temporaryGamePieceCoordinates);
+                    } else if (currentGamePieceIndex == 1) {
+                        battleshipCoordinates.add(temporaryGamePieceCoordinates);
+                    } else if (currentGamePieceIndex == 2) {
+                        submarineCoordinates.add(temporaryGamePieceCoordinates);
+                    } else if (currentGamePieceIndex == 3) {
+                        cruiserCoordinates.add(temporaryGamePieceCoordinates);
+                    } else if (currentGamePieceIndex == 4) {
+                        destroyerCoordinates.add(temporaryGamePieceCoordinates);
+                    }
+
+                }
+            }
+        }
+
+        if (currentGamePieceIndex == 0) {
+            getAllShipCoordinates().add(aircraftCarrierCoordinates);
+        } else if (currentGamePieceIndex == 1) {
+            getAllShipCoordinates().add(battleshipCoordinates);
+        } else if (currentGamePieceIndex == 2) {
+            getAllShipCoordinates().add(submarineCoordinates);
+        } else if (currentGamePieceIndex == 3) {
+            getAllShipCoordinates().add(cruiserCoordinates);
+        } else if (currentGamePieceIndex == 4) {
+            getAllShipCoordinates().add(destroyerCoordinates);
+        }
+
+    }
+
     // ***** TAKE SHOT *****
     public void takeShot() {
 
@@ -270,17 +347,14 @@ public class GameBoard {
 
         System.out.println("Take a shot!");
 
-
-        boolean correctShotCoordinates = false;
+        int shipCount = 5;
         boolean gameComplete = false;
 
-        while (!correctShotCoordinates && !gameComplete) {
+        while (!gameComplete) {
 
             String[] shotCoordinatesString = scanner.next().split("");
 
             if (correctShotCoordinates(shotCoordinatesString)) {
-
-                correctShotCoordinates = true;
 
                 int[] shotCoordinatesIndices = translateShotCoordinates(shotCoordinatesString);
 
@@ -310,13 +384,42 @@ public class GameBoard {
                 if (result.equals(miss)) {
                     System.out.println("You missed. Try again:");
                 } else if (result.equals(hit)) {
-                    System.out.println("You hit a ship! Try again:");
+                    if (shipSank()) {
+                        shipCount--;
+                        if (shipCount == 0) {
+                            System.out.println("You sank the last ship. You won. Congratulations!");
+                            gameComplete = true;
+                        } else {
+                            System.out.println("You sank a ship! Specify a new target:");
+                        }
+                    } else {
+                        System.out.println("You hit a ship! Try again:");
+                    }
                 }
 
             } else {
                 System.out.println("Error! You entered the wrong coordinates! Try again:");
             }
         }
+    }
+
+    public boolean shipSank() {
+
+        for (ArrayList<ArrayList<Integer>> ship : getAllShipCoordinates()) {
+            int hitCount = 0;
+            for (ArrayList<Integer> coordinate : ship) {
+                int x = coordinate.get(0);
+                int y = coordinate.get(1);
+                if (getGameBoard()[x][y].equalsIgnoreCase("X")) {
+                    hitCount++;
+                    if (hitCount == ship.size()) {
+                        getAllShipCoordinates().remove(ship);
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     public boolean correctShotCoordinates (String[] shotCoordinates) {
