@@ -190,38 +190,42 @@ public class GameBoard {
                 System.out.println();
             }
 
-            String[] coordinateStart = scanner.next().split("");
-            String[] coordinateEnd = scanner.next().split("");
-
-            // translate the coordinates into indices
-            int letterCount = 0;
-            for (String letter : columnLetters) {
-                if (coordinateStart[0].equalsIgnoreCase(letter)) {
-                    coordinateStart[0] = String.valueOf(letterCount);
-                }
-                if (coordinateEnd[0].equalsIgnoreCase(letter)) {
-                    coordinateEnd[0] = String.valueOf(letterCount);
-                }
-                letterCount++;
-            }
-
-            // handle 3 digit coordinate lengths (the number 10)
-
-            if (coordinateStart.length > 2) {
-                coordinateStart[1] = "10";
-            }
-            if (coordinateEnd.length > 2) {
-                coordinateEnd[1] = "10";
-
-            }
-
-            // change from strings to integers
             int[] gamePieceCoordinates = new int[4];
 
-            gamePieceCoordinates[0] = Integer.parseInt(coordinateStart[0]);
-            gamePieceCoordinates[1] = Integer.parseInt(coordinateStart[1]) - 1;
-            gamePieceCoordinates[2] = Integer.parseInt(coordinateEnd[0]);
-            gamePieceCoordinates[3] = Integer.parseInt(coordinateEnd[1]) - 1;
+            try {
+                String[] coordinateStart = scanner.next().split("");
+                String[] coordinateEnd = scanner.next().split("");
+
+                // translate the coordinates into indices
+                int letterCount = 0;
+                for (String letter : columnLetters) {
+                    if (coordinateStart[0].equalsIgnoreCase(letter)) {
+                        coordinateStart[0] = String.valueOf(letterCount);
+                    }
+                    if (coordinateEnd[0].equalsIgnoreCase(letter)) {
+                        coordinateEnd[0] = String.valueOf(letterCount);
+                    }
+                    letterCount++;
+                }
+
+                // handle 3 digit coordinate lengths (the number 10)
+
+                if (coordinateStart.length > 2) {
+                    coordinateStart[1] = "10";
+                }
+                if (coordinateEnd.length > 2) {
+                    coordinateEnd[1] = "10";
+
+                }
+
+                // change from strings to integers
+
+                gamePieceCoordinates[0] = Integer.parseInt(coordinateStart[0]);
+                gamePieceCoordinates[1] = Integer.parseInt(coordinateStart[1]) - 1;
+                gamePieceCoordinates[2] = Integer.parseInt(coordinateEnd[0]);
+                gamePieceCoordinates[3] = Integer.parseInt(coordinateEnd[1]) - 1;
+            } catch (Exception ignored) {
+            }
 
             String[][] previousGameBoard;
             String[][] updatedGameBoard;

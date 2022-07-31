@@ -7,5 +7,3 @@ public class Main {
         BattleshipGame battleshipGame = new BattleshipGame();
     }
 }
-
-
