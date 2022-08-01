@@ -11,15 +11,24 @@ public class GameBoard {
 
     private String[][] testGameBoard = new String[3][3];
     private int[] validUserCoordinates = new int[2];
-
-    private final String[] gamePieces = {"X", "O"};
-    private int currentGamePieceIndex = 0; //USE ENUM FOR THIS?
+    private final String[] gamePieces = {GamePieces.X.getGamePiece(), GamePieces.O.getGamePiece()};
+    private String currentGamePiece;
+    private int gamePieceCount;
 
     public GameBoard() {
+
+        System.out.println();
+
         getUserCells();
-        getUserCoordinates();
-        printGameBoard();
-        switchGamePieceIndex();
+
+//        while(!isGameOver) {
+            chooseGamePiece();
+            getUserCoordinates();
+            printGameBoard();
+            checkForWinner();
+
+//            setGameOver(checkForWinner());
+//        }
     }
 
     // ***** GAME BOARD *****
@@ -44,6 +53,10 @@ public class GameBoard {
 
         // print bottom row
         System.out.println(topBottomBorder);
+
+        // update number of game pieces on game board
+        updateNumberOfPiecesOnBoard();
+
     }
 
     public String[][] cloneGameBoard() {
@@ -61,15 +74,33 @@ public class GameBoard {
 
     // ***** SWITCH GAME PIECE ON EVERY TURN *****
 
-    public void switchGamePieceIndex() {
+    public void chooseGamePiece() {
 
-        if (getCurrentGamePieceIndex() == 0) {
-            setCurrentGamePieceIndex(1);
-        }
-        if (getCurrentGamePieceIndex() == 1) {
-            setCurrentGamePieceIndex(0);
+        // if there are an even number of game pieces already on the board, the game piece is "X", otherwise it's "O"
+
+        if (getGamePieceCount() % 2 == 0) {
+            setCurrentGamePiece(GamePieces.X.getGamePiece());
+        } else {
+            setCurrentGamePiece(GamePieces.O.getGamePiece());
         }
 
+    }
+
+    // keeps track of the number of pieces currently on the game board
+    public void updateNumberOfPiecesOnBoard() {
+        int gamePieceCount = 0;
+
+        for (int i = 0; i < getGameBoard().length; i++) {
+            for (int j = 0; j < getGameBoard()[i].length; j++) {
+                for (String gamePiece : getGamePieces()) {
+                    if (getGameBoard()[i][j].equals(gamePiece)) {
+                        gamePieceCount++;
+                    }
+                }
+            }
+        }
+
+        setGamePieceCount(gamePieceCount);
     }
 
     // ***** GET AND VALIDATE USER COORDINATES *****
@@ -92,17 +123,20 @@ public class GameBoard {
 
     public boolean isValidInput() {
 
-        // YOU ARE HERE
+        int[] testCoordinates = new int[2];
+
         try {
-            for (int i = 0; i < getValidUserCoordinates().length; i++) {
-                getValidUserCoordinates()[i] = input.nextInt() - 1;
+            for (int i = 0; i < testCoordinates.length; i++) {
+                testCoordinates[i] = input.nextInt() - 1;
             }
 
-            setTestGameBoard(testCoordinates(getValidUserCoordinates()));
+            setValidUserCoordinates(testCoordinates);
+
+            setTestGameBoard(checkForGamePieceInCoordinateLocation(getValidUserCoordinates()));
 
             String coordinate = getGameBoard()[getValidUserCoordinates()[0]][getValidUserCoordinates()[1]];
 
-            if (coordinate.equals("X") || coordinate.equals("O")) {
+            if (coordinate.equals(getGamePieces()[0]) || coordinate.equals(getGamePieces()[1])) {
                 throw new CellOccupiedException("This cell is occupied! Choose another one!");
             } else {
                 setGameBoard(getTestGameBoard());
@@ -122,17 +156,17 @@ public class GameBoard {
         return false;
     }
 
-    public String[][] testCoordinates(int[] validUserCoordinates) {
+    public String[][] checkForGamePieceInCoordinateLocation(int[] validUserCoordinates) {
 
         setTestGameBoard(cloneGameBoard());
 
-        getTestGameBoard()[validUserCoordinates[0]][validUserCoordinates[1]] = gamePieces[getCurrentGamePieceIndex()];
+        getTestGameBoard()[validUserCoordinates[0]][validUserCoordinates[1]] = getCurrentGamePiece();
 
         return getTestGameBoard();
 
     }
 
-    // ***** GET USER CELLS AND ADD THEM TO GAME BOARD *****
+    // ***** GET TEST USER CELLS AND ADD THEM TO GAME BOARD *****
 
     public void getUserCells() {
 
@@ -148,6 +182,7 @@ public class GameBoard {
         printGameBoard();
     }
 
+    // translate the user input String into the test game board array
     public String[][] translateUserInput(String[] userInput) {
 
         // add user input to test game board
@@ -166,6 +201,91 @@ public class GameBoard {
         }
 
         return getTestGameBoard();
+    }
+
+    // ***** DEFINE WINS AND CHECK FOR WINNER *****
+    public boolean checkForWinner() {
+
+        boolean gameWon = false;
+        String winner;
+
+        for (String gamePieceCheck : getGamePieces()) {
+            for (int i = 0; i < getGameBoard().length; i++) {
+
+                String gamePiece1 = "";
+                String gamePiece2 = "";
+                String gamePiece3 = "";
+
+                for (int j = 0; j < getGameBoard()[i].length; j++) {
+
+                    // check for left to right diagonal winner
+                    if (i == 0 && j == 0) {
+                        gamePiece1 = getGameBoard()[i][j];
+                        gamePiece2 = getGameBoard()[i + 1][j + 1];
+                        gamePiece3 = getGameBoard()[i + 2][j + 2];
+
+                        if (isWinner(gamePieceCheck, gamePiece1, gamePiece2, gamePiece3)) {
+                            break;
+                        }
+                    }
+
+                    // check for right to left diagonal winner
+                    if (i == 0 && j == 2) {
+                        gamePiece1 = getGameBoard()[i][j];
+                        gamePiece2 = getGameBoard()[i + 1][j - 1];
+                        gamePiece3 = getGameBoard()[i + 2][j - 2];
+
+                        if (isWinner(gamePieceCheck, gamePiece1, gamePiece2, gamePiece3)) {
+                            break;
+                        }
+                    }
+
+                    // check for horizontal winner
+                    if (j == 0) {
+                        gamePiece1 = getGameBoard()[i][j];
+                        gamePiece2 = getGameBoard()[i][j + 1];
+                        gamePiece3 = getGameBoard()[i][j + 2];
+
+                        if (isWinner(gamePieceCheck, gamePiece1, gamePiece2, gamePiece3)) {
+                            break;
+                        }
+                    }
+
+                    // check for vertical winner
+                    if (i == 0) {
+                        gamePiece1 = getGameBoard()[i][j];
+                        gamePiece2 = getGameBoard()[i + 1][j];
+                        gamePiece3 = getGameBoard()[i + 2][j];
+
+                        if (isWinner(gamePieceCheck, gamePiece1, gamePiece2, gamePiece3)) {
+                            break;
+                        }
+                    }
+                }
+
+                // break loop if game won
+                gameWon = isWinner(gamePieceCheck, gamePiece1, gamePiece2, gamePiece3);
+                if (gameWon) {
+                    winner = gamePieceCheck;
+                    System.out.println(winner + " wins");
+                    return true;
+                }
+            }
+        }
+
+        if (getGamePieceCount() == 9) {
+            System.out.println("Draw");
+            return true;
+        } else {
+            System.out.println("Game not finished");
+            return false;
+        }
+    }
+
+    public boolean isWinner(String gamePieceCheck, String gamePiece1, String gamePiece2, String gamePiece3) {
+
+        return gamePieceCheck.equals(gamePiece1) && gamePieceCheck.equals(gamePiece2) && gamePieceCheck.equals(gamePiece3);
+
     }
 
     // ***** GETTERS AND SETTERS *****
@@ -194,14 +314,6 @@ public class GameBoard {
         this.validUserCoordinates = validUserCoordinates;
     }
 
-    public int getCurrentGamePieceIndex() {
-        return currentGamePieceIndex;
-    }
-
-    public void setCurrentGamePieceIndex(int currentGamePieceIndex) {
-        this.currentGamePieceIndex = currentGamePieceIndex;
-    }
-
     public boolean isGameOver() {
         return isGameOver;
     }
@@ -210,7 +322,23 @@ public class GameBoard {
         isGameOver = gameOver;
     }
 
+    public String getCurrentGamePiece() {
+        return currentGamePiece;
+    }
+
+    public void setCurrentGamePiece(String currentGamePiece) {
+        this.currentGamePiece = currentGamePiece;
+    }
+
     public String[] getGamePieces() {
         return gamePieces;
+    }
+
+    public int getGamePieceCount() {
+        return gamePieceCount;
+    }
+
+    public void setGamePieceCount(int gamePieceCount) {
+        this.gamePieceCount = gamePieceCount;
     }
 }
