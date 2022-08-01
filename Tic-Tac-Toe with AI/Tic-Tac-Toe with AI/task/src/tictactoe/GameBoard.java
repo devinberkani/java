@@ -9,6 +9,7 @@ public class GameBoard {
     private boolean isGameOver = false;
     private String[][] gameBoard = new String[3][3];
 
+    private String[][] testGameBoard = new String[3][3];
     private int[] validUserCoordinates = new int[2];
 
     private final String[] gamePieces = {"X", "O"};
@@ -20,6 +21,8 @@ public class GameBoard {
         printGameBoard();
         switchGamePieceIndex();
     }
+
+    // ***** GAME BOARD *****
 
     public void printGameBoard() {
 
@@ -43,7 +46,7 @@ public class GameBoard {
         System.out.println(topBottomBorder);
     }
 
-    public String[][] testCoordinates(int[] validUserCoordinates) {
+    public String[][] cloneGameBoard() {
 
         String[][] newGameBoard = new String[3][3];
 
@@ -53,11 +56,10 @@ public class GameBoard {
             }
         }
 
-        newGameBoard[validUserCoordinates[0]][validUserCoordinates[1]] = gamePieces[getCurrentGamePieceIndex()];
-
         return newGameBoard;
-
     }
+
+    // ***** SWITCH GAME PIECE ON EVERY TURN *****
 
     public void switchGamePieceIndex() {
 
@@ -70,7 +72,7 @@ public class GameBoard {
 
     }
 
-    // ***** GET USER COORDINATES *****
+    // ***** GET AND VALIDATE USER COORDINATES *****
 
     public void getUserCoordinates() {
 
@@ -90,22 +92,20 @@ public class GameBoard {
 
     public boolean isValidInput() {
 
-        String[][] newGameBoard = new String[3][3];
-
         // YOU ARE HERE
         try {
             for (int i = 0; i < getValidUserCoordinates().length; i++) {
                 getValidUserCoordinates()[i] = input.nextInt() - 1;
             }
 
-            newGameBoard = testCoordinates(getValidUserCoordinates());
+            setTestGameBoard(testCoordinates(getValidUserCoordinates()));
 
             String coordinate = getGameBoard()[getValidUserCoordinates()[0]][getValidUserCoordinates()[1]];
 
             if (coordinate.equals("X") || coordinate.equals("O")) {
                 throw new CellOccupiedException("This cell is occupied! Choose another one!");
             } else {
-                setGameBoard(newGameBoard);
+                setGameBoard(getTestGameBoard());
                 return true;
             }
 
@@ -120,6 +120,16 @@ public class GameBoard {
             System.out.println("Coordinates should be from 1 to 3!");
         }
         return false;
+    }
+
+    public String[][] testCoordinates(int[] validUserCoordinates) {
+
+        setTestGameBoard(cloneGameBoard());
+
+        getTestGameBoard()[validUserCoordinates[0]][validUserCoordinates[1]] = gamePieces[getCurrentGamePieceIndex()];
+
+        return getTestGameBoard();
+
     }
 
     // ***** GET USER CELLS AND ADD THEM TO GAME BOARD *****
@@ -142,22 +152,20 @@ public class GameBoard {
 
         // add user input to test game board
 
-        String[][] newGameBoard = new String[3][3];
-
         int index = 0;
-        for (int i = 0; i < newGameBoard.length; i++) {
-            for (int j = 0; j < newGameBoard[i].length; j++) {
+        for (int i = 0; i < getTestGameBoard().length; i++) {
+            for (int j = 0; j < getTestGameBoard()[i].length; j++) {
                 // if one of the cells is "_" it should be printed as an empty space
                 if (userInput[index].equals("_")) {
-                    newGameBoard[i][j] = " ";
+                    getTestGameBoard()[i][j] = " ";
                 } else {
-                    newGameBoard[i][j] = userInput[index];
+                    getTestGameBoard()[i][j] = userInput[index];
                 }
                 index++;
             }
         }
 
-        return newGameBoard;
+        return getTestGameBoard();
     }
 
     // ***** GETTERS AND SETTERS *****
@@ -168,6 +176,14 @@ public class GameBoard {
 
     public void setGameBoard(String[][] gameBoard) {
         this.gameBoard = gameBoard;
+    }
+
+    public String[][] getTestGameBoard() {
+        return testGameBoard;
+    }
+
+    public void setTestGameBoard(String[][] testGameBoard) {
+        this.testGameBoard = testGameBoard;
     }
 
     public int[] getValidUserCoordinates() {
@@ -192,5 +208,9 @@ public class GameBoard {
 
     public void setGameOver(boolean gameOver) {
         isGameOver = gameOver;
+    }
+
+    public String[] getGamePieces() {
+        return gamePieces;
     }
 }
