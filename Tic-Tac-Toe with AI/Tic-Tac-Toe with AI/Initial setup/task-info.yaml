@@ -103,13 +103,13 @@ files:
         }
     }
   learner_created: false
-- name: src/tictactoe/Player.java
-  visible: true
-  learner_created: true
 - name: src/tictactoe/GameBoard.java
   visible: true
   learner_created: true
 - name: src/tictactoe/TicTacToeGame.java
+  visible: true
+  learner_created: true
+- name: src/tictactoe/CellOccupiedException.java
   visible: true
   learner_created: true
 feedback_link: https://hyperskill.org/projects/81/stages/447/implement#comment
