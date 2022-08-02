@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TicTacToeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-08-01T22:09:37" hostname="Devins-MacBook-Air.local" time="0.16">
+<testsuite name="TicTacToeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-08-02T02:04:15" hostname="Devins-MacBook-Air.local" time="0.169">
   <properties/>
-  <testcase name="start" classname="TicTacToeTest" time="0.16"/>
+  <testcase name="start" classname="TicTacToeTest" time="0.169"/>
   <system-out><![CDATA[?[1;31m
 Start test 1?[0m
 

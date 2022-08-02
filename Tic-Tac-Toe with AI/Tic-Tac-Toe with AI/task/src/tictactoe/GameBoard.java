@@ -59,7 +59,7 @@ public class GameBoard {
 
     }
 
-    public String[][] cloneGameBoard() {
+    private String[][] cloneGameBoard() {
 
         String[][] newGameBoard = new String[3][3];
 
@@ -74,7 +74,7 @@ public class GameBoard {
 
     // ***** SWITCH GAME PIECE ON EVERY TURN *****
 
-    public void chooseGamePiece() {
+    private void chooseGamePiece() {
 
         // if there are an even number of game pieces already on the board, the game piece is "X", otherwise it's "O"
 
@@ -87,7 +87,7 @@ public class GameBoard {
     }
 
     // keeps track of the number of pieces currently on the game board
-    public void updateNumberOfPiecesOnBoard() {
+    private void updateNumberOfPiecesOnBoard() {
         int gamePieceCount = 0;
 
         for (int i = 0; i < getGameBoard().length; i++) {
@@ -105,7 +105,7 @@ public class GameBoard {
 
     // ***** GET AND VALIDATE USER COORDINATES *****
 
-    public void getUserCoordinates() {
+    private void getUserCoordinates() {
 
         boolean isValid = false;
 
@@ -121,7 +121,7 @@ public class GameBoard {
 
     }
 
-    public boolean isValidInput() {
+    private boolean isValidInput() {
 
         int[] testCoordinates = new int[2];
 
@@ -156,7 +156,7 @@ public class GameBoard {
         return false;
     }
 
-    public String[][] checkForGamePieceInCoordinateLocation(int[] validUserCoordinates) {
+    private String[][] checkForGamePieceInCoordinateLocation(int[] validUserCoordinates) {
 
         setTestGameBoard(cloneGameBoard());
 
@@ -168,7 +168,7 @@ public class GameBoard {
 
     // ***** GET TEST USER CELLS AND ADD THEM TO GAME BOARD *****
 
-    public void getUserCells() {
+    private void getUserCells() {
 
         System.out.print("Enter the cells: ");
 
@@ -183,7 +183,7 @@ public class GameBoard {
     }
 
     // translate the user input String into the test game board array
-    public String[][] translateUserInput(String[] userInput) {
+    private String[][] translateUserInput(String[] userInput) {
 
         // add user input to test game board
 
@@ -204,7 +204,7 @@ public class GameBoard {
     }
 
     // ***** DEFINE WINS AND CHECK FOR WINNER *****
-    public boolean checkForWinner() {
+    private boolean checkForWinner() {
 
         boolean gameWon = false;
         String winner;
@@ -282,7 +282,7 @@ public class GameBoard {
         }
     }
 
-    public boolean isWinner(String gamePieceCheck, String gamePiece1, String gamePiece2, String gamePiece3) {
+    private boolean isWinner(String gamePieceCheck, String gamePiece1, String gamePiece2, String gamePiece3) {
 
         return gamePieceCheck.equals(gamePiece1) && gamePieceCheck.equals(gamePiece2) && gamePieceCheck.equals(gamePiece3);
 
