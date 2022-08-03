@@ -17,23 +17,22 @@ public class GameBoard {
 
     public GameBoard() {
 
-        System.out.println();
-
-        getUserCells();
-
-//        while(!isGameOver) {
-            chooseGamePiece();
-            getUserCoordinates();
-            printGameBoard();
-            checkForWinner();
-
-//            setGameOver(checkForWinner());
-//        }
     }
 
     // ***** GAME BOARD *****
 
-    public void printGameBoard() {
+    protected void initializeGameBoard() {
+
+        for (int i = 0; i < getGameBoard().length; i++) {
+            for (int j = 0; j < getGameBoard()[i].length; j++) {
+                getTestGameBoard()[i][j] = " ";
+            }
+        }
+
+        setGameBoard(getTestGameBoard());
+    }
+
+    protected void printGameBoard() {
 
         // print top row
         String topBottomBorder = "---------";
@@ -74,7 +73,7 @@ public class GameBoard {
 
     // ***** SWITCH GAME PIECE ON EVERY TURN *****
 
-    private void chooseGamePiece() {
+    protected void chooseGamePiece() {
 
         // if there are an even number of game pieces already on the board, the game piece is "X", otherwise it's "O"
 
@@ -103,32 +102,45 @@ public class GameBoard {
         setGamePieceCount(gamePieceCount);
     }
 
-    // ***** GET AND VALIDATE USER COORDINATES *****
+    // ***** COMPUTER AI LOGIC *****
 
-    private void getUserCoordinates() {
+    protected void getComputerCoordinates() {
 
-        boolean isValid = false;
+        // YOU ARE HERE
 
-        while(!isValid) {
+        // need to make coordinate validation flexible -- base it on current game piece -- put additional if else within each try/catch block -- if X then display the errors, if O then just keep trying until coordinates don't catch any error
+        // need to generate coordinates in this method to pass to valid input method
+        // need to remove "game not finished" verbiage
+
+    }
+
+    // ***** GET USER COORDINATES *****
+
+    protected void getUserCoordinates() {
+
+        boolean userCoordinatesValid = false;
+
+        while(!userCoordinatesValid) {
 
             System.out.print("Enter the coordinates: ");
 
+            int userCoordinate1 = input.nextInt() - 1;
+            int userCoordinate2 = input.nextInt() - 1;
+
             // validate user coordinates
 
-            isValid = isValidInput();
+            userCoordinatesValid = isValidInput(userCoordinate1, userCoordinate2);
 
         }
 
     }
 
-    private boolean isValidInput() {
-
-        int[] testCoordinates = new int[2];
+    // ***** VALIDATE COORDINATES AND ADD THEM TO GAME BOARD *****
+    private boolean isValidInput(int coordinate1, int coordinate2) {
 
         try {
-            for (int i = 0; i < testCoordinates.length; i++) {
-                testCoordinates[i] = input.nextInt() - 1;
-            }
+
+            int[] testCoordinates = {coordinate1, coordinate2};
 
             setValidUserCoordinates(testCoordinates);
 
@@ -166,9 +178,9 @@ public class GameBoard {
 
     }
 
-    // ***** GET TEST USER CELLS AND ADD THEM TO GAME BOARD *****
+    // ***** GET AND TEST USER CELLS AND ADD THEM TO GAME BOARD *****
 
-    private void getUserCells() {
+    protected void getUserCells() {
 
         System.out.print("Enter the cells: ");
 
@@ -204,7 +216,7 @@ public class GameBoard {
     }
 
     // ***** DEFINE WINS AND CHECK FOR WINNER *****
-    private boolean checkForWinner() {
+    protected boolean checkForWinner() {
 
         boolean gameWon = false;
         String winner;

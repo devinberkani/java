@@ -2,6 +2,21 @@ package tictactoe;
 
 public class TicTacToeGame {
 
-    private final GameBoard gameBoard = new GameBoard();
+    public TicTacToeGame() {
+
+        final GameBoard gameBoard = new GameBoard();
+
+        gameBoard.initializeGameBoard();
+
+        while(!gameBoard.isGameOver()) {
+
+            gameBoard.printGameBoard();
+            gameBoard.chooseGamePiece();
+            gameBoard.getUserCoordinates();
+            gameBoard.setGameOver(gameBoard.checkForWinner());
+
+        }
+
+    }
 
 }
