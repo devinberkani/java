@@ -1,6 +1,7 @@
 package tictactoe;
 
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class GameBoard {
@@ -56,6 +57,9 @@ public class GameBoard {
         // update number of game pieces on game board
         updateNumberOfPiecesOnBoard();
 
+        // update current game piece
+        chooseGamePiece();
+
     }
 
     private String[][] cloneGameBoard() {
@@ -73,14 +77,14 @@ public class GameBoard {
 
     // ***** SWITCH GAME PIECE ON EVERY TURN *****
 
-    protected void chooseGamePiece() {
+    private void chooseGamePiece() {
 
         // if there are an even number of game pieces already on the board, the game piece is "X", otherwise it's "O"
 
         if (getGamePieceCount() % 2 == 0) {
-            setCurrentGamePiece(GamePieces.X.getGamePiece());
+            setCurrentGamePiece(getGamePieces()[0]);
         } else {
-            setCurrentGamePiece(GamePieces.O.getGamePiece());
+            setCurrentGamePiece(getGamePieces()[1]);
         }
 
     }
@@ -106,11 +110,23 @@ public class GameBoard {
 
     protected void getComputerCoordinates() {
 
-        // YOU ARE HERE
+        boolean computerCoordinatesValid = false;
 
-        // need to make coordinate validation flexible -- base it on current game piece -- put additional if else within each try/catch block -- if X then display the errors, if O then just keep trying until coordinates don't catch any error
-        // need to generate coordinates in this method to pass to valid input method
-        // need to remove "game not finished" verbiage
+        System.out.print("Making move level \"easy\""); // levels will need to be turned into an array and called based on user selection
+        System.out.println();
+
+        while(!computerCoordinatesValid) {
+
+            Random random = new Random();
+
+            int computerCoordinate1 = random.nextInt(3);
+            int computerCoordinate2 = random.nextInt(3);
+
+            // validate user coordinates
+
+            computerCoordinatesValid = isValidInput(computerCoordinate1, computerCoordinate2);
+
+        }
 
     }
 
@@ -124,8 +140,9 @@ public class GameBoard {
 
             System.out.print("Enter the coordinates: ");
 
-            int userCoordinate1 = input.nextInt() - 1;
-            int userCoordinate2 = input.nextInt() - 1;
+            // empty coordinates in order to use validate input method
+            int userCoordinate1 = 0;
+            int userCoordinate2 = 0;
 
             // validate user coordinates
 
@@ -138,7 +155,14 @@ public class GameBoard {
     // ***** VALIDATE COORDINATES AND ADD THEM TO GAME BOARD *****
     private boolean isValidInput(int coordinate1, int coordinate2) {
 
+        boolean currentGamePieceIsX = getCurrentGamePiece().equals(getGamePieces()[0]);
+
         try {
+
+            if (currentGamePieceIsX) {
+                coordinate1 = input.nextInt() - 1;
+                coordinate2 = input.nextInt() - 1;
+            }
 
             int[] testCoordinates = {coordinate1, coordinate2};
 
@@ -156,14 +180,20 @@ public class GameBoard {
             }
 
         } catch (CellOccupiedException cellOccupiedException) {
-            System.out.println(cellOccupiedException.getMessage());
+            if (currentGamePieceIsX) {
+                System.out.println(cellOccupiedException.getMessage());
+            }
         // check that coordinates are numbers
         } catch (InputMismatchException inputMismatchException) {
-            System.out.println("You should enter numbers!");
-            input.nextLine(); // consume input
+            if (currentGamePieceIsX) {
+                System.out.println("You should enter numbers!");
+                input.nextLine(); // consume input
+            }
         // check that coordinates are within correct range
         } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
-            System.out.println("Coordinates should be from 1 to 3!");
+            if (currentGamePieceIsX) {
+                System.out.println("Coordinates should be from 1 to 3!");
+            }
         }
         return false;
     }
@@ -217,6 +247,8 @@ public class GameBoard {
 
     // ***** DEFINE WINS AND CHECK FOR WINNER *****
     protected boolean checkForWinner() {
+
+        printGameBoard(); // keeps game board in correct order for tests
 
         boolean gameWon = false;
         String winner;
@@ -289,7 +321,7 @@ public class GameBoard {
             System.out.println("Draw");
             return true;
         } else {
-            System.out.println("Game not finished");
+//            System.out.println("Game not finished");
             return false;
         }
     }

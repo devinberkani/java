@@ -7,13 +7,17 @@ public class TicTacToeGame {
         final GameBoard gameBoard = new GameBoard();
 
         gameBoard.initializeGameBoard();
+        gameBoard.printGameBoard();
 
         while(!gameBoard.isGameOver()) {
 
-            gameBoard.printGameBoard();
-            gameBoard.chooseGamePiece();
             gameBoard.getUserCoordinates();
             gameBoard.setGameOver(gameBoard.checkForWinner());
+
+            if (!gameBoard.isGameOver()) {
+                gameBoard.getComputerCoordinates();
+                gameBoard.setGameOver(gameBoard.checkForWinner());
+            }
 
         }
 
