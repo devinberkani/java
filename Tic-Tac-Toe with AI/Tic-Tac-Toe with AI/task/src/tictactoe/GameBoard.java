@@ -6,8 +6,10 @@ import java.util.Scanner;
 
 public class GameBoard {
     private final static Scanner input = new Scanner(System.in);
-
     private boolean isGameOver = false;
+
+    Player player1;
+    Player player2;
     private String[][] gameBoard = new String[3][3];
 
     private String[][] testGameBoard = new String[3][3];
@@ -16,8 +18,16 @@ public class GameBoard {
     private String currentGamePiece;
     private int gamePieceCount;
 
-    public GameBoard() {
+    public GameBoard(Player player1, Player player2) {
+        this.player1 = player1;
+        this.player2 = player2;
 
+        // YOU ARE HERE
+
+        // you have (potentially) completed menu logic, you now need to:
+        // make the game piece logic be associated with the PLAYER game piece (same with switching game piece)
+        // make whether coordinates are asked for or not be based on the player type (if type isn't user then don't)
+        
     }
 
     // ***** GAME BOARD *****
@@ -333,6 +343,23 @@ public class GameBoard {
     }
 
     // ***** GETTERS AND SETTERS *****
+
+
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    public void setPlayer1(Player player1) {
+        this.player1 = player1;
+    }
+
+    public Player getPlayer2() {
+        return player2;
+    }
+
+    public void setPlayer2(Player player2) {
+        this.player2 = player2;
+    }
 
     public String[][] getGameBoard() {
         return gameBoard;

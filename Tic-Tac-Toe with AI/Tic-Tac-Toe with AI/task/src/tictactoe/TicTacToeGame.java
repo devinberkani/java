@@ -4,19 +4,28 @@ public class TicTacToeGame {
 
     public TicTacToeGame() {
 
-        final GameBoard gameBoard = new GameBoard();
+        final Menu menu = new Menu();
+        String userCommand = menu.getUserCommand();
 
-        gameBoard.initializeGameBoard();
-        gameBoard.printGameBoard();
+        while (!userCommand.equalsIgnoreCase("exit")) {
 
-        while(!gameBoard.isGameOver()) {
+            Player player1 = menu.getPlayer1();
+            Player player2 = menu.getPlayer2();
+            final GameBoard gameBoard = new GameBoard(player1, player2);
 
-            gameBoard.getUserCoordinates();
-            gameBoard.setGameOver(gameBoard.checkForWinner());
+            gameBoard.initializeGameBoard();
+            gameBoard.printGameBoard();
 
-            if (!gameBoard.isGameOver()) {
-                gameBoard.getComputerCoordinates();
+            while(!gameBoard.isGameOver()) {
+
+                gameBoard.getUserCoordinates();
                 gameBoard.setGameOver(gameBoard.checkForWinner());
+
+                if (!gameBoard.isGameOver()) {
+                    gameBoard.getComputerCoordinates();
+                    gameBoard.setGameOver(gameBoard.checkForWinner());
+                }
+
             }
 
         }
