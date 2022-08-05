@@ -13,6 +13,12 @@
       <module name="Tic-Tac-Toe_with_AI.Topics-Calling_a_method-Correct_names_for_methods.main" target="11" />
       <module name="Tic-Tac-Toe_with_AI.Topics-Calling_a_method-Method_invocation.main" target="11" />
       <module name="Tic-Tac-Toe_with_AI.Topics-Calling_a_method-Theory.main" target="11" />
+      <module name="Tic-Tac-Toe_with_AI.Topics-Iterating_over_arrays-Alphabetical_order.main" target="11" />
+      <module name="Tic-Tac-Toe_with_AI.Topics-Iterating_over_arrays-Boxes.main" target="11" />
+      <module name="Tic-Tac-Toe_with_AI.Topics-Iterating_over_arrays-Check_if_an_array_contains_two_numbers.main" target="11" />
+      <module name="Tic-Tac-Toe_with_AI.Topics-Iterating_over_arrays-Count_how_many_times_a_number_occurs.main" target="11" />
+      <module name="Tic-Tac-Toe_with_AI.Topics-Iterating_over_arrays-Select_loops.main" target="11" />
+      <module name="Tic-Tac-Toe_with_AI.Topics-Iterating_over_arrays-Theory.main" target="11" />
       <module name="Tic-Tac-Toe_with_AI.Topics-Random-Choose_a_correct_invocation.main" target="11" />
       <module name="Tic-Tac-Toe_with_AI.Topics-Random-Find_the_seed.main" target="11" />
       <module name="Tic-Tac-Toe_with_AI.Topics-Random-Gaussian_random_numbers.main" target="11" />
