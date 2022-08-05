@@ -17,22 +17,24 @@ public class Menu {
     }
 
     private void getUserInput() {
+
         System.out.print("Input command: ");
         setUserInputArray(input.nextLine().split(" "));
 
+        boolean isExiting = getUserInputArray()[0].equalsIgnoreCase(getUserCommandChoices()[1]);
 
-        if (getUserInputArray()[0].equalsIgnoreCase(getUserCommandChoices()[1])) {
-            setUserCommand(getUserInputArray()[0]);
-        } else {
+        while (!isValidInputArray() && !isExiting) {
 
-            while (!isValidInputArray()) {
+            System.out.println("Bad parameters!");
+            setUserInputArray(input.nextLine().split(" "));
 
-                System.out.println("Bad parameters!");
-                setUserInputArray(input.nextLine().split(" "));
+            isExiting = getUserInputArray()[0].equalsIgnoreCase(getUserCommandChoices()[1]);
 
-            }
+        }
 
-            setUserCommand(getUserInputArray()[0]);
+        setUserCommand(getUserInputArray()[0]);
+
+        if (!isExiting) {
             getPlayer1().setType(getUserInputArray()[1]);
             getPlayer2().setType(getUserInputArray()[2]);
         }
@@ -40,9 +42,6 @@ public class Menu {
     }
 
     private boolean isValidInputArray() {
-        // length of input array must be 3 or bad parameters
-        // if first index isn't in getUserCommandChoices()
-        // if second or third index aren't in getUserPlayerChoices()
 
         // make sure length of input array is 3
         if (getUserInputArray().length != 3) {

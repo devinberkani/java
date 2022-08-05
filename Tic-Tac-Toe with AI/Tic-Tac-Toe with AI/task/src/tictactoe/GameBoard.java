@@ -10,24 +10,20 @@ public class GameBoard {
 
     Player player1;
     Player player2;
+
+    Player currentPlayer;
     private String[][] gameBoard = new String[3][3];
 
     private String[][] testGameBoard = new String[3][3];
     private int[] validUserCoordinates = new int[2];
-    private final String[] gamePieces = {GamePieces.X.getGamePiece(), GamePieces.O.getGamePiece()};
-    private String currentGamePiece;
+    private final String[] gamePieceChoices = {"X", "O"};
     private int gamePieceCount;
 
     public GameBoard(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
-
-        // YOU ARE HERE
-
-        // you have (potentially) completed menu logic, you now need to:
-        // make the game piece logic be associated with the PLAYER game piece (same with switching game piece)
-        // make whether coordinates are asked for or not be based on the player type (if type isn't user then don't)
-        
+        initializeGameBoard();
+        printGameBoard();
     }
 
     // ***** GAME BOARD *****
@@ -67,8 +63,8 @@ public class GameBoard {
         // update number of game pieces on game board
         updateNumberOfPiecesOnBoard();
 
-        // update current game piece
-        chooseGamePiece();
+        // update current player
+        chooseCurrentPlayer();
 
     }
 
@@ -87,16 +83,15 @@ public class GameBoard {
 
     // ***** SWITCH GAME PIECE ON EVERY TURN *****
 
-    private void chooseGamePiece() {
+    private void chooseCurrentPlayer() {
 
-        // if there are an even number of game pieces already on the board, the game piece is "X", otherwise it's "O"
+        // if there are an even number of game pieces already on the board, the current player is player 1, otherwise it's player 2
 
         if (getGamePieceCount() % 2 == 0) {
-            setCurrentGamePiece(getGamePieces()[0]);
+            setCurrentPlayer(getPlayer1());
         } else {
-            setCurrentGamePiece(getGamePieces()[1]);
+            setCurrentPlayer(getPlayer2());
         }
-
     }
 
     // keeps track of the number of pieces currently on the game board
@@ -105,7 +100,7 @@ public class GameBoard {
 
         for (int i = 0; i < getGameBoard().length; i++) {
             for (int j = 0; j < getGameBoard()[i].length; j++) {
-                for (String gamePiece : getGamePieces()) {
+                for (String gamePiece : getGamePieceChoices()) {
                     if (getGameBoard()[i][j].equals(gamePiece)) {
                         gamePieceCount++;
                     }
@@ -122,8 +117,7 @@ public class GameBoard {
 
         boolean computerCoordinatesValid = false;
 
-        System.out.print("Making move level \"easy\""); // levels will need to be turned into an array and called based on user selection
-        System.out.println();
+        System.out.println("Making move level \"easy\""); // levels will need to be turned into an array and called based on user selection
 
         while(!computerCoordinatesValid) {
 
@@ -165,11 +159,11 @@ public class GameBoard {
     // ***** VALIDATE COORDINATES AND ADD THEM TO GAME BOARD *****
     private boolean isValidInput(int coordinate1, int coordinate2) {
 
-        boolean currentGamePieceIsX = getCurrentGamePiece().equals(getGamePieces()[0]);
+        boolean playerIsHuman = getCurrentPlayer().getType().equalsIgnoreCase("user");
 
         try {
 
-            if (currentGamePieceIsX) {
+            if (playerIsHuman) {
                 coordinate1 = input.nextInt() - 1;
                 coordinate2 = input.nextInt() - 1;
             }
@@ -182,7 +176,7 @@ public class GameBoard {
 
             String coordinate = getGameBoard()[getValidUserCoordinates()[0]][getValidUserCoordinates()[1]];
 
-            if (coordinate.equals(getGamePieces()[0]) || coordinate.equals(getGamePieces()[1])) {
+            if (coordinate.equals(getGamePieceChoices()[0]) || coordinate.equals(getGamePieceChoices()[1])) {
                 throw new CellOccupiedException("This cell is occupied! Choose another one!");
             } else {
                 setGameBoard(getTestGameBoard());
@@ -190,18 +184,18 @@ public class GameBoard {
             }
 
         } catch (CellOccupiedException cellOccupiedException) {
-            if (currentGamePieceIsX) {
+            if (playerIsHuman) {
                 System.out.println(cellOccupiedException.getMessage());
             }
         // check that coordinates are numbers
         } catch (InputMismatchException inputMismatchException) {
-            if (currentGamePieceIsX) {
+            if (playerIsHuman) {
                 System.out.println("You should enter numbers!");
                 input.nextLine(); // consume input
             }
         // check that coordinates are within correct range
         } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
-            if (currentGamePieceIsX) {
+            if (playerIsHuman) {
                 System.out.println("Coordinates should be from 1 to 3!");
             }
         }
@@ -212,7 +206,7 @@ public class GameBoard {
 
         setTestGameBoard(cloneGameBoard());
 
-        getTestGameBoard()[validUserCoordinates[0]][validUserCoordinates[1]] = getCurrentGamePiece();
+        getTestGameBoard()[validUserCoordinates[0]][validUserCoordinates[1]] = getCurrentPlayer().getGamePiece();
 
         return getTestGameBoard();
 
@@ -263,7 +257,7 @@ public class GameBoard {
         boolean gameWon = false;
         String winner;
 
-        for (String gamePieceCheck : getGamePieces()) {
+        for (String gamePieceCheck : getGamePieceChoices()) {
             for (int i = 0; i < getGameBoard().length; i++) {
 
                 String gamePiece1 = "";
@@ -393,16 +387,8 @@ public class GameBoard {
         isGameOver = gameOver;
     }
 
-    public String getCurrentGamePiece() {
-        return currentGamePiece;
-    }
-
-    public void setCurrentGamePiece(String currentGamePiece) {
-        this.currentGamePiece = currentGamePiece;
-    }
-
-    public String[] getGamePieces() {
-        return gamePieces;
+    public String[] getGamePieceChoices() {
+        return gamePieceChoices;
     }
 
     public int getGamePieceCount() {
@@ -411,5 +397,13 @@ public class GameBoard {
 
     public void setGamePieceCount(int gamePieceCount) {
         this.gamePieceCount = gamePieceCount;
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
     }
 }

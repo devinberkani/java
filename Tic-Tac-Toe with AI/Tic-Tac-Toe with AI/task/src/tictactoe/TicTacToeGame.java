@@ -4,7 +4,7 @@ public class TicTacToeGame {
 
     public TicTacToeGame() {
 
-        final Menu menu = new Menu();
+        Menu menu = new Menu();
         String userCommand = menu.getUserCommand();
 
         while (!userCommand.equalsIgnoreCase("exit")) {
@@ -13,20 +13,23 @@ public class TicTacToeGame {
             Player player2 = menu.getPlayer2();
             final GameBoard gameBoard = new GameBoard(player1, player2);
 
-            gameBoard.initializeGameBoard();
-            gameBoard.printGameBoard();
+            boolean currentPlayerIsHuman = gameBoard.getCurrentPlayer().getType().equalsIgnoreCase("user");
 
             while(!gameBoard.isGameOver()) {
 
-                gameBoard.getUserCoordinates();
-                gameBoard.setGameOver(gameBoard.checkForWinner());
-
-                if (!gameBoard.isGameOver()) {
-                    gameBoard.getComputerCoordinates();
-                    gameBoard.setGameOver(gameBoard.checkForWinner());
+                if (currentPlayerIsHuman) {
+                    gameBoard.getUserCoordinates();
+                } else {
+                    gameBoard.getComputerCoordinates(); // level will be passed in as argument here
                 }
 
+                gameBoard.setGameOver(gameBoard.checkForWinner());
+                currentPlayerIsHuman = gameBoard.getCurrentPlayer().getType().equalsIgnoreCase("user");
+
             }
+
+            menu = new Menu();
+            userCommand = menu.getUserCommand();
 
         }
 
