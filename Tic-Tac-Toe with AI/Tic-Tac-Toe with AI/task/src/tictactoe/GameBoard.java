@@ -19,7 +19,10 @@ public class GameBoard {
     private int[] validUserCoordinates = new int[2];
     private final String[] gamePieceChoices = {"X", "O"};
     private int gamePieceCount;
-    private int[] mediumBlockingCoordinates = new int[2];
+
+    private boolean opponentHasTwoPiecesInRow;
+    private boolean currentPlayerHasTwoPiecesInRow;
+    private int[] mediumCoordinates = new int[2];
 
     public GameBoard(Player player1, Player player2) {
         this.player1 = player1;
@@ -132,7 +135,7 @@ public class GameBoard {
             if (difficultyLevel.equalsIgnoreCase("easy")) {
                 computerCoordinates = getEasyCoordinates();
             } if (difficultyLevel.equalsIgnoreCase("medium")) {
-                computerCoordinates = getMediumBlockingCoordinates();
+                computerCoordinates = getMediumCoordinates();
             }
 
             // validate user coordinates
@@ -153,13 +156,15 @@ public class GameBoard {
         return new int[]{computerCoordinate1, computerCoordinate2};
     }
 
-    private int[] getMediumBlockingCoordinates() {
+    private int[] getMediumCoordinates() {
 
-        return mediumBlockingCoordinates;
+        // if computer is at risk of losing, use medium ai logic, else use easy logic to produce random coordinates
 
-        // blocking seems to be working - time to make it so computer tries to win
-        // boolean computer medium win
-        // set a boolean for if the piece in gamepiececheck IS the current players game piece AND there are 2/3 pieces matching this condition, try to make a move on the one that is open
+        if (isOpponentHasTwoPiecesInRow()) {
+            return mediumCoordinates;
+        } else {
+            return getEasyCoordinates();
+        }
     }
 
     // ***** GET USER COORDINATES *****
@@ -277,9 +282,15 @@ public class GameBoard {
         return getTestGameBoard();
     }
 
-    // ***** DEFINE WINS AND CHECK FOR WINNER *****
-    protected boolean checkForWinner() {
+    // ***** DEFINE WINS AND CHECKS GAME BOARD FOR GAME PIECES IN A ROW AND WINNER *****
+    protected boolean checkGameBoard() {
 
+        // reset medium ai opponent logic
+//        System.out.println("current player is " + getCurrentPlayer().getGamePiece());
+//        System.out.println("current player has two pieces in a row? " + isCurrentPlayerHasTwoPiecesInRow());
+//        System.out.println("opponent has two pieces in a row? " + isOpponentHasTwoPiecesInRow());
+        setCurrentPlayerHasTwoPiecesInRow(false);
+        setOpponentHasTwoPiecesInRow(false);
         printGameBoard(); // keeps game board in correct order for tests
 
         boolean gameWon = false;
@@ -307,18 +318,33 @@ public class GameBoard {
 
                         if (gamePieceCheck.equals(gamePiece1) && gamePieceCheck.equals(gamePiece2) && gamePieceCheck.equals(gamePiece3)) {
                             break;
-                        } else if (isTwoOpponentPiecesInRow(gamePieceCheck, gamePiece1, gamePiece2, gamePiece3)) {
-                            if (gamePiece1.equalsIgnoreCase(" ")) {
-                                mediumCoordinate1 = i;
-                                mediumCoordinate2 = j;
-                            } else if (gamePiece2.equalsIgnoreCase(" ")) {
-                                mediumCoordinate1 = i + 1;
-                                mediumCoordinate2 = j + 1;
-                            } else if (gamePiece3.equalsIgnoreCase(" ")) {
-                                mediumCoordinate1 = i + 2;
-                                mediumCoordinate2 = j + 2;
+                        } else if (isTwoGamePiecesInRow(gamePieceCheck, gamePiece1, gamePiece2, gamePiece3)) {
+                            if (isCurrentPlayerHasTwoPiecesInRow()) {
+                                if (gamePiece1.equalsIgnoreCase(" ")) {
+                                    mediumCoordinate1 = i;
+                                    mediumCoordinate2 = j;
+                                } else if (gamePiece2.equalsIgnoreCase(" ")) {
+                                    mediumCoordinate1 = i + 1;
+                                    mediumCoordinate2 = j + 1;
+                                } else if (gamePiece3.equalsIgnoreCase(" ")) {
+                                    mediumCoordinate1 = i + 2;
+                                    mediumCoordinate2 = j + 2;
+                                }
+                                setMediumCoordinates(new int[]{mediumCoordinate1, mediumCoordinate2});
+                                break;
+                            } else if (isOpponentHasTwoPiecesInRow()) {
+                                if (gamePiece1.equalsIgnoreCase(" ")) {
+                                    mediumCoordinate1 = i;
+                                    mediumCoordinate2 = j;
+                                } else if (gamePiece2.equalsIgnoreCase(" ")) {
+                                    mediumCoordinate1 = i + 1;
+                                    mediumCoordinate2 = j + 1;
+                                } else if (gamePiece3.equalsIgnoreCase(" ")) {
+                                    mediumCoordinate1 = i + 2;
+                                    mediumCoordinate2 = j + 2;
+                                }
+                                setMediumCoordinates(new int[]{mediumCoordinate1, mediumCoordinate2});
                             }
-                            setMediumBlockingCoordinates(new int[]{mediumCoordinate1, mediumCoordinate2});
                         }
                     }
 
@@ -330,18 +356,33 @@ public class GameBoard {
 
                         if (gamePieceCheck.equals(gamePiece1) && gamePieceCheck.equals(gamePiece2) && gamePieceCheck.equals(gamePiece3)) {
                             break;
-                        } else if (isTwoOpponentPiecesInRow(gamePieceCheck, gamePiece1, gamePiece2, gamePiece3)) {
-                            if (gamePiece1.equalsIgnoreCase(" ")) {
-                                mediumCoordinate1 = i;
-                                mediumCoordinate2 = j;
-                            } else if (gamePiece2.equalsIgnoreCase(" ")) {
-                                mediumCoordinate1 = i + 1;
-                                mediumCoordinate2 = j - 1;
-                            } else if (gamePiece3.equalsIgnoreCase(" ")) {
-                                mediumCoordinate1 = i + 2;
-                                mediumCoordinate2 = j - 2;
+                        } else if (isTwoGamePiecesInRow(gamePieceCheck, gamePiece1, gamePiece2, gamePiece3)) {
+                            if (isCurrentPlayerHasTwoPiecesInRow()) {
+                                if (gamePiece1.equalsIgnoreCase(" ")) {
+                                    mediumCoordinate1 = i;
+                                    mediumCoordinate2 = j;
+                                } else if (gamePiece2.equalsIgnoreCase(" ")) {
+                                    mediumCoordinate1 = i + 1;
+                                    mediumCoordinate2 = j - 1;
+                                } else if (gamePiece3.equalsIgnoreCase(" ")) {
+                                    mediumCoordinate1 = i + 2;
+                                    mediumCoordinate2 = j - 2;
+                                }
+                                setMediumCoordinates(new int[]{mediumCoordinate1, mediumCoordinate2});
+                                break;
+                            } else if (isOpponentHasTwoPiecesInRow()) {
+                                if (gamePiece1.equalsIgnoreCase(" ")) {
+                                    mediumCoordinate1 = i;
+                                    mediumCoordinate2 = j;
+                                } else if (gamePiece2.equalsIgnoreCase(" ")) {
+                                    mediumCoordinate1 = i + 1;
+                                    mediumCoordinate2 = j - 1;
+                                } else if (gamePiece3.equalsIgnoreCase(" ")) {
+                                    mediumCoordinate1 = i + 2;
+                                    mediumCoordinate2 = j - 2;
+                                }
+                                setMediumCoordinates(new int[]{mediumCoordinate1, mediumCoordinate2});
                             }
-                            setMediumBlockingCoordinates(new int[]{mediumCoordinate1, mediumCoordinate2});
                         }
                     }
 
@@ -353,18 +394,33 @@ public class GameBoard {
 
                         if (gamePieceCheck.equals(gamePiece1) && gamePieceCheck.equals(gamePiece2) && gamePieceCheck.equals(gamePiece3)) {
                             break;
-                        } else if (isTwoOpponentPiecesInRow(gamePieceCheck, gamePiece1, gamePiece2, gamePiece3)) {
-                            if (gamePiece1.equalsIgnoreCase(" ")) {
-                                mediumCoordinate1 = i;
-                                mediumCoordinate2 = j;
-                            } else if (gamePiece2.equalsIgnoreCase(" ")) {
-                                mediumCoordinate1 = i;
-                                mediumCoordinate2 = j + 1;
-                            } else if (gamePiece3.equalsIgnoreCase(" ")) {
-                                mediumCoordinate1 = i;
-                                mediumCoordinate2 = j + 2;
+                        } else if (isTwoGamePiecesInRow(gamePieceCheck, gamePiece1, gamePiece2, gamePiece3)) {
+                            if (isCurrentPlayerHasTwoPiecesInRow()) {
+                                if (gamePiece1.equalsIgnoreCase(" ")) {
+                                    mediumCoordinate1 = i;
+                                    mediumCoordinate2 = j;
+                                } else if (gamePiece2.equalsIgnoreCase(" ")) {
+                                    mediumCoordinate1 = i;
+                                    mediumCoordinate2 = j + 1;
+                                } else if (gamePiece3.equalsIgnoreCase(" ")) {
+                                    mediumCoordinate1 = i;
+                                    mediumCoordinate2 = j + 2;
+                                }
+                                setMediumCoordinates(new int[]{mediumCoordinate1, mediumCoordinate2});
+                                break;
+                            } else if (isOpponentHasTwoPiecesInRow()) {
+                                if (gamePiece1.equalsIgnoreCase(" ")) {
+                                    mediumCoordinate1 = i;
+                                    mediumCoordinate2 = j;
+                                } else if (gamePiece2.equalsIgnoreCase(" ")) {
+                                    mediumCoordinate1 = i;
+                                    mediumCoordinate2 = j + 1;
+                                } else if (gamePiece3.equalsIgnoreCase(" ")) {
+                                    mediumCoordinate1 = i;
+                                    mediumCoordinate2 = j + 2;
+                                }
+                                setMediumCoordinates(new int[]{mediumCoordinate1, mediumCoordinate2});
                             }
-                            setMediumBlockingCoordinates(new int[]{mediumCoordinate1, mediumCoordinate2});
                         }
                     }
 
@@ -376,18 +432,33 @@ public class GameBoard {
 
                         if (gamePieceCheck.equals(gamePiece1) && gamePieceCheck.equals(gamePiece2) && gamePieceCheck.equals(gamePiece3)) {
                             break;
-                        } else if (isTwoOpponentPiecesInRow(gamePieceCheck, gamePiece1, gamePiece2, gamePiece3)) {
-                            if (gamePiece1.equalsIgnoreCase(" ")) {
-                                mediumCoordinate1 = i;
-                                mediumCoordinate2 = j;
-                            } else if (gamePiece2.equalsIgnoreCase(" ")) {
-                                mediumCoordinate1 = i + 1;
-                                mediumCoordinate2 = j;
-                            } else if (gamePiece3.equalsIgnoreCase(" ")) {
-                                mediumCoordinate1 = i + 2;
-                                mediumCoordinate2 = j;
+                        } else if (isTwoGamePiecesInRow(gamePieceCheck, gamePiece1, gamePiece2, gamePiece3)) {
+                            if (isCurrentPlayerHasTwoPiecesInRow()) {
+                                if (gamePiece1.equalsIgnoreCase(" ")) {
+                                    mediumCoordinate1 = i;
+                                    mediumCoordinate2 = j;
+                                } else if (gamePiece2.equalsIgnoreCase(" ")) {
+                                    mediumCoordinate1 = i + 1;
+                                    mediumCoordinate2 = j;
+                                } else if (gamePiece3.equalsIgnoreCase(" ")) {
+                                    mediumCoordinate1 = i + 2;
+                                    mediumCoordinate2 = j;
+                                }
+                                setMediumCoordinates(new int[]{mediumCoordinate1, mediumCoordinate2});
+                                break;
+                            } else if (isOpponentHasTwoPiecesInRow()) {
+                                if (gamePiece1.equalsIgnoreCase(" ")) {
+                                    mediumCoordinate1 = i;
+                                    mediumCoordinate2 = j;
+                                } else if (gamePiece2.equalsIgnoreCase(" ")) {
+                                    mediumCoordinate1 = i + 1;
+                                    mediumCoordinate2 = j;
+                                } else if (gamePiece3.equalsIgnoreCase(" ")) {
+                                    mediumCoordinate1 = i + 2;
+                                    mediumCoordinate2 = j;
+                                }
+                                setMediumCoordinates(new int[]{mediumCoordinate1, mediumCoordinate2});
                             }
-                            setMediumBlockingCoordinates(new int[]{mediumCoordinate1, mediumCoordinate2});
                         }
                     }
                 }
@@ -411,7 +482,7 @@ public class GameBoard {
         }
     }
 
-    private boolean isTwoOpponentPiecesInRow(String gamePieceCheck, String gamePiece1, String gamePiece2, String gamePiece3) {
+    private boolean isTwoGamePiecesInRow(String gamePieceCheck, String gamePiece1, String gamePiece2, String gamePiece3) {
 
         ArrayList<String> gamePiecesChecked = new ArrayList<>();
 
@@ -421,15 +492,24 @@ public class GameBoard {
         gamePiecesChecked.add(gamePiece2);
         gamePiecesChecked.add(gamePiece3);
 
-        // logic for computer blocking opponent
-
-        // if the game piece matches the game piece being checked && it is NOT the current player's piece, remove it from the array
-        gamePiecesChecked.removeIf(gamePiece -> gamePiece.equalsIgnoreCase(gamePieceCheck) && !gamePiece.equalsIgnoreCase(getCurrentPlayer().getGamePiece()));
-
-        // if there is only one left and it is blank, this is where the computer should try to go,
-        if (gamePiecesChecked.size() == 1) {
-            // make sure the space is blank
-            return gamePiecesChecked.get(0).equalsIgnoreCase(" ");
+        if (getCurrentPlayer().getGamePiece().equalsIgnoreCase(gamePieceCheck)) {
+            // if the game piece matches the game piece being checked && it IS the current player's piece, remove it from the array
+            gamePiecesChecked.removeIf(gamePiece -> gamePiece.equalsIgnoreCase(gamePieceCheck) && gamePiece.equalsIgnoreCase(getCurrentPlayer().getGamePiece()));
+            // if there is only one left and it is blank, this is where the computer should try to go,
+            if (gamePiecesChecked.size() == 1) {
+                // make sure the space is blank
+                setCurrentPlayerHasTwoPiecesInRow(gamePiecesChecked.get(0).equalsIgnoreCase(" "));
+                return gamePiecesChecked.get(0).equalsIgnoreCase(" ");
+            }
+        } else {
+            // if the game piece matches the game piece being checked && it is NOT the current player's piece, remove it from the array
+            gamePiecesChecked.removeIf(gamePiece -> gamePiece.equalsIgnoreCase(gamePieceCheck) && !gamePiece.equalsIgnoreCase(getCurrentPlayer().getGamePiece()));
+            // if there is only one left and it is blank, this is where the computer should try to go,
+            if (gamePiecesChecked.size() == 1) {
+                // make sure the space is blank
+                setOpponentHasTwoPiecesInRow(gamePiecesChecked.get(0).equalsIgnoreCase(" "));
+                return gamePiecesChecked.get(0).equalsIgnoreCase(" ");
+            }
         }
         return false;
     }
@@ -505,7 +585,23 @@ public class GameBoard {
         this.currentPlayer = currentPlayer;
     }
 
-    public void setMediumBlockingCoordinates(int[] mediumBlockingCoordinates) {
-        this.mediumBlockingCoordinates = mediumBlockingCoordinates;
+    public void setMediumCoordinates(int[] mediumCoordinates) {
+        this.mediumCoordinates = mediumCoordinates;
+    }
+
+    public boolean isOpponentHasTwoPiecesInRow() {
+        return opponentHasTwoPiecesInRow;
+    }
+
+    public void setOpponentHasTwoPiecesInRow(boolean opponentHasTwoPiecesInRow) {
+        this.opponentHasTwoPiecesInRow = opponentHasTwoPiecesInRow;
+    }
+
+    public boolean isCurrentPlayerHasTwoPiecesInRow() {
+        return currentPlayerHasTwoPiecesInRow;
+    }
+
+    public void setCurrentPlayerHasTwoPiecesInRow(boolean currentPlayerHasTwoPiecesInRow) {
+        this.currentPlayerHasTwoPiecesInRow = currentPlayerHasTwoPiecesInRow;
     }
 }
