@@ -7,7 +7,7 @@ public class Menu {
     private static final Scanner input = new Scanner(System.in);
     private String[] userInputArray;
     private final String[] userCommandChoices = {"start", "exit"};
-    private final String[] userPlayerChoices = {"easy", ",medium", "hard", "user"};
+    private final String[] userPlayerChoices = {"easy", "medium", "hard", "user"};
     private String userCommand;
     private final Player player1 = new Player("X"); // game piece is always X
     private final Player player2 = new Player("O"); // game piece is always O
