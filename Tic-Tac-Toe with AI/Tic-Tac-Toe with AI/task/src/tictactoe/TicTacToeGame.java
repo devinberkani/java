@@ -27,6 +27,7 @@ public class TicTacToeGame {
                 }
 
                 gameBoard.setGameOver(gameBoard.checkGameBoard());
+
                 currentPlayerIsHuman = gameBoard.getCurrentPlayer().getType().equalsIgnoreCase("user");
 
             }

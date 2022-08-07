@@ -160,7 +160,7 @@ public class GameBoard {
 
         // if computer is at risk of losing, use medium ai logic, else use easy logic to produce random coordinates
 
-        if (isOpponentHasTwoPiecesInRow()) {
+        if (isOpponentHasTwoPiecesInRow() || isCurrentPlayerHasTwoPiecesInRow()) {
             return mediumCoordinates;
         } else {
             return getEasyCoordinates();
@@ -298,8 +298,6 @@ public class GameBoard {
 
         for (String gamePieceCheck : getGamePieceChoices()) {
             for (int i = 0; i < getGameBoard().length; i++) {
-
-                // IF 2/3 OF THESE SCENARIOS ARE TRUE, COMPUTER SHOULD BLOCK WITH NEXT MOVE ON MEDIUM LEVEL, OR TAKE THE WIN IF IN ITS FAVOR
 
                 String gamePiece1 = "";
                 String gamePiece2 = "";
@@ -507,7 +505,9 @@ public class GameBoard {
             // if there is only one left and it is blank, this is where the computer should try to go,
             if (gamePiecesChecked.size() == 1) {
                 // make sure the space is blank
-                setOpponentHasTwoPiecesInRow(gamePiecesChecked.get(0).equalsIgnoreCase(" "));
+                if (!isOpponentHasTwoPiecesInRow()) {
+                    setOpponentHasTwoPiecesInRow(gamePiecesChecked.get(0).equalsIgnoreCase(" "));
+                }
                 return gamePiecesChecked.get(0).equalsIgnoreCase(" ");
             }
         }
