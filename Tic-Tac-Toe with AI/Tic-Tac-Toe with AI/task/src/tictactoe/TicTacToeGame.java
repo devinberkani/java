@@ -26,7 +26,7 @@ public class TicTacToeGame {
                     gameBoard.getComputerCoordinates(); // level will be passed in as argument here
                 }
 
-                gameBoard.setGameOver(gameBoard.checkGameBoard());
+                gameBoard.setGameOver(gameBoard.checkForWinner()); // current player is switched
 
                 currentPlayerIsHuman = gameBoard.getCurrentPlayer().getType().equalsIgnoreCase("user");
 
