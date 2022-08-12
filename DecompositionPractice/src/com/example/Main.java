@@ -1,21 +1,14 @@
 package com.example;
 
-public class Main {
+class DecompositionPractice {
     public static void main(String[] args) {
-        decompose(5);
+        System.out.println(method(29815));
     }
 
-    public static void decompose(int number) {
-        if (number < 1) {
-            System.out.println("done");
-        } else {
-            int i = number;
-            while (i > 0) {
-                System.out.print(1);
-                i--;
-            }
-            System.out.println();
-            decompose(number - 1);
+    public static long method(long n) {
+        if (n == 0) {
+            return 0;
         }
+        return n % 10 + method(n / 10);
     }
 }
