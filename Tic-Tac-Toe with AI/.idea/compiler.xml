@@ -24,7 +24,9 @@
       <module name="Tic-Tac-Toe_with_AI.Topics-Random-Gaussian_random_numbers.main" target="11" />
       <module name="Tic-Tac-Toe_with_AI.Topics-Random-Generate_random_numbers.main" target="11" />
       <module name="Tic-Tac-Toe_with_AI.Topics-Random-Theory.main" target="11" />
+      <module name="Tic-Tac-Toe_with_AI.Topics-Recursion-Fix_the_method_to_print_strings_in_the_reverse_order.main" target="11" />
       <module name="Tic-Tac-Toe_with_AI.Topics-Recursion-Number_of_decompositions.main" target="11" />
+      <module name="Tic-Tac-Toe_with_AI.Topics-Recursion-Select_statement.main" target="11" />
       <module name="Tic-Tac-Toe_with_AI.Topics-Recursion-Theory.main" target="11" />
       <module name="Tic-Tac-Toe_with_AI.util.main" target="11" />
     </bytecodeTargetLevel>
