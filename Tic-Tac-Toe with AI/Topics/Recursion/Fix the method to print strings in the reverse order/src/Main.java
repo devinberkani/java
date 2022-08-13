@@ -6,8 +6,9 @@ public class Main {
     public static void printReverseCharByChar(String s) {
         if (s.length() > 0) {
             int last = s.length() - 1;
+//            System.out.println("this is substring " + s.substring(0, last));
+            System.out.print(s.charAt(last)); // change this back to print
             printReverseCharByChar(s.substring(0, last));
-            System.out.print(s.charAt(last));
         }
     }
 

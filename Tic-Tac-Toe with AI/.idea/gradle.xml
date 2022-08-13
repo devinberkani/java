@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
@@ -32,7 +33,10 @@
             <option value="$PROJECT_DIR$/Topics/Random/Gaussian random numbers" />
             <option value="$PROJECT_DIR$/Topics/Random/Generate random numbers" />
             <option value="$PROJECT_DIR$/Topics/Random/Theory" />
+            <option value="$PROJECT_DIR$/Topics/Recursion/About recursion" />
+            <option value="$PROJECT_DIR$/Topics/Recursion/Alternating Fibonacci numbers" />
             <option value="$PROJECT_DIR$/Topics/Recursion/Fix the method to print strings in the reverse order" />
+            <option value="$PROJECT_DIR$/Topics/Recursion/K-combination" />
             <option value="$PROJECT_DIR$/Topics/Recursion/Number of decompositions" />
             <option value="$PROJECT_DIR$/Topics/Recursion/Select statement" />
             <option value="$PROJECT_DIR$/Topics/Recursion/Theory" />
