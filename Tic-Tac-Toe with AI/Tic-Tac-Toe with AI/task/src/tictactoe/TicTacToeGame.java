@@ -2,9 +2,6 @@ package tictactoe;
 
 public class TicTacToeGame {
 
-    // pass in player type as parameter of get computer coordinates
-    // based on this parameter, select a method for the ai logic
-
     public TicTacToeGame() {
 
         Menu menu = new Menu();

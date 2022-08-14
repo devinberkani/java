@@ -137,6 +137,8 @@ public class GameBoard {
                 computerCoordinates = getEasyCoordinates();
             } if (difficultyLevel.equalsIgnoreCase("medium")) {
                 computerCoordinates = getMediumCoordinates();
+            } if (difficultyLevel.equalsIgnoreCase("hard")) {
+                computerCoordinates = getHardCoordinates();
             }
 
             // validate user coordinates
@@ -144,6 +146,179 @@ public class GameBoard {
             computerCoordinatesValid = isValidInput(computerCoordinates[0], computerCoordinates[1]);
 
         }
+
+    }
+
+    // ***** HARD LEVEL LOGIC *****
+
+    protected void printSimplifiedGameBoard() {
+        for (int i = 0; i < getSimplifiedGameBoard().length; i++) {
+            System.out.print(getSimplifiedGameBoard()[i] + " ");
+        }
+    }
+
+    protected String[] getSimplifiedGameBoard() {
+
+        String[] simplifiedGameBoard = new String[9];
+
+        int index = 0;
+
+        for (int i = 0; i < getGameBoard().length; i++) {
+            for (int j = 0; j < getGameBoard()[i].length; j++) {
+                if (getGameBoard()[i][j].equalsIgnoreCase(" ")) {
+                    simplifiedGameBoard[index] = Integer.toString(index);
+                } else {
+                    simplifiedGameBoard[index] = getGameBoard()[i][j];
+                }
+                index++;
+            }
+        }
+        return simplifiedGameBoard;
+    }
+    public ArrayList<Integer> getEmptyIndices(String[] gameBoard) {
+
+        ArrayList<Integer> emptyIndices = new ArrayList<>();
+
+        for (int i = 0; i < gameBoard.length; i++) {
+            if (!gameBoard[i].equalsIgnoreCase("X") && !gameBoard[i].equalsIgnoreCase("O")) {
+                emptyIndices.add(i);
+            }
+        }
+
+        return emptyIndices;
+    }
+
+    protected boolean winning(String[] board, String player) {
+
+        return (board[0].equalsIgnoreCase(player) && board[1].equalsIgnoreCase(player) && board[2].equalsIgnoreCase(player)) ||
+                (board[3].equalsIgnoreCase(player) && board[4].equalsIgnoreCase(player) && board[5].equalsIgnoreCase(player)) ||
+                (board[6].equalsIgnoreCase(player) && board[7].equalsIgnoreCase(player) && board[8].equalsIgnoreCase(player)) ||
+                (board[0].equalsIgnoreCase(player) && board[3].equalsIgnoreCase(player) && board[6].equalsIgnoreCase(player)) ||
+                (board[1].equalsIgnoreCase(player) && board[4].equalsIgnoreCase(player) && board[7].equalsIgnoreCase(player)) ||
+                (board[2].equalsIgnoreCase(player) && board[5].equalsIgnoreCase(player) && board[8].equalsIgnoreCase(player)) ||
+                (board[0].equalsIgnoreCase(player) && board[4].equalsIgnoreCase(player) && board[8].equalsIgnoreCase(player)) ||
+                (board[2].equalsIgnoreCase(player) && board[4].equalsIgnoreCase(player) && board[6].equalsIgnoreCase(player));
+    }
+
+    protected Move minimax(String[] newBoard, String player) {
+
+        //player is current player
+
+        String aiPlayer = getCurrentPlayer().getGamePiece();
+        String opponent;
+
+        if (aiPlayer.equalsIgnoreCase("X")) {
+            opponent = "O";
+        } else {
+            opponent = "X";
+        }
+
+//        System.out.println("ai player is " + aiPlayer);
+//        System.out.println("opponent is " + opponent);
+
+        ArrayList<Integer> availSpots = getEmptyIndices(newBoard);
+
+        Move checkTestMove = new Move();
+
+        if (winning(newBoard, opponent)) {
+            checkTestMove.score = -10;
+            return checkTestMove;
+        } else if (winning(newBoard, aiPlayer)) {
+            checkTestMove.score = 10;
+            return checkTestMove;
+        } else if (availSpots.size() == 0) {
+            checkTestMove.score = 0;
+            return checkTestMove;
+        }
+
+        // an array to collect all the objects
+        ArrayList<Move> moves = new ArrayList<>();
+
+        // loop through available spots
+        for (int i = 0; i < availSpots.size(); i++) {
+            //create an object for each and store the index of that spot
+            Move testMove = new Move();
+//            printSimplifiedGameBoard();
+//            System.out.println();
+//            System.out.println("i is currently " + i);
+//            System.out.println(getEmptyIndices(newBoard));
+//            System.out.println("1 current index in this game Board is" + newBoard[availSpots.get(i)]);
+            testMove.index = Integer.parseInt(newBoard[availSpots.get(i)]);
+
+            // set the empty spot to the current player
+            newBoard[availSpots.get(i)] = player;
+//            System.out.println("2 current index in this game Board is" + newBoard[availSpots.get(i)]);
+
+            /*collect the score resulted from calling minimax
+            on the opponent of the current player*/
+            if (player.equalsIgnoreCase(aiPlayer)) {
+                testMove.score = minimax(newBoard, opponent).score;
+            } else {
+                testMove.score = minimax(newBoard, aiPlayer).score;
+            }
+
+            // reset the spot to empty
+            newBoard[availSpots.get(i)] = Integer.toString(testMove.index);
+//            System.out.println("3 current index in this game Board is" + newBoard[availSpots.get(i)]);
+
+            // push the object to the array
+            moves.add(testMove);
+
+        }
+
+        // if it is the computer's turn loop over the moves and choose the move with the highest score
+        int bestMove = 0; // index of the best move in the moves array (not a move object)
+        if (player.equalsIgnoreCase(aiPlayer)) {
+            int bestScore = -10000; // random low starting check number
+            for (int i = 0; i < moves.size(); i++) {
+                if (moves.get(i).score > bestScore) {
+                    bestScore = moves.get(i).score;
+                    bestMove = i;
+                }
+            }
+            // else loop over the moves and choose the move with the lowest score
+        } else {
+            int bestScore = 10000;
+            for (int i = 0; i < moves.size(); i++) {
+                if (moves.get(i).score < bestScore) {
+                    bestScore = moves.get(i).score;
+                    bestMove = i;
+                }
+            }
+        }
+
+//        System.out.println("best move index is " + moves.get(bestMove).index);
+
+        // return the chosen move (object) from the moves array
+        return moves.get(bestMove);
+    }
+
+    private int[] getHardCoordinates() {
+
+        Move bestMove = minimax(getSimplifiedGameBoard(), getCurrentPlayer().getGamePiece());
+        int bestMoveIndex = bestMove.index;
+
+        return translateHardCoordinates(bestMoveIndex);
+
+    }
+
+    private int[] translateHardCoordinates(int index) {
+
+        int rows = 0;
+        int columns = 0;
+
+        if (index < 3) {
+//            row = 0;
+            columns = index;
+        } else if (index < 6) {
+            rows = 1;
+            columns = index - 3;
+        } else if (index < 9) {
+            rows = 2;
+            columns = index - 6;
+        }
+
+        return new int[]{rows, columns};
 
     }
 
