@@ -1,1 +1,3 @@
-# Java Programming Masterclass
+# Devin's Java Playground
+
+Hello! This is my repo for anything and everything related to simply practicing Java. Here you'll find coding challenges, exercises and many throwaway projects I've done. I started this repo when I was taking the Java Programming Masterclass on Udemy, but have since switched to Hyperskill by Jetbrains Academy. I am currently making my way through the "Java For Beginners" learning path and plan on starting the "Java Core" learning path next.
