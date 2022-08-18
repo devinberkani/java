@@ -1,10 +1,40 @@
 [1;31m
 Start test 1[0m
-                    _______ 
-                   < hello >
-                    ------- 
-            ^__^   /        
-    _______/(oo)  /         
-/\/(       /(__)            
-   | w----||                
-   ||     ||                
+Input the file path:
+>  
+ 
+            ^__^
+    _______/(oo)
+/\/(       /(__)
+   | w----||    
+   ||     ||    
+[1;31m
+Start test 2[0m
+Input the file path:
+> test
+test
+            ^__^
+    _______/(oo)
+/\/(       /(__)
+   | w----||    
+   ||     ||    
+[1;31m
+Start test 3[0m
+Input the file path:
+> C:\Users\Examples\test.txt
+C:\Users\Examples\test.txt
+            ^__^
+    _______/(oo)
+/\/(       /(__)
+   | w----||    
+   ||     ||    
+[1;31m
+Start test 4[0m
+Input the file path:
+> /home/username/test.txt
+/home/username/test.txt
+            ^__^
+    _______/(oo)
+/\/(       /(__)
+   | w----||    
+   ||     ||    
