@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="BullsCowsTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-08-20T15:20:32" hostname="Devins-MacBook-Air.local" time="0.046">
+  <properties/>
+  <testcase name="start" classname="BullsCowsTest" time="0.046"/>
+  <system-out><![CDATA[?[1;31m
+Start test 1?[0m
+> 3601
+?[1;31m
+Start test 2?[0m
+> 2587
+?[1;31m
+Start test 3?[0m
+> 1346
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
