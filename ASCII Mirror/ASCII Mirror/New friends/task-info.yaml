@@ -179,6 +179,38 @@ files:
 
     Hello
   learner_created: false
+- name: src/asciimirror/AsciiMirror.java
+  visible: true
+  text: |
+    package asciimirror;
+
+    import java.util.Scanner;
+
+    public class AsciiMirror {
+        final static Scanner scanner = new Scanner(System.in);
+
+        protected void repeatFilePath(String filePath) {
+            System.out.println(filePath);
+        }
+        protected String getFilePath() {
+            System.out.println("Input the file path:");
+            String filePath = scanner.nextLine();
+            repeatFilePath(filePath);
+            return filePath;
+        }
+
+        protected void printCow() {
+            System.out.println("            ^__^\n" +
+                    "    _______/(oo)\n" +
+                    "/\\/(       /(__)\n" +
+                    "   | w----||    \n" +
+                    "   ||     ||    ");
+        }
+    }
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/260/stages/1318/implement#comment
-status: Unchecked
-record: -1
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Fri, 19 Aug 2022 23:09:32 UTC
+record: 3
