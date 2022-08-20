@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class AsciiMirror {
     final static Scanner scanner = new Scanner(System.in);
     private final ArrayList<String> fileStrings = new ArrayList<>();
+    private final ArrayList<String> fileStringsReversed = new ArrayList<>();
 
     private int longestStringLength;
 
@@ -29,18 +30,67 @@ public class AsciiMirror {
     }
 
     protected void printFile() {
-        for (String stringLine: getFileStrings()) {
+        String currentString;
+        for (int i = 0 ; i < getFileStrings().size(); i++) {
             // format fileStrings
-            stringLine = String.format("%-" + getLongestStringLength() + "s", stringLine);
-            System.out.print(stringLine);
+            currentString = String.format("%-" + getLongestStringLength() + "s", getFileStrings().get(i));
+            System.out.print(currentString);
             System.out.print(" | ");
-            System.out.println(stringLine);
+            currentString = String.format("%" + getLongestStringLength() + "s", getFileStringsReversed().get(i));
+            System.out.println(currentString);
         }
     }
 
     // GETTERS & SETTERS
 
-    protected ArrayList<String> setFileStrings(String pathToFile) {
+    protected void setFileStringsReversed(ArrayList<String> fileStrings) {
+
+        ArrayList<String> temporaryReversed = new ArrayList<>();
+
+        for (String stringLine : fileStrings) {
+//            System.out.println("current stringline:");
+//            System.out.println(stringLine);
+            StringBuilder reversedString = new StringBuilder();
+//            System.out.println(stringLine.length());
+//            System.out.println("char list:");
+            for (int i = stringLine.length() - 1; i >= 0; i--) {
+//                System.out.println("i is " + i);
+                char currentChar = stringLine.charAt(i);
+//                System.out.println(currentChar);
+                if (currentChar == '<') {
+                    currentChar = '>';
+                } else if (currentChar == '>') {
+                    currentChar = '<';
+                } else if (currentChar == '[') {
+                    currentChar = ']';
+                } else if (currentChar == ']') {
+                    currentChar = '[';
+                } else if (currentChar == '{') {
+                    currentChar = '}';
+                } else if (currentChar == '}') {
+                    currentChar = '{';
+                } else if (currentChar == '(') {
+                    currentChar = ')';
+                } else if (currentChar == ')') {
+                    currentChar = '(';
+                } else if (currentChar == '/') {
+                    currentChar = '\\';
+                } else if (currentChar == '\\') {
+                    currentChar = '/';
+                }
+                reversedString.append(currentChar);
+            }
+            temporaryReversed.add(reversedString.toString());
+        }
+
+        fileStringsReversed.addAll(temporaryReversed);
+    }
+
+    protected ArrayList<String> getFileStringsReversed() {
+        return fileStringsReversed;
+    }
+
+    protected void setFileStrings(String pathToFile) {
         File file = new File(pathToFile);
 
         try (Scanner scanner = new Scanner(file)) {
@@ -53,10 +103,11 @@ public class AsciiMirror {
         // find the longest string
         setLongestStringLength(findLongestStringLength(fileStrings));
 
-        return fileStrings;
+        // set reversed
+        setFileStringsReversed(fileStrings);
     }
 
-    public ArrayList<String> getFileStrings() {
+    protected ArrayList<String> getFileStrings() {
         return fileStrings;
     }
 

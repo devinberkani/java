@@ -214,6 +214,84 @@ files:
 
     Hello
   learner_created: false
+- name: src/asciimirror/AsciiMirror.java
+  visible: true
+  text: |-
+    package asciimirror;
+
+    import java.io.File;
+    import java.io.FileNotFoundException;
+    import java.util.ArrayList;
+    import java.util.Scanner;
+
+    public class AsciiMirror {
+        final static Scanner scanner = new Scanner(System.in);
+        private final ArrayList<String> fileStrings = new ArrayList<>();
+
+        private int longestStringLength;
+
+        protected String getFilePath() {
+            System.out.println("Input the file path:");
+            return scanner.nextLine();
+        }
+
+        protected int findLongestStringLength(ArrayList<String> fileStrings) {
+            int longestStringLength = 0;
+
+            for (String stringLine : fileStrings) {
+                if (stringLine.length() > longestStringLength) {
+                    longestStringLength = stringLine.length();
+                }
+            }
+
+            return longestStringLength;
+        }
+
+        protected void printFile() {
+            for (String stringLine: getFileStrings()) {
+                // format fileStrings
+                stringLine = String.format("%-" + getLongestStringLength() + "s", stringLine);
+                System.out.print(stringLine);
+                System.out.print(" | ");
+                System.out.println(stringLine);
+            }
+        }
+
+        // GETTERS & SETTERS
+
+        protected ArrayList<String> setFileStrings(String pathToFile) {
+            File file = new File(pathToFile);
+
+            try (Scanner scanner = new Scanner(file)) {
+                while (scanner.hasNext()) {
+                    fileStrings.add(scanner.nextLine());
+                }
+            } catch (FileNotFoundException e) {
+                System.out.println("File not found!");
+            }
+            // find the longest string
+            setLongestStringLength(findLongestStringLength(fileStrings));
+
+            return fileStrings;
+        }
+
+        public ArrayList<String> getFileStrings() {
+            return fileStrings;
+        }
+
+        public int getLongestStringLength() {
+            return longestStringLength;
+        }
+
+        public void setLongestStringLength(int longestStringLength) {
+            this.longestStringLength = longestStringLength;
+        }
+    }
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/260/stages/1320/implement#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Well done! You've finished the project. Select a new project on <a href="https://hyperskill.org/projects">JetBrains
+    Academy</a> to continue learning.
+  time: Sat, 20 Aug 2022 12:28:42 UTC
 record: -1
