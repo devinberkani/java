@@ -10,8 +10,8 @@ public class BullsAndCows {
     private ArrayList<Integer> userGuess = new ArrayList<>();
 
     public BullsAndCows() {
-        getUserInput();
-        gradeUserInput();
+//        getUserInput();
+//        gradeUserInput();
     }
 
     private void printGrade(int cowCount, int bullCount) {
