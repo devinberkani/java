@@ -1,10 +1,10 @@
 package bullscows;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class SecretCode {
-
     private boolean isValidSecretCode;
     private final Scanner scanner = new Scanner(System.in);
     private int userInputSecretCodeLength;
@@ -19,15 +19,18 @@ public class SecretCode {
             setValidSecretCode(setSecretCode());
         }
 
-        // print the secret code
-        System.out.print("The random secret number is ");
-        for (int n : getSecretCode()) {
-            System.out.print(n);
-        }
-        System.out.print(".");
+        System.out.println("Okay, let's start a game!");
+
+//        // print the secret code
+//        System.out.print("The random secret number is ");
+//        for (int n : getSecretCode()) {
+//            System.out.print(n);
+//        }
+//        System.out.print(".");
     }
 
     private void getSecretCodeLengthFromUser() {
+        System.out.println("Please, enter the secret code's length:");
         int codeLength = scanner.nextInt();
         while (codeLength > 10) {
             System.out.println("Error: can't generate a secret number with a length of " + codeLength + " because there aren't enough unique digits.");
@@ -37,13 +40,12 @@ public class SecretCode {
     }
 
     private long getRandomNumber() {
-        long pseudoRandomNumber = System.nanoTime();
 
-        while (pseudoRandomNumber < getUserInputSecretCodeLength()) {
-            pseudoRandomNumber = System.nanoTime();
-        }
+        Random random = new Random();
+        int upperBound = Integer.MAX_VALUE;
+        int lowerBound = Integer.MAX_VALUE - 1000000000;
 
-        return pseudoRandomNumber;
+        return random.nextInt(upperBound - lowerBound) + lowerBound;
     }
 
     // generate secret code of numbers between 0-9
@@ -74,14 +76,6 @@ public class SecretCode {
         } else {
             return true;
         }
-
-//        Random random = new Random();
-//        int upperBound = 10;
-//
-//        // fill secretCode array
-//        for (int i = 0; i < 4; i++) {
-//            secretCode.add(random.nextInt(upperBound));
-//        }
     }
 
     protected ArrayList<Integer> getSecretCode() {
