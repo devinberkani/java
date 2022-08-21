@@ -3,37 +3,56 @@ package bullscows;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class BullsAndCows {
-
+    private boolean gameOver;
     // generate the secret code
     private final SecretCode secretCode = new SecretCode();
     private final Scanner scanner = new Scanner(System.in);
     private ArrayList<Integer> userGuess = new ArrayList<>();
+    private int turnNumber = 1;
 
     public BullsAndCows() {
-//        getUserInput();
-//        gradeUserInput();
+        setGameOver(false);
+
+        while(!isGameOver()) {
+            printTurn();
+            getUserInput();
+            gradeUserInput();
+        }
+
+        System.out.println("Congratulations! You guessed the secret code.");
+    }
+
+    private void printTurn() {
+        System.out.println("Turn " + getTurnNumber() + ":");
+        setTurnNumber(getTurnNumber() + 1);
     }
 
     private void printGrade(int cowCount, int bullCount) {
 
         System.out.print("Grade: ");
 
-        if (cowCount > 0 && bullCount > 0) {
-            System.out.print(bullCount + " bull(s) and " + cowCount + " cow(s). ");
-        } else if (bullCount > 0) {
-            System.out.print(bullCount + " bull(s). ");
-        } else if (cowCount > 0) {
-            System.out.print(cowCount + " cow(s). ");
+        if (cowCount == 1 && bullCount == 1) {
+            System.out.println(bullCount + " bull and " + cowCount + " cow. ");
+        } else if (cowCount > 1 && bullCount > 1) {
+            System.out.println(bullCount + " bulls and " + cowCount + " cows. ");
+        } else if (bullCount == 1) {
+            System.out.println(bullCount + " bull. ");
+        } else if (bullCount > 1) {
+            System.out.println(bullCount + " bulls. ");
+        } else if (cowCount == 1) {
+            System.out.println(cowCount + " cow. ");
+        } else if (cowCount > 1) {
+            System.out.println(cowCount + " cows. ");
         } else {
-            System.out.print("None. ");
+            System.out.println("None. ");
         }
 
-        // print the secret code
-        System.out.print("The secret code is ");
-        for (int n : secretCode.getSecretCode()) {
-            System.out.print(n);
-        }
-        System.out.print(".");
+//        // print the secret code
+//        System.out.print("The secret code is ");
+//        for (int n : secretCode.getSecretCode()) {
+//            System.out.print(n);
+//        }
+//        System.out.print(".");
     }
 
     private void gradeUserInput() {
@@ -51,6 +70,12 @@ public class BullsAndCows {
                 cowCount++;
             }
         }
+
+        // set game over if all bulls
+        if (bullCount == secretCode.getUserInputSecretCodeLength()) {
+            setGameOver(true);
+        }
+
         // print out grade
         printGrade(cowCount, bullCount);
     }
@@ -76,5 +101,21 @@ public class BullsAndCows {
 
     private void setUserGuess(ArrayList<Integer> userGuess) {
         this.userGuess = userGuess;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
+
+    public int getTurnNumber() {
+        return turnNumber;
+    }
+
+    public void setTurnNumber(int turnNumber) {
+        this.turnNumber = turnNumber;
     }
 }
