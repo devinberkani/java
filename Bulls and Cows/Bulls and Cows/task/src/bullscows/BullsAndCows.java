@@ -7,7 +7,7 @@ public class BullsAndCows {
     // generate the secret code
     private final SecretCode secretCode = new SecretCode();
     private final Scanner scanner = new Scanner(System.in);
-    private ArrayList<Integer> userGuess = new ArrayList<>();
+    private ArrayList<Character> userGuess = new ArrayList<>();
     private int turnNumber = 1;
 
     public BullsAndCows() {
@@ -60,8 +60,8 @@ public class BullsAndCows {
         int bullCount = 0;
 
         for (int i = 0; i < getUserGuess().size(); i++) {
-            int userGuessAtIndex = getUserGuess().get(i);
-            int secretCodeAtIndex = secretCode.getSecretCode().get(i);
+            char userGuessAtIndex = getUserGuess().get(i);
+            char secretCodeAtIndex = secretCode.getSecretCode().get(i);
             // test for bulls - same number at same index
             if (userGuessAtIndex == secretCodeAtIndex) {
                 bullCount++;
@@ -72,7 +72,7 @@ public class BullsAndCows {
         }
 
         // set game over if all bulls
-        if (bullCount == secretCode.getUserInputSecretCodeLength()) {
+        if (bullCount == secretCode.getSecretCodeLength()) {
             setGameOver(true);
         }
 
@@ -80,14 +80,14 @@ public class BullsAndCows {
         printGrade(cowCount, bullCount);
     }
     private void getUserInput() {
-        ArrayList<Integer> userInput = new ArrayList<>();
+        ArrayList<Character> userInput = new ArrayList<>();
 
         // split next line of user input into string array
-        String[] userInputStringArr = scanner.nextLine().split("");
+        String userInputString = scanner.nextLine();
 
         // convert to ints and add to userInputArr
-        for (String s : userInputStringArr) {
-            userInput.add(Integer.parseInt(s));
+        for (int i = 0; i < userInputString.length(); i++) {
+            userInput.add(userInputString.charAt(i));
         }
 
         setUserGuess(userInput);
@@ -95,11 +95,11 @@ public class BullsAndCows {
 
     // getters and setters
 
-    private ArrayList<Integer> getUserGuess() {
+    private ArrayList<Character> getUserGuess() {
         return userGuess;
     }
 
-    private void setUserGuess(ArrayList<Integer> userGuess) {
+    private void setUserGuess(ArrayList<Character> userGuess) {
         this.userGuess = userGuess;
     }
 

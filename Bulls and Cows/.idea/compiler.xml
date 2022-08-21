@@ -19,6 +19,11 @@
       <module name="Bulls_and_Cows.Topics-Math_library-Pow.main" target="11" />
       <module name="Bulls_and_Cows.Topics-Math_library-The_angle_between_vectors.main" target="11" />
       <module name="Bulls_and_Cows.Topics-Math_library-Theory.main" target="11" />
+      <module name="Bulls_and_Cows.Topics-Types_and_variables-Animal.main" target="11" />
+      <module name="Bulls_and_Cows.Topics-Types_and_variables-Assignments.main" target="11" />
+      <module name="Bulls_and_Cows.Topics-Types_and_variables-Statements.main" target="11" />
+      <module name="Bulls_and_Cows.Topics-Types_and_variables-Statements__1_.main" target="11" />
+      <module name="Bulls_and_Cows.Topics-Types_and_variables-Theory.main" target="11" />
       <module name="Bulls_and_Cows.util.main" target="11" />
     </bytecodeTargetLevel>
   </component>

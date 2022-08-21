@@ -7,19 +7,21 @@ import java.util.Scanner;
 public class SecretCode {
     private boolean isValidSecretCode;
     private final Scanner scanner = new Scanner(System.in);
-    private int userInputSecretCodeLength;
-    private final ArrayList<Integer> secretCode = new ArrayList<>();
+    private int secretCodeLength;
+    private int numberOfPossibleSymbols;
+    private final ArrayList<Character> secretCode = new ArrayList<>();
 
     public SecretCode() {
 
-        getSecretCodeLengthFromUser();
+        getSecretCodeChoices();
+        getUserParameters();
         setValidSecretCode(false);
 
         while (!isValidSecretCode) {
             setValidSecretCode(setSecretCode());
         }
 
-        System.out.println("Okay, let's start a game!");
+        printGameStartMessage();
 
 //        // print the secret code
 //        System.out.print("The random secret number is ");
@@ -29,65 +31,140 @@ public class SecretCode {
 //        System.out.print(".");
     }
 
-    private void getSecretCodeLengthFromUser() {
-        System.out.println("Please, enter the secret code's length:");
+    private void printGameStartMessage() {
+        System.out.print("The secret is prepared: ");
+
+        for (int i = 0; i < getSecretCodeLength(); i++) {
+            System.out.print("*");
+        }
+
+        if (getNumberOfPossibleSymbols() <= 10) {
+            System.out.println(" (0-" + (getNumberOfPossibleSymbols() - 1) + ").");
+        } else {
+            System.out.println(" (0-9, a-" + (getSecretCodeChoices().get(getNumberOfPossibleSymbols() - 1)) + ").");
+        }
+
+        System.out.println("Okay, let's start a game!");
+    }
+
+    private ArrayList<Character> getSecretCodeChoices() {
+        ArrayList<Character> secretCodeChoices = new ArrayList<>();
+
+        char currChar = '0';
+
+        for (int i = 0; i < 10; i++) {
+            secretCodeChoices.add(currChar);
+            currChar++;
+        }
+
+        currChar = 'a';
+
+        for (int i = 0; i < 26; i++) {
+            secretCodeChoices.add(currChar);
+            currChar++;
+        }
+
+        return secretCodeChoices;
+    }
+
+    private void getUserParameters() {
+        System.out.println("Input the length of the secret code:");
         int codeLength = scanner.nextInt();
-        while (codeLength > 10) {
+        while (codeLength > 36) {
             System.out.println("Error: can't generate a secret number with a length of " + codeLength + " because there aren't enough unique digits.");
             codeLength = scanner.nextInt();
         }
-        setUserInputSecretCodeLength(codeLength);
+
+        System.out.println("Input the number of possible symbols in the code:");
+        int numberOfParameters = scanner.nextInt();
+
+        setSecretCodeLength(codeLength);
+        setNumberOfPossibleSymbols(numberOfParameters);
     }
 
-    private long getRandomNumber() {
-
+    private ArrayList<Integer> getRandomSymbolIndices() {
+        ArrayList<Integer> randomSymbolIndices = new ArrayList<>();
         Random random = new Random();
-        int upperBound = Integer.MAX_VALUE;
-        int lowerBound = Integer.MAX_VALUE - 1000000000;
 
-        return random.nextInt(upperBound - lowerBound) + lowerBound;
-    }
-
-    // generate secret code of numbers between 0-9
-    private boolean setSecretCode() {
-
-        String pseudoRandomNumberString = String.valueOf(getRandomNumber());
-
-        for (int i = pseudoRandomNumberString.length() - 1; i >= 0; i--) {
-            if (secretCode.size() < getUserInputSecretCodeLength()) {
-                char currentNumberAsString = pseudoRandomNumberString.charAt(i);
-                int currentNumber = Character.getNumericValue(currentNumberAsString);
-                // make sure first digit isn't 0
-                if (i == pseudoRandomNumberString.length() - 1 && currentNumber == 0) {
-                    continue;
-                }
-                // add to secretCode array if number doesn't already exist
-                if (!secretCode.contains(currentNumber)) {
-                    secretCode.add(currentNumber);
-                }
-            } else {
-                break;
+        int numberOfIndicesAdded = 0;
+        while (numberOfIndicesAdded < getNumberOfPossibleSymbols()) {
+            int randomNumber = random.nextInt(getNumberOfPossibleSymbols());
+            if (!randomSymbolIndices.contains(randomNumber)) {
+                randomSymbolIndices.add(randomNumber);
+                numberOfIndicesAdded++;
             }
         }
 
-        if (secretCode.size() < getUserInputSecretCodeLength()) {
-            secretCode.clear();
-            return false;
-        } else {
-            return true;
-        }
+        return randomSymbolIndices;
     }
 
-    protected ArrayList<Integer> getSecretCode() {
+//    private long getRandomNumber() {
+//
+//        // create array of (numberOfParameters) random numbers between 0 and 36
+//        // fill secret code array up with (codeLength) characters based on their index from array mentioned above
+//
+//        Random random = new Random();
+//        int upperBound = Integer.MAX_VALUE;
+//        int lowerBound = Integer.MAX_VALUE - 1000000000;
+//
+//        return random.nextInt(upperBound - lowerBound) + lowerBound;
+//    }
+
+    private boolean setSecretCode() {
+
+        ArrayList<Integer> randomSymbolIndices = getRandomSymbolIndices();
+
+        for (int i = 0; i < getSecretCodeLength(); i++) {
+            secretCode.add(getSecretCodeChoices().get(randomSymbolIndices.get(i)));
+        }
+
+        return true;
+
+//        String pseudoRandomNumberString = String.valueOf(getRandomNumber());
+//
+//        for (int i = pseudoRandomNumberString.length() - 1; i >= 0; i--) {
+//            if (secretCode.size() < getSecretCodeLength()) {
+//                char currentNumberAsString = pseudoRandomNumberString.charAt(i);
+//                int currentNumber = Character.getNumericValue(currentNumberAsString);
+//                // make sure first digit isn't 0
+//                if (i == pseudoRandomNumberString.length() - 1 && currentNumber == 0) {
+//                    continue;
+//                }
+//                // add to secretCode array if number doesn't already exist
+//                if (!secretCode.contains(currentNumber)) {
+//                    secretCode.add(currentNumber);
+//                }
+//            } else {
+//                break;
+//            }
+//        }
+//
+//        if (secretCode.size() < getSecretCodeLength()) {
+//            secretCode.clear();
+//            return false;
+//        } else {
+//            return true;
+//        }
+    }
+
+    protected ArrayList<Character> getSecretCode() {
         return secretCode;
     }
 
-    public int getUserInputSecretCodeLength() {
-        return userInputSecretCodeLength;
+    public int getSecretCodeLength() {
+        return secretCodeLength;
     }
 
-    public void setUserInputSecretCodeLength(int userInputSecretCodeLength) {
-        this.userInputSecretCodeLength = userInputSecretCodeLength;
+    public void setSecretCodeLength(int secretCodeLength) {
+        this.secretCodeLength = secretCodeLength;
+    }
+
+    public int getNumberOfPossibleSymbols() {
+        return numberOfPossibleSymbols;
+    }
+
+    public void setNumberOfPossibleSymbols(int numberOfPossibleSymbols) {
+        this.numberOfPossibleSymbols = numberOfPossibleSymbols;
     }
 
     public boolean isValidSecretCode() {
