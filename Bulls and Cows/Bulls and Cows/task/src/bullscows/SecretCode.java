@@ -5,6 +5,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class SecretCode {
+
+    private boolean errorThrown = false;
     private boolean isValidSecretCode;
     private final Scanner scanner = new Scanner(System.in);
     private int secretCodeLength;
@@ -17,11 +19,13 @@ public class SecretCode {
         getUserParameters();
         setValidSecretCode(false);
 
-        while (!isValidSecretCode) {
+        while (!isValidSecretCode && !errorThrown) {
             setValidSecretCode(setSecretCode());
         }
 
-        printGameStartMessage();
+        if (!errorThrown) {
+            printGameStartMessage();
+        }
 
 //        // print the secret code
 //        System.out.print("The random secret number is ");
@@ -47,7 +51,7 @@ public class SecretCode {
         System.out.println("Okay, let's start a game!");
     }
 
-    private ArrayList<Character> getSecretCodeChoices() {
+    protected ArrayList<Character> getSecretCodeChoices() {
         ArrayList<Character> secretCodeChoices = new ArrayList<>();
 
         char currChar = '0';
@@ -69,17 +73,61 @@ public class SecretCode {
 
     private void getUserParameters() {
         System.out.println("Input the length of the secret code:");
-        int codeLength = scanner.nextInt();
-        while (codeLength > 36) {
-            System.out.println("Error: can't generate a secret number with a length of " + codeLength + " because there aren't enough unique digits.");
-            codeLength = scanner.nextInt();
+
+        boolean codeLengthValid = false;
+        boolean numberOfParametersValid = false;
+
+        String codeLengthString = "";
+        int codeLength = 0;
+
+//        while (!codeLengthValid) {
+            try {
+                codeLengthString = scanner.nextLine();
+                codeLength = Integer.parseInt(codeLengthString);
+                if (codeLength > 36) {
+                    System.out.println("Error: can't generate a secret number with a length of " + codeLength + " because there aren't enough unique digits.");
+                    setErrorThrown(true);
+                } else if (codeLength < 1) {
+                    System.out.println("Error: length of secret code must greater than 0.");
+                    setErrorThrown(true);
+                } else {
+                    codeLengthValid = true;
+                }
+            } catch (Exception e) {
+                System.out.println("Error: \"" + codeLengthString + "\" isn't a valid number.");
+                setErrorThrown(true);
+            }
+//        }
+
+
+        if (codeLengthValid) {
+            System.out.println("Input the number of possible symbols in the code:");
+
+            String numberOfParametersString = "";
+            int numberOfParameters = 0;
+
+//        while (!numberOfParametersValid) {
+            try {
+                numberOfParametersString = scanner.nextLine();
+                numberOfParameters = Integer.parseInt(numberOfParametersString);
+                if (numberOfParameters < codeLength) {
+                    System.out.println("Error: it's not possible to generate a code with a length of " + codeLength + " with " + numberOfParameters + " unique symbols.");
+                    setErrorThrown(true);
+                } else if (numberOfParameters > 36) {
+                    System.out.println("Error: maximum number of possible symbols in the code is 36 (0-9, a-z).");
+                    setErrorThrown(true);
+                } else {
+                    numberOfParametersValid = true;
+                }
+            } catch (Exception e) {
+                System.out.println("Error: \"" + numberOfParametersString + "\" isn't a valid number.");
+                setErrorThrown(true);
+            }
+//        }
+
+            setSecretCodeLength(codeLength);
+            setNumberOfPossibleSymbols(numberOfParameters);
         }
-
-        System.out.println("Input the number of possible symbols in the code:");
-        int numberOfParameters = scanner.nextInt();
-
-        setSecretCodeLength(codeLength);
-        setNumberOfPossibleSymbols(numberOfParameters);
     }
 
     private ArrayList<Integer> getRandomSymbolIndices() {
@@ -173,5 +221,13 @@ public class SecretCode {
 
     public void setValidSecretCode(boolean validSecretCode) {
         isValidSecretCode = validSecretCode;
+    }
+
+    public boolean isErrorThrown() {
+        return errorThrown;
+    }
+
+    public void setErrorThrown(boolean errorThrown) {
+        this.errorThrown = errorThrown;
     }
 }

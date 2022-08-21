@@ -408,6 +408,316 @@ files:
         }
     }
   learner_created: false
+- name: src/bullscows/SecretCode.java
+  visible: true
+  text: |
+    package bullscows;
+
+    import java.util.ArrayList;
+    import java.util.Random;
+    import java.util.Scanner;
+
+    public class SecretCode {
+        private boolean isValidSecretCode;
+        private final Scanner scanner = new Scanner(System.in);
+        private int secretCodeLength;
+        private int numberOfPossibleSymbols;
+        private final ArrayList<Character> secretCode = new ArrayList<>();
+
+        public SecretCode() {
+
+            getSecretCodeChoices();
+            getUserParameters();
+            setValidSecretCode(false);
+
+            while (!isValidSecretCode) {
+                setValidSecretCode(setSecretCode());
+            }
+
+            printGameStartMessage();
+
+    //        // print the secret code
+    //        System.out.print("The random secret number is ");
+    //        for (int n : getSecretCode()) {
+    //            System.out.print(n);
+    //        }
+    //        System.out.print(".");
+        }
+
+        private void printGameStartMessage() {
+            System.out.print("The secret is prepared: ");
+
+            for (int i = 0; i < getSecretCodeLength(); i++) {
+                System.out.print("*");
+            }
+
+            if (getNumberOfPossibleSymbols() <= 10) {
+                System.out.println(" (0-" + (getNumberOfPossibleSymbols() - 1) + ").");
+            } else {
+                System.out.println(" (0-9, a-" + (getSecretCodeChoices().get(getNumberOfPossibleSymbols() - 1)) + ").");
+            }
+
+            System.out.println("Okay, let's start a game!");
+        }
+
+        private ArrayList<Character> getSecretCodeChoices() {
+            ArrayList<Character> secretCodeChoices = new ArrayList<>();
+
+            char currChar = '0';
+
+            for (int i = 0; i < 10; i++) {
+                secretCodeChoices.add(currChar);
+                currChar++;
+            }
+
+            currChar = 'a';
+
+            for (int i = 0; i < 26; i++) {
+                secretCodeChoices.add(currChar);
+                currChar++;
+            }
+
+            return secretCodeChoices;
+        }
+
+        private void getUserParameters() {
+            System.out.println("Input the length of the secret code:");
+            int codeLength = scanner.nextInt();
+            while (codeLength > 36) {
+                System.out.println("Error: can't generate a secret number with a length of " + codeLength + " because there aren't enough unique digits.");
+                codeLength = scanner.nextInt();
+            }
+
+            System.out.println("Input the number of possible symbols in the code:");
+            int numberOfParameters = scanner.nextInt();
+
+            setSecretCodeLength(codeLength);
+            setNumberOfPossibleSymbols(numberOfParameters);
+        }
+
+        private ArrayList<Integer> getRandomSymbolIndices() {
+            ArrayList<Integer> randomSymbolIndices = new ArrayList<>();
+            Random random = new Random();
+
+            int numberOfIndicesAdded = 0;
+            while (numberOfIndicesAdded < getNumberOfPossibleSymbols()) {
+                int randomNumber = random.nextInt(getNumberOfPossibleSymbols());
+                if (!randomSymbolIndices.contains(randomNumber)) {
+                    randomSymbolIndices.add(randomNumber);
+                    numberOfIndicesAdded++;
+                }
+            }
+
+            return randomSymbolIndices;
+        }
+
+    //    private long getRandomNumber() {
+    //
+    //        // create array of (numberOfParameters) random numbers between 0 and 36
+    //        // fill secret code array up with (codeLength) characters based on their index from array mentioned above
+    //
+    //        Random random = new Random();
+    //        int upperBound = Integer.MAX_VALUE;
+    //        int lowerBound = Integer.MAX_VALUE - 1000000000;
+    //
+    //        return random.nextInt(upperBound - lowerBound) + lowerBound;
+    //    }
+
+        private boolean setSecretCode() {
+
+            ArrayList<Integer> randomSymbolIndices = getRandomSymbolIndices();
+
+            for (int i = 0; i < getSecretCodeLength(); i++) {
+                secretCode.add(getSecretCodeChoices().get(randomSymbolIndices.get(i)));
+            }
+
+            return true;
+
+    //        String pseudoRandomNumberString = String.valueOf(getRandomNumber());
+    //
+    //        for (int i = pseudoRandomNumberString.length() - 1; i >= 0; i--) {
+    //            if (secretCode.size() < getSecretCodeLength()) {
+    //                char currentNumberAsString = pseudoRandomNumberString.charAt(i);
+    //                int currentNumber = Character.getNumericValue(currentNumberAsString);
+    //                // make sure first digit isn't 0
+    //                if (i == pseudoRandomNumberString.length() - 1 && currentNumber == 0) {
+    //                    continue;
+    //                }
+    //                // add to secretCode array if number doesn't already exist
+    //                if (!secretCode.contains(currentNumber)) {
+    //                    secretCode.add(currentNumber);
+    //                }
+    //            } else {
+    //                break;
+    //            }
+    //        }
+    //
+    //        if (secretCode.size() < getSecretCodeLength()) {
+    //            secretCode.clear();
+    //            return false;
+    //        } else {
+    //            return true;
+    //        }
+        }
+
+        protected ArrayList<Character> getSecretCode() {
+            return secretCode;
+        }
+
+        public int getSecretCodeLength() {
+            return secretCodeLength;
+        }
+
+        public void setSecretCodeLength(int secretCodeLength) {
+            this.secretCodeLength = secretCodeLength;
+        }
+
+        public int getNumberOfPossibleSymbols() {
+            return numberOfPossibleSymbols;
+        }
+
+        public void setNumberOfPossibleSymbols(int numberOfPossibleSymbols) {
+            this.numberOfPossibleSymbols = numberOfPossibleSymbols;
+        }
+
+        public boolean isValidSecretCode() {
+            return isValidSecretCode;
+        }
+
+        public void setValidSecretCode(boolean validSecretCode) {
+            isValidSecretCode = validSecretCode;
+        }
+    }
+  learner_created: true
+- name: src/bullscows/BullsAndCows.java
+  visible: true
+  text: |-
+    package bullscows;
+
+    import java.util.ArrayList;
+    import java.util.Scanner;
+    public class BullsAndCows {
+        private boolean gameOver;
+        // generate the secret code
+        private final SecretCode secretCode = new SecretCode();
+        private final Scanner scanner = new Scanner(System.in);
+        private ArrayList<Character> userGuess = new ArrayList<>();
+        private int turnNumber = 1;
+
+        public BullsAndCows() {
+            setGameOver(false);
+
+            while(!isGameOver()) {
+                printTurn();
+                getUserInput();
+                gradeUserInput();
+            }
+
+            System.out.println("Congratulations! You guessed the secret code.");
+        }
+
+        private void printTurn() {
+            System.out.println("Turn " + getTurnNumber() + ":");
+            setTurnNumber(getTurnNumber() + 1);
+        }
+
+        private void printGrade(int cowCount, int bullCount) {
+
+            System.out.print("Grade: ");
+
+            if (cowCount == 1 && bullCount == 1) {
+                System.out.println(bullCount + " bull and " + cowCount + " cow. ");
+            } else if (cowCount > 1 && bullCount > 1) {
+                System.out.println(bullCount + " bulls and " + cowCount + " cows. ");
+            } else if (bullCount == 1) {
+                System.out.println(bullCount + " bull. ");
+            } else if (bullCount > 1) {
+                System.out.println(bullCount + " bulls. ");
+            } else if (cowCount == 1) {
+                System.out.println(cowCount + " cow. ");
+            } else if (cowCount > 1) {
+                System.out.println(cowCount + " cows. ");
+            } else {
+                System.out.println("None. ");
+            }
+
+    //        // print the secret code
+    //        System.out.print("The secret code is ");
+    //        for (int n : secretCode.getSecretCode()) {
+    //            System.out.print(n);
+    //        }
+    //        System.out.print(".");
+        }
+
+        private void gradeUserInput() {
+            int cowCount = 0;
+            int bullCount = 0;
+
+            for (int i = 0; i < getUserGuess().size(); i++) {
+                char userGuessAtIndex = getUserGuess().get(i);
+                char secretCodeAtIndex = secretCode.getSecretCode().get(i);
+                // test for bulls - same number at same index
+                if (userGuessAtIndex == secretCodeAtIndex) {
+                    bullCount++;
+                    // test for cows - same number at different index
+                } else if (secretCode.getSecretCode().contains(userGuessAtIndex)) {
+                    cowCount++;
+                }
+            }
+
+            // set game over if all bulls
+            if (bullCount == secretCode.getSecretCodeLength()) {
+                setGameOver(true);
+            }
+
+            // print out grade
+            printGrade(cowCount, bullCount);
+        }
+        private void getUserInput() {
+            ArrayList<Character> userInput = new ArrayList<>();
+
+            // split next line of user input into string array
+            String userInputString = scanner.nextLine();
+
+            // convert to ints and add to userInputArr
+            for (int i = 0; i < userInputString.length(); i++) {
+                userInput.add(userInputString.charAt(i));
+            }
+
+            setUserGuess(userInput);
+        }
+
+        // getters and setters
+
+        private ArrayList<Character> getUserGuess() {
+            return userGuess;
+        }
+
+        private void setUserGuess(ArrayList<Character> userGuess) {
+            this.userGuess = userGuess;
+        }
+
+        public boolean isGameOver() {
+            return gameOver;
+        }
+
+        public void setGameOver(boolean gameOver) {
+            this.gameOver = gameOver;
+        }
+
+        public int getTurnNumber() {
+            return turnNumber;
+        }
+
+        public void setTurnNumber(int turnNumber) {
+            this.turnNumber = turnNumber;
+        }
+    }
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/5435#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Well done! You've finished the project. Select a new project on <a href="https://hyperskill.org/projects">JetBrains
+    Academy</a> to continue learning.
+  time: Sun, 21 Aug 2022 17:47:05 UTC
 record: -1
