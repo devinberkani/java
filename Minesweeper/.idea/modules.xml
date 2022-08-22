@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Minesweeper.iml" filepath="$PROJECT_DIR$/.idea/modules/Minesweeper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Topics/NPE/Avoid NPE/Minesweeper.Topics-NPE-Avoid_NPE.iml" filepath="$PROJECT_DIR$/.idea/modules/Topics/NPE/Avoid NPE/Minesweeper.Topics-NPE-Avoid_NPE.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Topics/NPE/Avoid NPE/Minesweeper.Topics-NPE-Avoid_NPE.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Topics/NPE/Avoid NPE/Minesweeper.Topics-NPE-Avoid_NPE.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Topics/NPE/Avoid NPE/Minesweeper.Topics-NPE-Avoid_NPE.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Topics/NPE/Avoid NPE/Minesweeper.Topics-NPE-Avoid_NPE.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Topics/NPE/Avoid NPE with strings/Minesweeper.Topics-NPE-Avoid_NPE_with_strings.iml" filepath="$PROJECT_DIR$/.idea/modules/Topics/NPE/Avoid NPE with strings/Minesweeper.Topics-NPE-Avoid_NPE_with_strings.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Topics/NPE/Avoid NPE with strings/Minesweeper.Topics-NPE-Avoid_NPE_with_strings.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Topics/NPE/Avoid NPE with strings/Minesweeper.Topics-NPE-Avoid_NPE_with_strings.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Topics/NPE/Avoid NPE with strings/Minesweeper.Topics-NPE-Avoid_NPE_with_strings.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Topics/NPE/Avoid NPE with strings/Minesweeper.Topics-NPE-Avoid_NPE_with_strings.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Topics/NPE/Theory/Minesweeper.Topics-NPE-Theory.iml" filepath="$PROJECT_DIR$/.idea/modules/Topics/NPE/Theory/Minesweeper.Topics-NPE-Theory.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Topics/NPE/Theory/Minesweeper.Topics-NPE-Theory.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Topics/NPE/Theory/Minesweeper.Topics-NPE-Theory.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Topics/NPE/Theory/Minesweeper.Topics-NPE-Theory.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Topics/NPE/Theory/Minesweeper.Topics-NPE-Theory.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Topics/NPE/When NPE cannot occur/Minesweeper.Topics-NPE-When_NPE_cannot_occur.iml" filepath="$PROJECT_DIR$/.idea/modules/Topics/NPE/When NPE cannot occur/Minesweeper.Topics-NPE-When_NPE_cannot_occur.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Topics/NPE/When NPE cannot occur/Minesweeper.Topics-NPE-When_NPE_cannot_occur.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Topics/NPE/When NPE cannot occur/Minesweeper.Topics-NPE-When_NPE_cannot_occur.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Topics/NPE/When NPE cannot occur/Minesweeper.Topics-NPE-When_NPE_cannot_occur.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Topics/NPE/When NPE cannot occur/Minesweeper.Topics-NPE-When_NPE_cannot_occur.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/util/Minesweeper.util.iml" filepath="$PROJECT_DIR$/.idea/modules/util/Minesweeper.util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/util/Minesweeper.util.main.iml" filepath="$PROJECT_DIR$/.idea/modules/util/Minesweeper.util.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/util/Minesweeper.util.test.iml" filepath="$PROJECT_DIR$/.idea/modules/util/Minesweeper.util.test.iml" />
+    </modules>
+  </component>
+</project>
