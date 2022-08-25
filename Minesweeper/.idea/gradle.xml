@@ -12,10 +12,23 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Minesweeper/task" />
+            <option value="$PROJECT_DIR$/Minesweeper/task/build/classes/java" />
+            <option value="$PROJECT_DIR$/Minesweeper/task/build/generated/sources/annotationProcessor/java" />
+            <option value="$PROJECT_DIR$/Minesweeper/task/build/generated/sources/headers/java" />
+            <option value="$PROJECT_DIR$/Minesweeper/task/build/reports/tests" />
+            <option value="$PROJECT_DIR$/Minesweeper/task/build/test-results" />
+            <option value="$PROJECT_DIR$/Minesweeper/task/build/tmp" />
             <option value="$PROJECT_DIR$/Topics/NPE/Avoid NPE" />
             <option value="$PROJECT_DIR$/Topics/NPE/Avoid NPE with strings" />
             <option value="$PROJECT_DIR$/Topics/NPE/Theory" />
             <option value="$PROJECT_DIR$/Topics/NPE/When NPE cannot occur" />
+            <option value="$PROJECT_DIR$/Topics/The while and do-while loops/Magic code" />
+            <option value="$PROJECT_DIR$/Topics/The while and do-while loops/Squares of natural numbers" />
+            <option value="$PROJECT_DIR$/Topics/The while and do-while loops/The largest element of a sequence" />
+            <option value="$PROJECT_DIR$/Topics/The while and do-while loops/The length of the sequence" />
+            <option value="$PROJECT_DIR$/Topics/The while and do-while loops/The sequence" />
+            <option value="$PROJECT_DIR$/Topics/The while and do-while loops/The smallest value" />
+            <option value="$PROJECT_DIR$/Topics/The while and do-while loops/Theory" />
             <option value="$PROJECT_DIR$/util" />
           </set>
         </option>

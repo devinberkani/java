@@ -2,11 +2,24 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="17">
+      <module name="Minesweeper.Minesweeper-task-build-classes-java.main" target="11" />
+      <module name="Minesweeper.Minesweeper-task-build-generated-sources-annotationProcessor-java.main" target="11" />
+      <module name="Minesweeper.Minesweeper-task-build-generated-sources-headers-java.main" target="11" />
+      <module name="Minesweeper.Minesweeper-task-build-reports-tests.main" target="11" />
+      <module name="Minesweeper.Minesweeper-task-build-test-results.main" target="11" />
+      <module name="Minesweeper.Minesweeper-task-build-tmp.main" target="11" />
       <module name="Minesweeper.Minesweeper-task.main" target="11" />
       <module name="Minesweeper.Topics-NPE-Avoid_NPE.main" target="11" />
       <module name="Minesweeper.Topics-NPE-Avoid_NPE_with_strings.main" target="11" />
       <module name="Minesweeper.Topics-NPE-Theory.main" target="11" />
       <module name="Minesweeper.Topics-NPE-When_NPE_cannot_occur.main" target="11" />
+      <module name="Minesweeper.Topics-The_while_and_do-while_loops-Magic_code.main" target="11" />
+      <module name="Minesweeper.Topics-The_while_and_do-while_loops-Squares_of_natural_numbers.main" target="11" />
+      <module name="Minesweeper.Topics-The_while_and_do-while_loops-The_largest_element_of_a_sequence.main" target="11" />
+      <module name="Minesweeper.Topics-The_while_and_do-while_loops-The_length_of_the_sequence.main" target="11" />
+      <module name="Minesweeper.Topics-The_while_and_do-while_loops-The_sequence.main" target="11" />
+      <module name="Minesweeper.Topics-The_while_and_do-while_loops-The_smallest_value.main" target="11" />
+      <module name="Minesweeper.Topics-The_while_and_do-while_loops-Theory.main" target="11" />
       <module name="Minesweeper.util.main" target="11" />
     </bytecodeTargetLevel>
   </component>
