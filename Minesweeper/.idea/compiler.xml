@@ -13,6 +13,8 @@
       <module name="Minesweeper.Topics-NPE-Avoid_NPE_with_strings.main" target="11" />
       <module name="Minesweeper.Topics-NPE-Theory.main" target="11" />
       <module name="Minesweeper.Topics-NPE-When_NPE_cannot_occur.main" target="11" />
+      <module name="Minesweeper.Topics-Stack-The_LIFO_principle_in_action.main" target="11" />
+      <module name="Minesweeper.Topics-Stack-Theory.main" target="11" />
       <module name="Minesweeper.Topics-The_while_and_do-while_loops-Magic_code.main" target="11" />
       <module name="Minesweeper.Topics-The_while_and_do-while_loops-Squares_of_natural_numbers.main" target="11" />
       <module name="Minesweeper.Topics-The_while_and_do-while_loops-The_largest_element_of_a_sequence.main" target="11" />
