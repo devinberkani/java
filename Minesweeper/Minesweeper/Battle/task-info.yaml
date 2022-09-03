@@ -1002,58 +1002,9 @@ files:
     }
   learner_created: true
 feedback_link: https://hyperskill.org/learn/step/7204#comment
-status: Failed
+status: Solved
 feedback:
-  message: |-
-    Wrong answer in test #7
-
-    The last grid contains &#39;*&#39; and &#39;/&#39; characters that are next to each other. This situation is impossible. If there is &#39;*&#39; character that is next to &#39;/&#39; it should be replaced to &#39;/&#39; or to a number.
-
-    Please find below the output of your program during this failed test.
-    Note that the &#39;&gt;&#39; character indicates the beginning of the input line.
-
-    ---
-
-    How many mines do you want on the field?
-    &gt; 1
-     |123456789|
-    -|---------|
-    1|.........|
-    2|.........|
-    3|.........|
-    4|.........|
-    5|.........|
-    6|.........|
-    7|.........|
-    8|.........|
-    9|.........|
-    -|---------|
-    Set/delete mines marks (x and y coordinates): &gt; 3 6 mine
-     |123456789|
-    -|---------|
-    1|.........|
-    2|.........|
-    3|.........|
-    4|.........|
-    5|.........|
-    6|..*......|
-    7|.........|
-    8|.........|
-    9|.........|
-    -|---------|
-    Set/delete mines marks (x and y coordinates): &gt; 5 4 free
-     |123456789|
-    -|---------|
-    1|/////////|
-    2|/////////|
-    3|//////111|
-    4|//////1..|
-    5|//////111|
-    6|//*//////|
-    7|/////////|
-    8|/////////|
-    9|/////////|
-    -|---------|
-    Set/delete mines marks (x and y coordinates):
-  time: Sat, 03 Sep 2022 15:41:37 UTC
+  message: Well done! You've finished the project. Select a new project on <a href="https://hyperskill.org/projects">JetBrains
+    Academy</a> to continue learning.
+  time: Sat, 03 Sep 2022 21:39:45 UTC
 record: -1

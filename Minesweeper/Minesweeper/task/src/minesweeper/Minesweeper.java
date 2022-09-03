@@ -1,5 +1,6 @@
 package minesweeper;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Minesweeper {
@@ -20,6 +21,7 @@ public class Minesweeper {
 //        userGameBoard.printGameBoard();
 
         while(!gameBoardKey.isGameOver()) {
+            updateAllUserIndices();
 //            gameBoardKey.printGameBoard();
             userGameBoard.printGameBoard();
 //            System.out.println("remaining mine indices: " + gameBoardKey.getMineIndices());
@@ -97,6 +99,7 @@ public class Minesweeper {
             }
         } else {
             gameBoardKey.updateGameBoardWithMineCoordinates(convertedCoordinate);
+            userGameBoard.updateGameBoardWithAsterisks(convertedCoordinate);
             userGameBoard.updateGameBoardWithMineCoordinates(convertedCoordinate);
             gameBoardKey.setGameOver(gameBoardKey.getAllUserIndices().size() == 0);
         }
@@ -127,6 +130,19 @@ public class Minesweeper {
         floodFill(multiGameKey, multiUser, coordinateOne + 1, coordinateTwo - 1); // 6 4
         floodFill(multiGameKey, multiUser, coordinateOne + 1, coordinateTwo); // 6 5
         floodFill(multiGameKey, multiUser, coordinateOne + 1, coordinateTwo + 1); // 6 6
+    }
+
+    protected void updateAllUserIndices() {
+
+        ArrayList<Integer> toRemove = new ArrayList<>();
+
+        for (int index : gameBoardKey.getAllUserIndices()) {
+            if (gameBoardKey.getGameBoard()[index] == '/') {
+                toRemove.add(index);
+            }
+        }
+
+        gameBoardKey.getAllUserIndices().removeAll(toRemove);
     }
 
     private char[][] convertToMultiDimensionalArray(char[] gameBoard) {
