@@ -23,7 +23,8 @@
    Note, the 
    <code class="language-java">Collection</code> and 
    <code class="language-java">Map</code> interfaces do not extend each other.
-  </div> 
+  </div>
+  <p></p> 
   <h5 id="the-collection-interface" style="text-align: center;">The Collection interface</h5> 
   <p>Here are common methods provided by the <code class="language-java">Collection</code> interface.</p> 
   <ul> 
@@ -52,7 +53,8 @@ System.out.println(languages.size()); // 3</code></pre>
    <code class="language-java">ArrayList</code> is still preserved. We simply cannot call the 
    <code class="language-java">get</code> method via the 
    <code class="language-java">Collection</code> interface.
-  </div> 
+  </div>
+  <p></p> 
   <p>Every collection can be cast to a string by using <code class="language-java">toString</code> and compared with another collection using the <code class="language-java">equals</code> method. These methods come from <code class="language-java">Object</code> and their behavior depends on elements stored in the collection and the type of the collection itself.</p> 
   <h5 id="mutable-and-immutable-collections" style="text-align: center;">Mutable and Immutable collections</h5> 
   <p>All collections can be divided into two large groups: mutable and immutable. They both implement the <code class="language-java">Collection&lt;E&gt;</code> interface, but immutable collections will throw <code class="language-java">UnsupportedOperationException</code> when trying to invoke some methods which change them: for example, <code class="language-java">add</code>, <code class="language-java">remove</code>, <code class="language-java">clear</code>.</p> 
@@ -86,7 +88,8 @@ System.out.println(languages.size()); // 2</code></pre>
    <code class="language-java">equals</code> of the elements. If you store non-standard classes in the collection, 
    <code class="language-java">equals</code> together with 
    <code class="language-java">hashCode</code> should be overridden.
-  </div> 
+  </div>
+  <p></p> 
   <p>Again, if you are already familiar with lambda expressions, you can invoke the <code class="language-java">removeIf</code> method to remove all of the elements that satisfy the given predicate:</p> 
   <pre><code class="language-java">languages.removeIf(lang -&gt; lang.startsWith("E")); // it removes English
 

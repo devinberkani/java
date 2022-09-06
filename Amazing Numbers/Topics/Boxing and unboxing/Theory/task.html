@@ -23,16 +23,14 @@ int anotherPrimitive = reference.intValue();    // unboxing</code></pre>
 Double wrapperDouble = primitiveDouble; // autoboxing
 double anotherPrimitiveDouble = wrapperDouble; // auto-unboxing</code></pre> 
   <p>You can mix both automatic and manual boxing/unboxing processes in your programs.</p> 
-  <p></p>
-  <div class="alert alert-warning">
-   Autoboxing works only when the left and the right parts of an assignment have the same type. In other cases, you will get a compilation error.
-  </div>
-  <p></p> 
+  <p> </p> 
+  <p>Autoboxing works only when the left and the right parts of an assignment have the same type. In other cases, you will get a compilation error.</p> 
+  <p> </p> 
   <pre><code class="language-java">Long n1 = 10L; // OK, assigning long to Long
 Integer n2 = 10; // OK, assigning int to Integer 
 
 Long n3 = 10; // WRONG, assigning int to Long
-Integer n4 = 10L; // WRONG assigning long to Integer</code></pre> 
+Integer n4 = 10L; // WRONG, assigning long to Integer</code></pre> 
   <h5 id="constructing-wrappers-based-on-other-types" style="text-align: center;">Constructing wrappers based on other types</h5> 
   <p>The wrapper classes have constructors for creating objects from other types. For instance, an object of a wrapper class can be created from a string (except for the <code class="language-java">Character</code> class).</p> 
   <pre><code class="language-java">Integer number = new Integer("10012"); // an Integer from "10012"
@@ -43,11 +41,9 @@ Boolean boolVal = new Boolean("true");   // a Boolean from "true"</code></pre>
   <pre><code class="language-java">Long longVal = Long.parseLong("1000");      // a Long from "1000"
 Long anotherLongVal = Long.valueOf("2000"); // a Long from "2000"</code></pre> 
   <p>If the input string has an invalid argument (for instance, <code class="language-java">"1d0o3"</code>), both of these methods throw the <code class="language-java">NumberFormatException</code>.</p> 
-  <p></p>
-  <div class="alert alert-primary">
-   Note, since Java 9, the constructors are deprecated. You should use special methods to create objects of the wrapper classes.
-  </div>
-  <p></p> 
+  <p> </p> 
+  <p>Note, since Java 9, the constructors are deprecated. You should use the available special methods to create objects of the wrapper classes.</p> 
+  <p> </p> 
   <ul> 
   </ul> 
   <h5 id="comparing-wrappers" style="text-align: center;">Comparing wrappers</h5> 
@@ -58,7 +54,7 @@ System.out.println(i1 == i2);      // false
 System.out.println(i1.equals(i2)); // true</code></pre> 
   <p>Do not forget about this feature when working with wrappers. Even though they correspond to the primitive types, wrapper objects are reference types!</p> 
   <h5 id="npe-when-unboxing" style="text-align: center;">NPE when unboxing</h5> 
-  <p>There is one possible problem when unpacking. If the wrapper object is <code class="language-java">null</code>, the unpacking throws<strong> </strong><code class="language-java">NullPointerException</code><strong>.</strong></p> 
+  <p>There is one possible problem when unboxing. If the wrapper object is <code class="language-java">null</code>, the unboxing throws<strong> </strong><code class="language-java">NullPointerException</code><strong>.</strong></p> 
   <pre><code class="language-java">Long longVal = null;
 long primitiveLong = longVal; // It throws NPE</code></pre> 
   <p>To fix it, we can add a conditional statement that produces a default value:</p> 

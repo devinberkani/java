@@ -56,7 +56,8 @@ DrawingTool brush = new Brush();</code></pre>
   <div class="alert alert-primary">
    If the modifiers are not specified once the method is declared, its parameters will be 
    <strong>public abstract</strong> by default.
-  </div> 
+  </div>
+  <p></p> 
   <p>The keyword <strong><code class="language-java">abstract</code></strong> before a method means that the method does not have a body, it just declares a signature. <strong><code class="language-java">default</code></strong> methods will be discussed further in detail.</p> 
   <p>An interface can't contain constructors, non-public abstract methods, or any fields other than <code class="language-java">public static final</code> (<strong>constants</strong>). Let's declare an interface containing all possible members:</p> 
   <pre><code class="language-java">interface Interface {
@@ -82,7 +83,8 @@ DrawingTool brush = new Brush();</code></pre>
   <p></p>
   <div class="alert alert-primary">
    Static, default, and private methods should have an implementation in the interface!
-  </div> 
+  </div>
+  <p></p> 
   <p>Let's take a closer look at this interface. The variable <code class="language-java">INT_CONSTANT</code> is not the same as a class field here – it's a static final constant. Two methods <code class="language-java">instanceMethod1()</code> and <code class="language-java">instanceMethod2()</code> are abstract methods. The <code class="language-java">staticMethod()</code> is just a regular static method. The default method <code class="language-java">defaultMethod()</code> has an implementation but it can be overridden in subclasses. The <code class="language-java">privateMethod</code> has an implementation as well and can be used to decompose <code class="language-java">default</code> methods.</p> 
   <h5 id="implementing-interfaces" style="text-align: center;">Implementing interfaces</h5> 
   <p>A class can implement an interface using the keyword <strong><code class="language-java">implements</code></strong>. We must provide implementations for all abstract methods of the interface.</p> 

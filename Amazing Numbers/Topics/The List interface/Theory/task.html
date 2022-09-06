@@ -3,12 +3,9 @@
  <head></head>
  <body>
   <p>As you know, lists are the closest type to arrays, except their size can be changed dynamically while an array's size is constrained. Moreover, lists provide more advanced behavior than arrays. In this topic, you will deepen your knowledge of lists and their relationship with the Collections Framework.</p> 
-  <p></p>
-  <div class="alert alert-primary">
-   A list is an 
-   <em>ordered </em>collection of elements. It means that each element has a position in the list specified by an integer index like in regular arrays.
-  </div>
-  <p></p> 
+  <p> </p> 
+  <p>A list is an <em>ordered </em>collection of elements. It means that each element has a position in the list specified by an integer index like in regular arrays.</p> 
+  <p> </p> 
   <h5 id="the-list-interface" style="text-align: center;">The List interface</h5> 
   <p>The <code class="language-java">List&lt;E&gt;</code> interface represents a list as an abstract data type. It extends the <code class="language-java">Collection&lt;E&gt;</code> interface acquiring its methods and adds some new methods:</p> 
   <ul> 
@@ -20,18 +17,15 @@
   </ul> 
   <p>As you can see, the methods presume that a list is an ordered collection.</p> 
   <p>You cannot create an instance of the <code class="language-java">List</code> interface, but you can create an instance of one of its implementations: <code class="language-java">ArrayList</code> or <code class="language-java">LinkedList</code> or an <em>immutable </em>list, and then use it through the common <code class="language-java">List</code> interface. You will have access to all methods declared in both <code class="language-java">List&lt;E&gt;</code> and <code class="language-java">Collection&lt;E&gt;</code> interfaces.</p> 
-  <p></p>
-  <div class="alert alert-primary">
-   Working with lists through the 
-   <code class="language-java">List</code> interface is considered good practice in programming since your code will not depend on the internal mechanisms of a specific implementation.
-  </div>
-  <p></p> 
+  <p> </p> 
+  <p>Working with lists through the <code class="language-java">List</code> interface is considered good practice in programming since your code will not depend on the internal mechanisms of a specific implementation.</p> 
+  <p> </p> 
   <h5 id="immutable-lists" style="text-align: center;">Immutable lists</h5> 
   <p>The simplest way to create a list is to invoke the <code class="language-java">of</code> method of the <code class="language-java">List</code> interface.</p> 
   <pre><code class="language-java">List&lt;String&gt; emptyList = List.of(); // 0 elements
 List&lt;String&gt; names = List.of("Larry", "Kenny", "Sabrina"); // 3 elements
 List&lt;Integer&gt; numbers = List.of(0, 1, 1, 2, 3, 5, 8, 13);  // 8 elements</code></pre> 
-  <p>It returns an <strong>immutable </strong>list containing either all the passed elements or an empty list. Using this method is convenient when creating list constants or testing some code.</p> 
+  <p>It returns an <strong>immutable </strong>list containing either all the passed elements or an empty list. Using this method is convenient when creating a list of constants or testing some code.</p> 
   <p>Let's perform some operations:</p> 
   <pre><code class="language-java">List&lt;String&gt; daysOfWeek = List.of(
         "Monday",
@@ -53,12 +47,9 @@ System.out.println(weekDays); // [Monday, Tuesday, Wednesday, Thursday, Friday]<
   <pre><code class="language-java">daysOfWeek.set(0, "Funday"); // throws UnsupportedOperationException
 daysOfWeek.add("Holiday");   // throws UnsupportedOperationException</code></pre> 
   <p>This situation clearly demonstrates when immutable lists are needed. It's hard to imagine that someone renames a day or adds another one! </p> 
-  <p></p>
-  <div class="alert alert-warning">
-   Be careful when working with immutable lists. Sometimes even experienced developers get 
-   <code class="language-java">UnsupportedOperationException</code>.
-  </div>
-  <p></p> 
+  <p> </p> 
+  <p>Be careful when working with immutable lists. Sometimes even experienced developers get <code class="language-java">UnsupportedOperationException</code>.</p> 
+  <p> </p> 
   <p>Prior to Java 9, another way to create unmodifiable lists was the following:</p> 
   <pre><code class="language-java">List&lt;Integer&gt; numbers = Arrays.asList(1, 2, 3, 4, 5);</code></pre> 
   <p>To use it, the class <code class="language-java">java.util.Arrays</code> must be imported.</p> 
@@ -88,13 +79,9 @@ numbers.add(30);
 
 System.out.println(numbers); // [10, 20, 30]</code></pre> 
   <p>Access to the first and the last element of the list is always carried out in constant time <code class="language-java">O(1)</code> because links are permanently stored in the first and the last element, so adding an item to the end of the list does not mean that you have to iterate the whole list in search of the last element. But accessing/setting an element by its index takes <code class="language-java">O(n)</code> time for a linked list.</p> 
-  <p></p>
-  <div class="alert alert-primary">
-   In the general case, 
-   <code class="language-java">LinkedList</code> loses to 
-   <code class="language-java">ArrayList</code> in memory consumption and speed of operations. But it depends on the problem you are trying to solve.
-  </div>
-  <p></p> 
+  <p> </p> 
+  <p>In the general case, <code class="language-java">LinkedList</code> loses to <code class="language-java">ArrayList</code> in memory consumption and speed of operations. But it depends on the problem you are trying to solve.</p> 
+  <p> </p> 
   <h5 id="iterating-over-a-list" style="text-align: center;">Iterating over a list</h5> 
   <p>There are no problems to iterate over elements of a list.</p> 
   <pre><code class="language-java">List&lt;String&gt; names = List.of("Larry", "Kenny", "Sabrina");</code></pre> 
