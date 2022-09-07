@@ -56,6 +56,31 @@ files:
         }
     }
   learner_created: false
+- name: src/readability/ReadabilityScorer.java
+  visible: true
+  text: |+
+    package readability;
+
+    import java.util.Scanner;
+
+    public class ReadabilityScorer {
+        private final static Scanner scanner = new Scanner(System.in);
+
+        public ReadabilityScorer() {
+            System.out.println(easyOrHard());
+        }
+
+        private String easyOrHard() {
+            int inputLength = scanner.nextLine().split("").length;
+
+            return inputLength <= 100 ? "EASY" : "HARD";
+        }
+    }
+
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/5263#comment
-status: Unchecked
-record: -1
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Wed, 07 Sep 2022 11:16:28 UTC
+record: 2
