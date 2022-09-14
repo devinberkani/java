@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="FlashcardsTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-09-12T19:28:50" hostname="Devins-MacBook-Air.local" time="0.16">
+<testsuite name="FlashcardsTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-09-14T10:25:25" hostname="Devins-MacBook-Air.local" time="0.141">
   <properties/>
-  <testcase name="start" classname="FlashcardsTest" time="0.16"/>
+  <testcase name="start" classname="FlashcardsTest" time="0.141"/>
   <system-out><![CDATA[?[1;31m
 Start test 1?[0m
 Input the number of cards:

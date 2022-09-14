@@ -1,39 +1,35 @@
 package flashcards;
 
 public class Flashcard {
-    private int number;
-    private String front;
-    private String back;
+    private int id;
+    private String term;
+    private String definition;
 
-    public Flashcard(int number, String front, String back) {
-        this.number = number;
-        this.front = front;
-        this.back = back;
+    public Flashcard() {
     }
 
     // getters and setters
-
-    protected int getNumber() {
-        return number;
+    public int getId() {
+        return id;
     }
 
-    protected void setNumber(int number) {
-        this.number = number;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    protected String getFront() {
-        return front;
+    protected String getTerm() {
+        return term;
     }
 
-    protected void setFront(String front) {
-        this.front = front;
+    protected void setTerm(String term) {
+        this.term = term;
     }
 
-    public String getBack() {
-        return back;
+    protected String getDefinition() {
+        return definition;
     }
 
-    public void setBack(String back) {
-        this.back = back;
+    protected void setDefinition(String definition) {
+        this.definition = definition;
     }
 }

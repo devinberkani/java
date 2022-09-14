@@ -1,31 +1,82 @@
 package flashcards;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 public class Deck {
-    // old list for having an arraylist of flashcard objects
-    private ArrayList<Flashcard> deck = new ArrayList<>();
-    private LinkedHashMap<String, String> hashMapDeck = new LinkedHashMap<>();
-    public Deck() {
+    private LinkedHashMap<String, String> flashcards;
+    private LinkedHashMap<Integer, Flashcard> flashcardData;
+    private int deckSize;
 
+    public Deck() {
+        flashcards = new LinkedHashMap<>();
+        flashcardData = new LinkedHashMap<>();
+        deckSize = 0;
+    }
+
+    protected Flashcard getSpecificFlashcard(int id) {
+        return getFlashcardData().get(id);
+    }
+
+    protected void addFlashcard(Flashcard flashcard) {
+        getFlashcards().put(flashcard.getTerm(), flashcard.getDefinition());
+        getFlashcardData().put(flashcard.getId(), flashcard);
+    }
+
+    // check flashcard inputs
+
+    protected boolean termExists(String input) {
+        return getFlashcards().containsKey(input);
+    }
+
+    protected boolean definitionExists(String definition) {
+        return getFlashcards().containsValue(definition);
+    }
+
+    // check user answers
+
+    protected boolean answerIsCorrect(String userAnswer, int id) {
+        String correctAnswer = getFlashcardData().get(id).getDefinition();
+        return userAnswer.equals(correctAnswer);
+    }
+
+    protected String correctDefinitionForCurrentCard(int id) {
+        return getFlashcardData().get(id).getDefinition();
+    }
+
+    protected String correctTermForDifferentCard(String userAnswer) {
+        for (var entry : getFlashcards().entrySet()) {
+            if (entry.getValue().equals(userAnswer)) {
+                return entry.getKey();
+            }
+        }
+
+        return "Flashcards do not contain a term for this definition.";
     }
 
     // getters and setters
 
-    protected ArrayList<Flashcard> getDeck() {
-        return deck;
+
+    public LinkedHashMap<String, String> getFlashcards() {
+        return flashcards;
     }
 
-    private void setDeck(ArrayList<Flashcard> deck) {
-        this.deck = deck;
+    public void setFlashcards(LinkedHashMap<String, String> flashcards) {
+        this.flashcards = flashcards;
     }
 
-    protected LinkedHashMap<String, String> getHashMapDeck() {
-        return hashMapDeck;
+    public LinkedHashMap<Integer, Flashcard> getFlashcardData() {
+        return flashcardData;
     }
 
-    protected void setHashMapDeck(LinkedHashMap<String, String> hashMapDeck) {
-        this.hashMapDeck = hashMapDeck;
+    public void setFlashcardData(LinkedHashMap<Integer, Flashcard> flashcardData) {
+        this.flashcardData = flashcardData;
+    }
+
+    protected int getDeckSize() {
+        return deckSize;
+    }
+
+    protected void setDeckSize(int deckSize) {
+        this.deckSize = deckSize;
     }
 }
