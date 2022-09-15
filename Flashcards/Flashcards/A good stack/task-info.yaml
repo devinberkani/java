@@ -318,6 +318,9 @@ files:
 - name: src/flashcards/StateMachine.java
   visible: true
   learner_created: true
+- name: src/flashcards/Menu.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/5346#comment
 status: Solved
 feedback:

@@ -6,6 +6,7 @@ public class Flashcard {
     private String definition;
 
     public Flashcard() {
+
     }
 
     // getters and setters

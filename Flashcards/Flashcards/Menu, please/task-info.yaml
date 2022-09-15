@@ -1011,6 +1011,15 @@ files:
         }
     }
   learner_created: true
+- name: src/flashcards/State.java
+  visible: true
+  learner_created: true
+- name: src/flashcards/StateMachine.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/5347#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Thu, 15 Sep 2022 12:17:18 UTC
 record: 5

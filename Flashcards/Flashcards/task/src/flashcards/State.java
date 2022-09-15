@@ -1,10 +1,13 @@
 package flashcards;
 
 public enum State {
-    USER_PROMPT,
+    MENU,
     ADD_TERM,
     ADD_DEFINITION,
-    ANSWER,
-    END
+    REMOVE,
+    IMPORT,
+    EXPORT,
+    GET_ASK_NUMBER,
+    ASK,
+    EXIT
 }
-
