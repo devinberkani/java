@@ -596,6 +596,490 @@ files:
     \   \"London\",\n                \"Abuja\",\n                \"Berlin\"\n    \
     \    );\n    }\n    \n}\n\n\n\n\n"
   learner_created: false
+- name: src/flashcards/StateMachine.java
+  visible: true
+  text: |
+    package flashcards;
+
+    import java.util.ArrayList;
+
+    public class StateMachine {
+        private State state;
+        private final Menu menu;
+        private final Deck deck;
+        private Flashcard currentCard;
+
+        // ask variables
+        private int askNumber;
+        private int currentAskNumber;
+        private ArrayList<String> askSet;
+        private String currentAskTerm;
+        public StateMachine() {
+            state = State.MENU;
+            menu = new Menu();
+            deck = new Deck();
+        }
+
+        // MENU
+        private String handleMenu(String command) {
+            switch(command) {
+                case "add":
+                    setState(State.ADD_TERM);
+                    return "The card:";
+
+                case "remove":
+                    setState(State.REMOVE);
+                    return "Which card?";
+
+                case "ask":
+                    setState(State.GET_ASK_NUMBER);
+                    return "How many times to ask?";
+
+                case "import":
+                    setState(State.IMPORT);
+                    return "File name:";
+
+                case "export":
+                    setState(State.EXPORT);
+                    return "File name:";
+
+                case "exit":
+                    setState(State.EXIT);
+                    return "Bye bye!";
+
+                default:
+                    return "";
+
+            }
+        }
+
+        // ADD
+        private String handleAddTerm(String userTerm) {
+            if (getDeck().termExists(userTerm)) {
+                setState(State.MENU);
+                return String.format("The card \"%s\" already exists.", userTerm);
+            }
+            setState(State.ADD_DEFINITION);
+            setCurrentCard(new Flashcard());
+            getCurrentCard().setTerm(userTerm);
+            return "The definition of the card:";
+        }
+
+        private String handleAddDefinition(String userDefinition) {
+            setState(State.MENU);
+            if (deck.definitionExists(userDefinition)) {
+                return String.format("The definition \"%s\" already exists.", userDefinition);
+            }
+            getCurrentCard().setDefinition(userDefinition);
+            getDeck().addFlashcardToDeck(getCurrentCard());
+            return String.format("The pair (\"%s\":\"%s\") has been added.", getCurrentCard().getTerm(), getCurrentCard().getDefinition());
+        }
+
+        // REMOVE
+        private String handleRemove(String cardToBeRemoved) {
+            setState(State.MENU);
+            if (!getDeck().termExists(cardToBeRemoved)) {
+                return String.format("Can't remove \"%s\": there is no such card.", cardToBeRemoved);
+            }
+            getDeck().removeFlashcardFromDeck(cardToBeRemoved);
+            return "The card has been removed.";
+        }
+
+        // ASK
+        private String handleAskNumber(String numberOfCardsToShow) {
+            int numberOfCards = Integer.parseInt(numberOfCardsToShow);
+            setState(State.ASK);
+            setAskSet(getDeck().getAskSet(numberOfCards));
+            setAskNumber(numberOfCards);
+            setCurrentAskNumber(0);
+            setCurrentAskTerm(getAskSet().get(getCurrentAskNumber()));
+            return (String.format("Print the definition of \"%s\":", getCurrentAskTerm()));
+        }
+
+        private String handleAsk(String userAnswer) {
+            StringBuilder response = new StringBuilder();
+            if (getDeck().answerIsCorrect(userAnswer, getCurrentAskTerm().hashCode())) {
+                response.append("Correct!");
+            } else {
+                response.append(String.format("Wrong. The right answer is \"%s\"", getDeck().correctDefinitionForCurrentCard(getCurrentAskTerm().hashCode())));
+                if (getDeck().definitionExists(userAnswer)) {
+                    response.append(String.format(", but your definition is correct for \"%s\"", getDeck().correctTermForDifferentCard(userAnswer)));
+                }
+                response.append(".");
+            }
+            if (getCurrentAskNumber() + 1 < getAskNumber()) {
+                setCurrentAskNumber(getCurrentAskNumber() + 1);
+                setCurrentAskTerm(getAskSet().get(getCurrentAskNumber()));
+                response.append("\n");
+                response.append(String.format("Print the definition of \"%s\":", getCurrentAskTerm()));
+            } else {
+                setState(State.MENU);
+            }
+            return response.toString();
+        }
+
+        // IMPORT
+        private String handleImport(String file) {
+            setState(State.MENU);
+            return getDeck().importCardsFromFile(file);
+        }
+
+        // EXPORT
+        private String handleExport(String file) {
+            setState(State.MENU);
+            return getDeck().exportCardsToFile(file);
+        }
+
+        // PROCESS INPUT
+        protected String processInput(String input) {
+            switch(getState()) {
+                case MENU:
+                    return handleMenu(input);
+
+                case ADD_TERM:
+                    return handleAddTerm(input);
+
+                case ADD_DEFINITION:
+                    return handleAddDefinition(input);
+
+                case REMOVE:
+                    return handleRemove(input);
+
+                case IMPORT:
+                    return handleImport(input);
+
+                case EXPORT:
+                    return handleExport(input);
+
+                case GET_ASK_NUMBER:
+                    return handleAskNumber(input);
+
+                case ASK:
+                    return handleAsk(input);
+
+                default:
+                    return "";
+            }
+        }
+
+        // getters and setters
+
+        protected State getState() {
+            return state;
+        }
+
+        private void setState(State state) {
+            this.state = state;
+        }
+
+        public Menu getMenu() {
+            return menu;
+        }
+
+        private Deck getDeck() {
+            return deck;
+        }
+
+        private Flashcard getCurrentCard() {
+            return currentCard;
+        }
+
+        private void setCurrentCard(Flashcard currentCard) {
+            this.currentCard = currentCard;
+        }
+
+        public int getAskNumber() {
+            return askNumber;
+        }
+
+        public void setAskNumber(int askNumber) {
+            this.askNumber = askNumber;
+        }
+
+        public int getCurrentAskNumber() {
+            return currentAskNumber;
+        }
+
+        public void setCurrentAskNumber(int currentAskNumber) {
+            this.currentAskNumber = currentAskNumber;
+        }
+
+        public ArrayList<String> getAskSet() {
+            return askSet;
+        }
+
+        public void setAskSet(ArrayList<String> askSet) {
+            this.askSet = askSet;
+        }
+
+        public String getCurrentAskTerm() {
+            return currentAskTerm;
+        }
+
+        public void setCurrentAskTerm(String currentAskTerm) {
+            this.currentAskTerm = currentAskTerm;
+        }
+    }
+  learner_created: true
+- name: src/flashcards/Flashcard.java
+  visible: true
+  text: |
+    package flashcards;
+
+    public class Flashcard {
+        private int id;
+        private String term;
+        private String definition;
+
+        public Flashcard() {
+
+        }
+
+        // getters and setters
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        protected String getTerm() {
+            return term;
+        }
+
+        protected void setTerm(String term) {
+            this.term = term;
+        }
+
+        protected String getDefinition() {
+            return definition;
+        }
+
+        protected void setDefinition(String definition) {
+            this.definition = definition;
+        }
+    }
+  learner_created: true
+- name: src/flashcards/State.java
+  visible: true
+  text: |
+    package flashcards;
+
+    public enum State {
+        MENU,
+        ADD_TERM,
+        ADD_DEFINITION,
+        REMOVE,
+        IMPORT,
+        EXPORT,
+        GET_ASK_NUMBER,
+        ASK,
+        EXIT
+    }
+  learner_created: true
+- name: src/flashcards/Deck.java
+  visible: true
+  text: |
+    package flashcards;
+
+    import java.io.*;
+    import java.util.ArrayList;
+    import java.util.LinkedHashMap;
+    import java.util.Scanner;
+
+    public class Deck {
+        private LinkedHashMap<Integer, Flashcard> flashcardData;
+        private LinkedHashMap<String, String> flashcardTerms;
+        private int deckSize;
+
+        public Deck() {
+            flashcardData = new LinkedHashMap<>();
+            flashcardTerms = new LinkedHashMap<>();
+            deckSize = 0;
+        }
+
+        protected void addFlashcardToDeck(Flashcard flashcard) {
+            getFlashcardTerms().put(flashcard.getTerm(), flashcard.getDefinition());
+            addToFlashcardDataDeckIfNeeded(flashcard);
+    //        printFlashcardMapsTest();
+        }
+
+        protected void addToFlashcardDataDeckIfNeeded(Flashcard flashcard) {
+            int id = flashcard.getTerm().hashCode();
+            if (!getFlashcardData().containsKey(id)) {
+                flashcard.setId(flashcard.getTerm().hashCode());
+                getFlashcardData().put(flashcard.getId(), flashcard);
+            } else {
+                if (!getFlashcardData().get(id).getDefinition().equals(flashcard.getDefinition())) {
+                    getFlashcardData().get(id).setDefinition(flashcard.getDefinition());
+                }
+            }
+        }
+
+        protected void addFlashcardToDeck(String term, String definition) {
+            Flashcard flashcard = new Flashcard();
+            flashcard.setTerm(term);
+            flashcard.setDefinition(definition);
+            addFlashcardToDeck(flashcard);
+        }
+
+        protected void printFlashcardMapsTest() {
+
+            // flashcards-example-one.txt
+
+            System.out.println("flashcard terms: " + getFlashcardTerms());
+            System.out.println("flashcard data terms and definitions: ");
+            for (var entry : getFlashcardData().entrySet()) {
+                System.out.print(entry.getValue().getTerm() + " ");
+                System.out.println(entry.getValue().getDefinition());
+            }
+        }
+
+        protected void removeFlashcardFromDeck(String term) {
+            getFlashcardTerms().remove(term);
+            getFlashcardData().remove(term.hashCode());
+        }
+
+        // check flashcard inputs
+
+        protected boolean termExists(String term) {
+            return getFlashcardTerms().containsKey(term);
+        }
+
+        protected boolean definitionExists(String definition) {
+            return getFlashcardTerms().containsValue(definition);
+        }
+
+        // get terms for questioning
+        protected ArrayList<String> getAskSet(int numberOfCardsInSet) {
+            ArrayList<String> askSet = new ArrayList<>();
+            int numberOfCardsNeeded = numberOfCardsInSet;
+            while (numberOfCardsNeeded > 0) {
+                for (var entry : getFlashcardTerms().entrySet()) {
+                    askSet.add(entry.getKey());
+                    numberOfCardsNeeded--;
+                    if (askSet.size() == numberOfCardsInSet) {
+                        break;
+                    }
+                }
+            }
+            return askSet;
+        }
+
+        // check user answers
+
+        protected boolean answerIsCorrect(String userAnswer, int id) {
+            String correctAnswer = getFlashcardData().get(id).getDefinition();
+            return userAnswer.equals(correctAnswer);
+        }
+
+        protected String correctDefinitionForCurrentCard(int id) {
+            return getFlashcardData().get(id).getDefinition();
+        }
+
+        protected String correctTermForDifferentCard(String userAnswer) {
+            String correctAnswer = "";
+            for (var entry : getFlashcardTerms().entrySet()) {
+                if (entry.getValue().equals(userAnswer)) {
+                    correctAnswer = entry.getKey();
+                }
+            }
+            return correctAnswer;
+        }
+
+        // import cards from file
+        protected String importCardsFromFile(String file) {
+
+            int numberOfLoadedCards = 0;
+            try {
+                File newFile = new File("./" + file);
+                Scanner myReader = new Scanner(newFile);
+                while (myReader.hasNextLine()) {
+                    String term = myReader.nextLine();
+                    String definition = myReader.nextLine();
+                    addFlashcardToDeck(term, definition);
+                    numberOfLoadedCards++;
+                    if (myReader.hasNextLine()) {
+                        myReader.nextLine();
+                    }
+                }
+                myReader.close();
+            } catch (FileNotFoundException e) {
+                return "File not found";
+            }
+            return String.format("%d cards have been loaded.", numberOfLoadedCards);
+
+        }
+
+        protected String exportCardsToFile(String file) {
+
+            int numberOfSavedCards = 0;
+            try {
+                File newFile = new File("./" + file);
+                newFile.createNewFile();
+                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(newFile));
+                for (var entry : getFlashcardTerms().entrySet()) {
+                    bufferedWriter.write(entry.getKey() + "\n");
+                    bufferedWriter.write(entry.getValue() + "\n\n");
+                    numberOfSavedCards++;
+                }
+                bufferedWriter.close();
+            } catch (IOException e) {
+                return "An error occured";
+            }
+            return String.format("%d cards have been saved.", numberOfSavedCards);
+
+        }
+
+        // getters and setters
+
+        public LinkedHashMap<Integer, Flashcard> getFlashcardData() {
+            return flashcardData;
+        }
+
+        public void setFlashcardData(LinkedHashMap<Integer, Flashcard> flashcardData) {
+            this.flashcardData = flashcardData;
+        }
+
+        public LinkedHashMap<String, String> getFlashcardTerms() {
+            return flashcardTerms;
+        }
+
+        public void setFlashcardTerms(LinkedHashMap<String, String> flashcardTerms) {
+            this.flashcardTerms = flashcardTerms;
+        }
+
+        protected int getDeckSize() {
+            return deckSize;
+        }
+
+        protected void setDeckSize(int deckSize) {
+            this.deckSize = deckSize;
+        }
+    }
+  learner_created: true
+- name: src/flashcards/Menu.java
+  visible: true
+  text: |
+    package flashcards;
+
+    public class Menu {
+
+        private final String[] menuOptions = {"add", "remove", "import", "export", "ask", "exit"};
+
+        public Menu() {
+        }
+
+        protected void printMenuMessage(boolean firstMenuPrint) {
+            if (firstMenuPrint) {
+                System.out.println("Input the action (add, remove, import, export, ask, exit):");
+            } else {
+                System.out.println("\nInput the action (add, remove, import, export, ask, exit):");
+            }
+        }
+    }
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/5348#comment
 status: Unchecked
 record: -1
