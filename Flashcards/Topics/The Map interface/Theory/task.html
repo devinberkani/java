@@ -3,13 +3,14 @@
  <head></head>
  <body>
   <p>In some situations, you need to store pairs of associated objects. For example, when counting the number of words in a text, the first one is a word and the second one is the number of its occurrences in the text. There is a special type of collections called <strong>map</strong> to effectively store such pairs of objects.</p> 
+  <p> </p> 
   <p></p>
   <div class="alert alert-primary">
    A 
    <strong>map</strong> is a 
    <u>collection of key-value pairs</u>. Keys are always unique while values can repeat.
-  </div>
-  <p></p> 
+  </div> 
+  <p> </p> 
   <p>A good example of a map from the real world is a phone book where keys are names of your friends and values are phones associated with them.</p> 
   <pre><code class="language-java">Keys  : Values
 -----------------------
@@ -73,18 +74,20 @@ System.out.println(friendPhones.size()); // 3</code></pre>
   <pre><code class="language-java">String bobPhone = friendPhones.get("Bob"); // +1-202-555-0118
 String alicePhone = friendPhones.get("Alice"); // null
 String phone = friendPhones.getOrDefault("Alex", "Unknown phone"); // Unknown phone</code></pre> 
+  <p> </p> 
   <p></p>
   <div class="alert alert-primary">
    Note that the 
    <code class="language-java">getOrDefault</code> method provides a simple way to prevent 
    <strong>NPE</strong> since it avoids 
    <code class="language-java">null</code>'s.
-  </div>
-  <p></p> 
+  </div> 
+  <p> </p> 
   <p>It is also possible to check whether a map contains a particular key or value by using <code class="language-java">containsKey</code> and <code class="language-java">containsValue</code> methods.</p> 
   <p>We can directly access the set of keys and collection of values from a map:</p> 
   <pre><code class="language-java">System.out.println(friendPhones.keySet()); // [James, Bob, Katy]
 System.out.println(friendPhones.values()); // [+1-202-555-0220, +1-202-555-0118, +1-202-555-0175]</code></pre> 
+  <p> </p> 
   <p></p>
   <div class="alert alert-warning">
    Since it is 
@@ -93,8 +96,8 @@ System.out.println(friendPhones.values()); // [+1-202-555-0220, +1-202-555-0118,
    <code class="language-java">HashMap</code>, 
    <code class="language-java">TreeMap</code> or 
    <code class="language-java">LinkedHashMap</code>.
-  </div>
-  <p></p> 
+  </div> 
+  <p> </p> 
   <h5 id="hashmap" style="text-align: center;">HashMap</h5> 
   <p>The <code class="language-java">HashMap</code> class represents a map backed by a <strong>hash table</strong>. This implementation provides constant-time performance for <code class="language-java">get</code> and <code class="language-java">put</code> methods assuming the hash function disperses the elements properly among the buckets.</p> 
   <p>The following example demonstrates a map of products where key is the product code and value is the name.</p> 
@@ -115,11 +118,12 @@ System.out.println(products.get(1000)); // null
 products.putIfAbsent(3000, "Mouse"); // it does not change the current element
 
 System.out.println(products.get(3000)); // Keyboard</code></pre> 
+  <p> </p> 
   <p></p>
   <div class="alert alert-primary">
    This implementation is often used in practice since it is highly-optimized for putting and getting pairs.
-  </div>
-  <p></p> 
+  </div> 
+  <p> </p> 
   <h5 id="linkedhashmap" style="text-align: center;">LinkedHashMap</h5> 
   <p>The <code class="language-java">LinkedHashMap</code> stores the order in which elements were inserted.</p> 
   <p>Let's see a part of the previous example again:</p> 
@@ -140,15 +144,16 @@ System.out.println(products); // it's always ordered {1000=Notebook, 2000=Phone,
    <li><code class="language-java">E lastKey()</code> returns the last (highest) key in the map;</li> 
    <li><code class="language-java">SortedMap&lt;K, V&gt; headMap(K toKey)</code> returns a submap containing elements whose keys are strictly less than <code class="language-java">toKey</code>;</li> 
    <li><code class="language-java">SortedMap&lt;K, V&gt; tailMap(K fromKey)</code> returns a submap containing elements whose keys are greater than or equal to <code class="language-java">fromKey</code>;</li> 
-   <li><code class="language-java">SortedMap&lt;K, V&gt; subMap(K fromKey, E toKey)</code> returns a submap containing elements whose keys are in range <code class="language-java">fromKey</code> (inclusive) <code class="language-java">toKey</code> (exclusive);</li> 
+   <li><code class="language-java">SortedMap&lt;K, V&gt; subMap(K fromKey, K toKey)</code> returns a submap containing elements whose keys are in range <code class="language-java">fromKey</code> (inclusive) <code class="language-java">toKey</code> (exclusive);</li> 
   </ul> 
   <p>The example below demonstrates how to create and use an object of <code class="language-java">TreeMap</code>. This map is filled with events, each of them has a date (key) and title (value).</p> 
+  <p> </p> 
   <p></p>
   <div class="alert alert-primary">
    <code class="language-java">LocalDate</code> is a class that represents a date. The invocation of 
    <code class="language-java">LocalDate.of(year, month, day)</code> method creates the specified date object with the given year, month and day.
-  </div>
-  <p></p> 
+  </div> 
+  <p> </p> 
   <pre><code class="language-java">SortedMap&lt;LocalDate, String&gt; events = new TreeMap&lt;&gt;();
 
 events.put(LocalDate.of(2017, 6, 6), "The Java Conference");
@@ -163,13 +168,14 @@ LocalDate toExclusive = LocalDate.of(2017, 6, 10);
 System.out.println(events.subMap(fromInclusive, toExclusive));</code></pre> 
   <p>The code outputs the resulting submap:</p> 
   <pre><code class="language-java">{2017-06-08=Discussion: career or education?, 2017-06-09=The modern art}</code></pre> 
+  <p> </p> 
   <p></p>
   <div class="alert alert-primary">
    Use 
    <code class="language-java">TreeMap</code> only when you really need the sorting order of elements, since this implementation is less efficient than 
    <code class="language-java">HashMap</code>.
-  </div>
-  <p></p> 
+  </div> 
+  <p> </p> 
   <h5 id="iterating-over-maps" style="text-align: center;">Iterating over maps</h5> 
   <p>It is impossible to directly iterate over a map since it does not implement the <code class="language-java">Iterable</code> interface. Fortunately, some methods of maps return other collections which are iterable. The order of elements when iterating depends on the concrete implementation of the <code class="language-java">Map</code> interface.</p> 
   <p>The following code shows how to get keys and values in a for-each loop:</p> 
@@ -196,6 +202,7 @@ for (String phone : friendPhones.values()) {
   <pre><code class="language-java">Bob: +1-202-555-0118
 James: +1-202-555-0220
 Katy: +1-202-555-0175</code></pre> 
+  <p> </p> 
   <p></p>
   <div class="alert alert-primary">
    We use 
@@ -203,8 +210,8 @@ Katy: +1-202-555-0175</code></pre>
    <code class="language-java">entry</code>, but it is not necessary. If you have an older version of Java or just don't want to use 
    <code class="language-java">var</code>, you can write the data type explicitly like 
    <code class="language-java">Map.Entry&lt;String, String&gt;</code>.
-  </div>
-  <p></p> 
+  </div> 
+  <p> </p> 
   <p>The same behavior can be achieved by using a lambda expression with two arguments if you prefer this way:</p> 
   <pre><code class="language-java">friendPhones.forEach((name, phone) -&gt; System.out.println(name + ": " + phone));</code></pre> 
   <h5 id="other-collections-as-values" style="text-align: center;">Other collections as values</h5> 
