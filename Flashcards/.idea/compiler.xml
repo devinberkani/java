@@ -28,6 +28,11 @@
       <module name="Flashcards.Topics-Switch_statement-Floor-space_of_the_room.main" target="11" />
       <module name="Flashcards.Topics-Switch_statement-Statements.main" target="11" />
       <module name="Flashcards.Topics-Switch_statement-Theory.main" target="11" />
+      <module name="Flashcards.Topics-The_keyword_super-Bank_account.main" target="11" />
+      <module name="Flashcards.Topics-The_keyword_super-Employees.main" target="11" />
+      <module name="Flashcards.Topics-The_keyword_super-Fix_the_non-compiled_hierarchy.main" target="11" />
+      <module name="Flashcards.Topics-The_keyword_super-Statements.main" target="11" />
+      <module name="Flashcards.Topics-The_keyword_super-Theory.main" target="11" />
       <module name="Flashcards.Topics-The_Map_interface-Basics_of_Maps.main" target="11" />
       <module name="Flashcards.Topics-The_Map_interface-Counting_words.main" target="11" />
       <module name="Flashcards.Topics-The_Map_interface-Creating_a_map.main" target="11" />
